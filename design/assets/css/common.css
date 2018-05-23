@@ -20,16 +20,6 @@ nav{
     border-radius: 100%;
 }
 
-.header-fa-icon-xs{
-    transform: scale(1.25);
-    padding: 0;
-}
-
-.header-fa-icon-md{
-    transform: scale(1.5);
-    padding: 0;
-}
-
 /* Side bar */
 .nav-side-menu {
     overflow: auto;
