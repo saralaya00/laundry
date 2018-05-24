@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,131 +8,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/cloth.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <title>Laundry</title>
 
-    <link href="assets/css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">
-    <link href="assets/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
-    <link href="assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="assets/css/helper.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    
+
+    <!-- Bootstrap Core CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/common.css">
+
+    <!-- Custom JS -->
+    <script src="assets/js/common.js"></script>
+
+
 </head>
 
 <body class="fix-header fix-sidebar">
+
     <!-- Preloader : if any-->
 
-
-
-
+    <!-- (+) Main Wrapper -->
     <div id="main-wrapper">
 
-        <!-- Left Sidebar  -->
-        <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-label">Dashboard</li>
-                        <li> 
-                            <a class="has-arrow" href="#" aria-expanded="false">
-                                <i class="fa fa-plus"></i>
-                                <span class="hide-menu">Add <span class="label label-rouded label-primary pull-right">3</span>
-                                </span>
-                            </a>
 
-                            <!-- Items -->
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="">Employee </a></li>
+        <!-- (+) Header -->
+        <!-- (-) Header -->
+
+        <!-- (+) Sidebar -->
+        <div class="nav-side-menu" id="sidebar">
+            <div class="brand">[ This Header is Hidden ]</div>
+            <div class="brand">                               
+                <span class="fa fa-dashboard fa-lg"> &nbsp;</span> Dashboard
+            </div>
+                <i class="fa fa-bars fa-2x btn toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+                    <!-- Item List -->
+                    <div class="menu-list">
+                        <ul id="menu-content" class="menu-content collapse out">
+
+                            <!-- Itemlist - 1 -->
+                            <li  data-toggle="collapse" data-target="#sidebar-add" class="collapsed active">
+                                <a href="#"><i class="fa fa fa-plus fa-lg"></i>
+                                    Add  <span class="label label-rouded label-warning pull-right">3</span> 
+                                    <span class="arrow"></span>
+                                </a>
+                            </li>
+
+                            <ul class="sub-menu collapse" id="sidebar-add">
+                                <!-- Items -->
+                                <li class="active"><a href="">Employee </a></li>
                                 <li><a href="">Service </a></li>
                                 <li><a href="">Item </a></li>
                             </ul>
-                        </li>
-
-                        <li> 
-                            <a class="has-arrow" href="#" aria-expanded="false">
-                                <i class="fa fa-book"></i>
-                                <span class="hide-menu">View <span class="label label-rouded label-primary pull-right">3</span>
-                                </span>
+            
+                            <!-- Itemlist - 2 -->
+                            <li  data-toggle="collapse" data-target="#sidebar-view" class="collapsed">
+                            <a href="#"><i class="fa fa fa-book fa-lg"></i>
+                                    View  <span class="label label-rouded label-warning pull-right">3</span> 
+                                <span class="arrow"></span>
                             </a>
-
-                            <!-- Items -->
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="">Employee </a></li>
-                                <li><a href="">Item </a></li>
-                                <li><a href="">Order History </a></li>
+                            </li>
+                            <ul class="sub-menu collapse" id="sidebar-view">
+                                <!-- Items -->
+                                <li class="active"><a href="#1">Employee </a></li>
+                                <li><a href="#">Item </a></li>
+                                <li><a href="#">Order History </a></li>
                             </ul>
-                        </li>
-
-                        <li> 
-                            <a class="has-arrow" href="#" aria-expanded="false">
-                                <i class="fa fa-bar-chart"></i>
-                                <span class="hide-menu">Charts<span class="label label-rouded label-primary pull-right">2</span>
-                                </span>
+                    
+                            <!-- Itemlist - 3 -->
+                            <li  data-toggle="collapse" data-target="#sidebar-chart" class="collapsed">
+                            <a href="#"><i class="fa fa fa-bar-chart fa-lg"></i>
+                                    Charts  <span class="label label-rouded label-warning pull-right">2</span> 
+                                <span class="arrow"></span>
                             </a>
-
-                            <!-- Items -->
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="">Reports </a></li>
+                            </li>
+                            <ul class="sub-menu collapse" id="sidebar-chart">
+                                <!-- Items -->
+                                <li class="active"><a href="">Report </a></li>
                                 <li><a href="">Reviews </a></li>
                             </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
+                        </ul>
+                 </div>
         </div>
-        <!-- End Left Sidebar  -->
-        
+        <!-- (-) Sidebar -->
     </div>
+    <!-- (-) Main Wrapper -->
 
-
-
-    <!-- All Jquery -->
-    <script src="assets/js/lib/jquery/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/js/lib/bootstrap/js/popper.min.js"></script>
-    <script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <!--Menu sidebar -->
-    <script src="assets/js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <!--Custom JavaScript -->
-
-
-    <!-- Amchart -->
-    <script src="assets/js/lib/morris-chart/raphael-min.js"></script>
-    <script src="assets/js/lib/morris-chart/morris.js"></script>
-    <script src="assets/js/lib/morris-chart/dashboard1-init.js"></script>
-
-
-    <script src="assets/js/lib/calendar-2/moment.latest.min.js"></script>
-    <!-- scripit init-->
-    <script src="assets/js/lib/calendar-2/semantic.ui.min.js"></script>
-    <!-- scripit init-->
-    <script src="assets/js/lib/calendar-2/prism.min.js"></script>
-    <!-- scripit init-->
-    <script src="assets/js/lib/calendar-2/pignose.calendar.min.js"></script>
-    <!-- scripit init-->
-    <script src="assets/js/lib/calendar-2/pignose.init.js"></script>
-
-    <script src="assets/js/lib/owl-carousel/owl.carousel.min.js"></script>
-    <script src="assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
-    <script src="assets/js/scripts.js"></script>
-    <!-- scripit init-->
-
-    <script src="assets/js/custom.min.js"></script>
 
 </body>
+
 </html>

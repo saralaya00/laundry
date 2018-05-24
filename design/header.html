@@ -26,56 +26,71 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/common.css">
+
+    <!-- Custom JS -->
+    <script src="assets/js/common.js"></script>
+
 
 </head>
 
 <body class="fix-header fix-sidebar">
+ 
     <!-- Preloader : if any-->
 
-
-
-
+    <!-- (+) Main Wrapper -->
     <div id="main-wrapper">
 
+        <!-- (+) Header -->
         <div class="header">
-            <nav class="navbar top-navbar navbar-expand-md navbar-inverse">
-                <div class="container-fluid">
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span> 
-                    </button>
-                    
-                    <a href="#"> 
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <img src="assets/icons/cloth.png" alt="homepage" class="header-icon" />
+                <nav class="navbar top-navbar navbar-expand-md navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+    
+                            <a href="#">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <img src="assets/icons/cloth.png" alt="homepage" class="header-icon" />
+                                    </div>
+    
+                                    <div class="col-xs-offset-1 col-md-8 navbar-brand pull-right"> Laundry </div>
+                                </div>
+                            </a>
                         </div>
-
-                        <div class="col-xs-offset-1 col-md-8 navbar-brand pull-right"> Laundry </div>
+    
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="active" id="sidebarToggle">
+                                    <a href="#">
+                                        <span class="fa fa-bars fa-lg"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#">
+                                        <span class="fa fa-sign-out fa-lg"> &nbsp;</span> Logout </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    </a>
-                  </div>
-
-                  <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                      <li class="active"><a href="#"> <span class="fa fa-superpowers"></span> </a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"> <span class="fa fa-sign-in"></span> </a></li>
-                    </ul>
-                  </div>
-                </div>
-              </nav>
+                </nav>
         </div>
-
+        <!-- (-) Header -->
 
 
         
     </div>
+    <!-- (-) Main Wrapper -->
+
 
 </body>
 </html>
