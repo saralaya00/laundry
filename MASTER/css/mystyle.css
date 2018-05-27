@@ -36,21 +36,21 @@
     }
  .div1
  {
-    width: 900px;
-    height: 500px;
+    width: 70%;
+    height: 50%;
  }
 
  .div2{
-    height: 500px;
-    width: 385px;
+    height:50%;
+    width: 30%;
  }
 
- table,th{
-    border: 2px solid block;
+ table{
+    border: 2% solid block;
  }
 
  th,td{
-     padding: 6px;
+     padding:1%;
  }
     /* GLOBAL STYLES
 -------------------------------------------------- */
@@ -112,5 +112,11 @@
     padding: 50px 0;
 }
 
+
+.card{
+   
+    height:60% ;
+    width:75% ;
+}
 
   
