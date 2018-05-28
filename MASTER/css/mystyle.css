@@ -1,4 +1,10 @@
  
+.bg{
+  background-image:url('../images/bubble.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 /*this is for icons*/
 .icons{
