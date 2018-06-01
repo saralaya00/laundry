@@ -38,179 +38,185 @@
 
 
 </head>
-    <body class="fix-header fix-sidebar">
 
-        <!-- Preloader : if any-->
+<body class="fix-header fix-sidebar">
 
-        <!-- (+) Main Wrapper : Header -->
-        <div id="main-wrapper">
-            <!-- (+) Header -->
-            <div class="header">
-                <nav class="navbar top-navbar navbar-expand-md navbar-inverse">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
+    <!-- Preloader : if any-->
 
-                            <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="fa fa-angle-down fa-lg"></span>
-                            </button>
+    <!-- (+) Main Wrapper : Header -->
+    <div id="main-wrapper">
+        <!-- (+) Header -->
+        <nav class="navbar navbar-fixed-top navbar-expand-md navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
 
+                    <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="fa fa-angle-down fa-lg"></span>
+                    </button>
+
+                    <a href="#">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img src="assets/icons/cloth.png" alt="homepage" class="header-icon" />
+                            </div>
+
+                            <div class=" col-xs-offset-1 col-md-8 navbar-brand"> Laundry </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active" id="sidebarToggle">
                             <a href="#">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <img src="assets/icons/cloth.png" alt="homepage" class="header-icon" />
-                                    </div>
-
-                                    <div class=" col-xs-offset-1 col-md-8 navbar-brand"> Laundry </div>
-                                </div>
+                                <span class="fa fa-bars fa-lg"></span>
                             </a>
-                        </div>
-
-                        <div class="collapse navbar-collapse" id="myNavbar">
-                            <ul class="nav navbar-nav">
-                                <li class="active" id="sidebarToggle">
-                                    <a href="#">
-                                        <span class="fa fa-bars fa-lg"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="#">
-                                        <span class="fa fa-sign-out fa-lg"> &nbsp;</span> Logout </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <!-- (-) Header -->
-        </div> 
-        <!-- (-) Main Wrapper -->
-
-        <!-- (+) Main Wrapper : Sidebar -->
-        <div id="main-wrapper">
-            <!-- (+) Sidebar -->
-            <div class="nav-side-menu" id="sidebar">
-                <div class="navbar-sidebar-block"></div>
-                <div class="brand">                               
-                    <span class="fa fa-dashboard fa-lg"> &nbsp; Dashboard </span>  
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                <span class="fa fa-sign-out fa-lg"> &nbsp;</span> Logout </a>
+                        </li>
+                    </ul>
                 </div>
-                    <i class="fa fa-angle-double-down fa-2x btn toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+            </div>
+        </nav>
+        <!-- (-) Header -->
 
-                    <!-- Item List -->
-                    <div class="menu-list">
-                        <ul id="menu-content" class="menu-content collapse out">
+        <!-- (+) Sidebar -->
+        <div class="nav-side-menu" id="sidebar">
+            <div class="navbar-sidebar-block"></div>
+            <div class="brand">                               
+                <span class="fa fa-dashboard fa-lg"> &nbsp; Dashboard </span>  
+                <i class="fa fa-angle-double-down fa-2x btn toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+            </div>
+                
 
-                            <!-- Itemlist - 1 -->
-                            <li  data-toggle="collapse" data-target="#sidebar-add" class="collapsed active">
-                                <a href="#"><i class="fa fa fa-plus fa-lg"></i>
-                                    Add  <span class="label label-rouded label-warning pull-right">3</span> 
-                                    <span class="arrow"></span>
-                                </a>
-                            </li>
+            <!-- Item List -->
+            <div class="menu-list">
+                <ul id="menu-content" class="menu-content collapse out">
 
-                            <ul class="sub-menu collapse" id="sidebar-add">
-                                <!-- Items -->
-                                <li class="active"><a href="">Employee </a></li>
-                                <li><a href="">Service </a></li>
-                                <li><a href="">Item </a></li>
-                            </ul>
+                    <!-- Itemlist - 1 -->
+                    <li  data-toggle="collapse" data-target="#sidebar-add" class="collapsed active">
+                        <a href="#"><i class="fa fa fa-plus fa-lg"></i>
+                            Add  <span class="label label-rouded label-warning pull-right">3</span> 
+                            <span class="arrow"></span>
+                        </a>
+                    </li>
+
+                    <ul class="sub-menu collapse" id="sidebar-add">
+                        <!-- Items -->
+                        <li class="active"><a href="">Employee </a></li>
+                        <li><a href="">Service </a></li>
+                        <li><a href="">Item </a></li>
+                    </ul>
+
+                    <li>
+                        <a href="#">
+                        <i class="fa fa-user fa-lg"></i> View Employee
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                        <i class="fa fa-list-alt fa-lg"></i> View Item
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                        <i class="fa fa-book fa-lg"></i> View Order History
+                        </a>
+                    </li>
             
-                            <!-- Itemlist - 2 -->
-                            <li  data-toggle="collapse" data-target="#sidebar-view" class="collapsed">
-                            <a href="#"><i class="fa fa fa-book fa-lg"></i>
-                                    View  <span class="label label-rouded label-warning pull-right">3</span> 
-                                <span class="arrow"></span>
-                            </a>
-                            </li>
-                            <ul class="sub-menu collapse" id="sidebar-view">
-                                <!-- Items -->
-                                <li class="active"><a href="#1">Employee </a></li>
-                                <li><a href="#">Item </a></li>
-                                <li><a href="#">Order History </a></li>
-                            </ul>
-                    
-                            <!-- Itemlist - 3 -->
-                            <li  data-toggle="collapse" data-target="#sidebar-chart" class="collapsed">
-                            <a href="#"><i class="fa fa fa-bar-chart fa-lg"></i>
-                                    Charts  <span class="label label-rouded label-warning pull-right">2</span> 
-                                <span class="arrow"></span>
-                            </a>
-                            </li>
-                            <ul class="sub-menu collapse" id="sidebar-chart">
-                                <!-- Items -->
-                                <li class="active"><a href="">Report </a></li>
-                                <li><a href="">Reviews </a></li>
-                            </ul>
-                        </ul>
-                    </div>
+                    <!-- Itemlist - 3 -->
+                    <li  data-toggle="collapse" data-target="#sidebar-chart" class="collapsed">
+                    <a href="#"><i class="fa fa fa-bar-chart fa-lg"></i>
+                            Charts  <span class="label label-rouded label-warning pull-right">2</span> 
+                        <span class="arrow"></span>
+                    </a>
+                    </li>
+                    <ul class="sub-menu collapse" id="sidebar-chart">
+                        <!-- Items -->
+                        <li class="active"><a href="">Report </a></li>
+                        <li><a href="">Reviews </a></li>
+                    </ul>
+                </ul>
             </div>
-            <!-- (-) Sidebar -->
-        </div> 
-        <!-- (-) Main Wrapper -->
+        </div>
+        <!-- (-) Sidebar -->
+
+        <!-- (+) Footer -->
+        <footer class="navbar-fixed-bottom">
+            <div class="text-center jumbotron">  <span>&copy; 2018 | VRV Embassy | All rights reserved. </span> </div>
+        </footer>
+        <!-- (-) Footer -->
         
-        <!-- Page Wrapper : Container/Body -->
-        <div class="page-wrapper">
-            <div class="container">
-                <!-- Start Page Content -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body"> <h3 class="text-left">Today's pickup</h3> 
-                            <br>
-                            <h4 class="text-right">15</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body"> <h3 class="text-left">Today's order</h3> 
-                            <br>
-                            <h4 class="text-right">20</h4>
-                            </div>
+        </div> 
+    <!-- (-) Main Wrapper -->
+    
+    <!-- (+) Page Wrapper : Container/Body -->
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Start Page Content -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body"> <h3 class="text-left">Today's pickup</h3> 
+                        <br>
+                        <h4 class="text-right">15</h4>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6" >
-                        <div class="card">
-                            <div class="card-body"> <h3 class="text-left">Today's delivery</h3> 
-                            <br>
-                            <h4 class="text-right">30</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 ">
-                        <div class="card">
-                            <div class="card-body"> <h3 class="text-left">Today's payable amount</h3> 
-                            <br>
-                            <h4 class="text-right">1500</h4>
-                            </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body"> <h3 class="text-left">Today's order</h3> 
+                        <br>
+                        <h4 class="text-right">20</h4>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6" >
-                        <div class="card">
-                            <div class="card-body"> <h3 class="text-left">Collected Amount</h3> 
-                            <br>
-                            <h4 class="text-right">250</h4>
-                            </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" >
+                    <div class="card">
+                        <div class="card-body"> <h3 class="text-left">Today's delivery</h3> 
+                        <br>
+                        <h4 class="text-right">30</h4>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-md-6 ">
-                        <div class="card">
-                            <div class="card-body"> <h3 class="text-left">Trusted Customer</h3> 
-                            <br>
-                            <h4 class="text-right">50</h4>
-                            </div>
+                <div class="col-md-6 ">
+                    <div class="card">
+                        <div class="card-body"> <h3 class="text-left">Today's payable amount</h3> 
+                        <br>
+                        <h4 class="text-right">1500</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" >
+                    <div class="card">
+                        <div class="card-body"> <h3 class="text-left">Collected Amount</h3> 
+                        <br>
+                        <h4 class="text-right">250</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 ">
+                    <div class="card">
+                        <div class="card-body"> <h3 class="text-left">Trusted Customer</h3> 
+                        <br>
+                        <h4 class="text-right">50</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- (-) Page Wrapper -->
-    </body>
+    </div>
+</body>
 </html>
