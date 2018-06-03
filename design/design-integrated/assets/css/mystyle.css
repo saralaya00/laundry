@@ -267,3 +267,14 @@
     font-family: 'Poppins', sans-serif;
     margin-bottom: 12px;
   } 
+  ul.icons li{
+    display:inline-block;
+}
+.icon{
+  display: inline-block;
+}
+
+#elementID {
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 3.5em;
+}
