@@ -1,6 +1,16 @@
  
+.div1 {
+  width:950px;
+  height: 500px;
+  overflow-y: auto;
+}
+.div2{
+  height: 500px;
+  overflow-y: auto;
+}
+
 .bg{
-  background-image:url('../images/bubble.jpg');
+  background-image:url('../images/soap.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -30,26 +40,11 @@
 
     }
 
-    .tabletron{
-        margin-top:50px; 
-        color:#999;
-        border-radius:0px!important;
-        background:linear-gradient(to right,#000,#333,#666);
-    }
-
+   
     .my-panels{
         padding-top: 60px;
     }
- .div1
- {
-    width: 70%;
-    height: 50%;
- }
-
- .div2{
-    height:50%;
-    width: 30%;
- }
+ 
 
  table{
     border: 2% solid block;
@@ -274,3 +269,8 @@
     font-family: 'Poppins', sans-serif;
     margin-bottom: 12px;
   } 
+
+ .card-image{
+   height:70% ;
+   width:50% ;
+ }
