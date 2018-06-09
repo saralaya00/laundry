@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2018 at 12:12 PM
+-- Generation Time: Jun 09, 2018 at 08:45 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -33,7 +33,6 @@ CREATE TABLE `customer` (
   `full_name` varchar(30) NOT NULL,
   `address` varchar(100) NOT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `contact_prefix` int(4) DEFAULT NULL,
   `contact_no` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -45,10 +44,9 @@ CREATE TABLE `customer` (
 
 CREATE TABLE `employee` (
   `emoloyee_id` int(10) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `full_name` varchar(30) NOT NULL,
   `address` varchar(100) NOT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `contact_prefix` int(4) DEFAULT NULL,
   `contact_no` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
