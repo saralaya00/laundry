@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2018 at 09:13 AM
+-- Generation Time: Jun 12, 2018 at 04:51 PM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -78,6 +78,19 @@ CREATE TABLE IF NOT EXISTS `items` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `item_service`
+--
+
+CREATE TABLE IF NOT EXISTS `item_service` (
+  `s_id` int(10) NOT NULL,
+  `item_id` int(10) NOT NULL,
+  `service_id` int(10) NOT NULL,
+  PRIMARY KEY (`s_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -137,14 +150,16 @@ CREATE TABLE IF NOT EXISTS `services` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service_on_item`
+-- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `service_on_item` (
-  `s_id` int(10) NOT NULL,
-  `item_id` int(10) NOT NULL,
-  `service_id` int(10) NOT NULL,
-  PRIMARY KEY (`s_id`)
+CREATE TABLE IF NOT EXISTS `users` (
+  `u_id` int(10) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `cust_id` int(10) NOT NULL,
+  `emp_id` int(10) NOT NULL,
+  KEY `fk_cust` (`cust_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -167,8 +182,8 @@ ALTER TABLE `orders`
 -- Constraints for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD CONSTRAINT `fk_on_s_id` FOREIGN KEY (`s_id`) REFERENCES `service_on_item` (`s_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_on_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_on_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_on_s_id` FOREIGN KEY (`s_id`) REFERENCES `item_service` (`s_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `order_tracking`
@@ -176,6 +191,12 @@ ALTER TABLE `order_details`
 ALTER TABLE `order_tracking`
   ADD CONSTRAINT `FK_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`emoloyee_id`),
   ADD CONSTRAINT `FK_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_cust` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`customer_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
