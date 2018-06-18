@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2018 at 09:07 AM
+-- Generation Time: Jun 18, 2018 at 09:30 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -76,6 +76,18 @@ CREATE TABLE `items` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `item_service`
+--
+
+CREATE TABLE `item_service` (
+  `s_id` int(10) NOT NULL,
+  `item_id` int(10) NOT NULL,
+  `service_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -127,13 +139,15 @@ CREATE TABLE `services` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service_on_item`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `service_on_item` (
-  `s_id` int(10) NOT NULL,
-  `item_id` int(10) NOT NULL,
-  `service_id` int(10) NOT NULL
+CREATE TABLE `users` (
+  `u_id` int(10) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `cust_id` int(10) NOT NULL,
+  `emp_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -165,6 +179,12 @@ ALTER TABLE `items`
   ADD PRIMARY KEY (`item_id`);
 
 --
+-- Indexes for table `item_service`
+--
+ALTER TABLE `item_service`
+  ADD PRIMARY KEY (`s_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -193,10 +213,10 @@ ALTER TABLE `services`
   ADD PRIMARY KEY (`service_id`);
 
 --
--- Indexes for table `service_on_item`
+-- Indexes for table `users`
 --
-ALTER TABLE `service_on_item`
-  ADD PRIMARY KEY (`s_id`);
+ALTER TABLE `users`
+  ADD KEY `fk_cust` (`cust_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -259,7 +279,7 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_details`
   ADD CONSTRAINT `fk_on_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_on_s_id` FOREIGN KEY (`s_id`) REFERENCES `service_on_item` (`s_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_on_s_id` FOREIGN KEY (`s_id`) REFERENCES `item_service` (`s_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `order_tracking`
@@ -267,6 +287,12 @@ ALTER TABLE `order_details`
 ALTER TABLE `order_tracking`
   ADD CONSTRAINT `FK_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`emoloyee_id`),
   ADD CONSTRAINT `FK_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_cust` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`customer_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
