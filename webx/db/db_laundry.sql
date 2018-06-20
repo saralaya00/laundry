@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2018 at 11:45 AM
+-- Generation Time: Jun 20, 2018 at 01:17 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customer` (
   `customer_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
   `full_name` varchar(30) NOT NULL,
   `address` varchar(100) NOT NULL,
   `email` varchar(30) DEFAULT NULL,
@@ -44,6 +45,7 @@ CREATE TABLE `customer` (
 
 CREATE TABLE `employee` (
   `employee_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
   `full_name` varchar(30) NOT NULL,
   `address` varchar(100) NOT NULL,
   `email` varchar(30) DEFAULT NULL,
@@ -145,7 +147,8 @@ CREATE TABLE `services` (
 CREATE TABLE `users` (
   `user_id` int(10) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(30) NOT NULL,
+  `role` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -156,13 +159,15 @@ CREATE TABLE `users` (
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`customer_id`);
+  ADD PRIMARY KEY (`customer_id`),
+  ADD KEY `FK_customer_user_id` (`user_id`);
 
 --
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
-  ADD PRIMARY KEY (`employee_id`) USING BTREE;
+  ADD PRIMARY KEY (`employee_id`) USING BTREE,
+  ADD KEY `FK_employee_user_id` (`user_id`);
 
 --
 -- Indexes for table `feedback`
@@ -195,8 +200,8 @@ ALTER TABLE `orders`
 -- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD KEY `FK_orders_order_id` (`order_id`) USING BTREE,
-  ADD KEY `FK_item_service_id` (`id`) USING BTREE;
+  ADD KEY `FK_item_service_id` (`id`) USING BTREE,
+  ADD KEY `FK_order_details_order_id` (`order_id`) USING BTREE;
 
 --
 -- Indexes for table `order_tracking`
@@ -269,6 +274,18 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `FK_customer_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `employee`
+--
+ALTER TABLE `employee`
+  ADD CONSTRAINT `FK_employee_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -292,7 +309,7 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_details`
   ADD CONSTRAINT `FK_item_service_id` FOREIGN KEY (`id`) REFERENCES `item_service` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_orders_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_order_details_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `order_tracking`
