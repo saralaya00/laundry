@@ -22,6 +22,19 @@ SET time_zone = "+00:00";
 -- Database: `db_laundry`
 --
 
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `password`, `role`) VALUES
+(1, 'Pooja V Tendulkar', 'pooja123', 'Employee'),
+(2, 'Deepa V Tendulkar', 'deepa123', 'Customer'),
+(3, 'Amey Kamath', 'amey123', 'Customer'),
+(4, 'Rakshith', 'raksh123', 'Employee'),
+(5, 'Rakesh', 'rakesh123', 'Employee'),
+(6, 'Deepak ', 'deep123', 'Customer');
+
 --
 -- Dumping data for table `customer`
 --
@@ -51,6 +64,16 @@ INSERT INTO `items` (`item_id`, `name`) VALUES
 (4, 'JEANS'),
 (5, 'CURTAINS'),
 (6, 'PANT');
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`service_id`, `name`, `description`) VALUES
+(1, 'Dyeing', 'its colouring of the cloths.'),
+(2, 'Dry clean', 'washing the cloths adding chemical'),
+(3, 'Iron', 'ironing of cloths.'),
+(4, 'wash', 'machine wash/ hand wash of cloths.');
 
 --
 -- Dumping data for table `item_service`
@@ -98,27 +121,6 @@ INSERT INTO `order_tracking` (`tracking_id`, `order_id`, `employee_id`, `status`
 (4, 4, 2, 'processed'),
 (5, 5, 2, 'Pending ');
 
---
--- Dumping data for table `services`
---
-
-INSERT INTO `services` (`service_id`, `name`, `description`) VALUES
-(1, 'Dyeing', 'its colouring of the cloths.'),
-(2, 'Dry clean', 'washing the cloths adding chemical'),
-(3, 'Iron', 'ironing of cloths.'),
-(4, 'wash', 'machine wash/ hand wash of cloths.');
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `username`, `password`, `role`) VALUES
-(1, 'Pooja V Tendulkar', 'pooja123', 'Employee'),
-(2, 'Deepa V Tendulkar', 'deepa123', 'Customer'),
-(3, 'Amey Kamath', 'amey123', 'Customer'),
-(4, 'Rakshith', 'raksh123', 'Employee'),
-(5, 'Rakesh', 'rakesh123', 'Employee'),
-(6, 'Deepak ', 'deep123', 'Customer');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
