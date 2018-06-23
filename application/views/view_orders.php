@@ -7,27 +7,7 @@
       <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />  
-   <style>  
-           body  
-           {  
-                margin:0;  
-                padding:0;  
-                background-color:#f1f1f1;  
-           }  
-           #order_id
-           {
-               display:inline;
-           }
-           .box  
-           {  
-                width:900px;  
-                padding:20px;  
-                background-color:#fff;  
-                border:1px solid #ccc;  
-                border-radius:5px;  
-                margin-top:10px;  
-           }  
-      </style>  
+
  </head>  
  <body>  
       <div class="container box">  
@@ -117,6 +97,7 @@
                     }   
             })  
       });  
+
       $("#employeeDropdown").change(function() {
             var id = $(this).children(":selected").attr("id");
             assign_order(id);
@@ -125,15 +106,15 @@
     function assign_order(id){
         $(document).on('submit', '#assign_order_form', function(event){  
             event.preventDefault();  
-            var employee_name = $('#employeeDropdown').val();  
+           // var employee_name = $('#employeeDropdown').val();  
             var order_id = $("#order_id").text();
-            var emp_id=id;
+            var employee_id=id;
 
             var data_details={
-                    emp_id=id;
-                    employee_name : employee_name,
+                    employee_id : employee_id,
+                  //  employee_name : employee_name,
                     order_id : order_id
-                }
+                };
 
             if(employee_name != 'Select Employee')  
             {  
@@ -146,8 +127,8 @@
                         success:function(data)  
                         {  
                             alert(data);  
-                            $('#user_form')[0].reset();  
-                            $('#userModal').modal('hide');  
+                            $('#assign_order_form')[0].reset();  
+                            $('#assignOrderModal').modal('hide');  
                             dataTable.ajax.reload();  
                         }  
                     });  
@@ -157,6 +138,7 @@
                     alert("Select employee");  
             }  
       });  
+    }
  </script>   
  </html>  
  

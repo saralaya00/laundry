@@ -66,6 +66,7 @@ class View_orders_controller extends CI_Controller {
       function assign_order()
       {
             $data=array(
+                  'employee_id' => $this->input->post('employee_id'),
                   'employee_name'=> $this->input->post('employee_name'),
                   'order_id'=> $this->input->post('order_id')
                   );
