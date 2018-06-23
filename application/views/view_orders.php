@@ -14,6 +14,10 @@
                 padding:0;  
                 background-color:#f1f1f1;  
            }  
+           #order_id
+           {
+               display:inline;
+           }
            .box  
            {  
                 width:900px;  
@@ -45,51 +49,25 @@
                 </table>  
            </div>  
       </div>  
-      <div id="userModal" class="modal fade">  
-      <div class="modal-dialog">  
-           <form method="post" id="user_form">  
-                <div class="modal-content">  
-                     <div class="modal-header">  
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                          <h4 class="modal-title">Add User</h4>  
-                     </div>  
-                     <div class="modal-body">  
-                          <label>Enter First Name</label>  
-                          <input type="text" name="first_name" id="first_name" class="form-control" />  
-                          <br />  
-                          <label>Enter Last Name</label>  
-                          <input type="text" name="last_name" id="last_name" class="form-control" />  
-                          <br />  
-                          <label>Select User Image</label>  
-                          <input type="file" name="user_image" id="user_image" />  
-                     </div>  
-                     <div class="modal-footer">  
-                          <input type="submit" name="action" class="btn btn-success" value="Add" />  
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                     </div>  
-                </div>  
-           </form>  
-      </div>  
- </div>  
  </body> 
  <div id="assignOrderModal" class="modal fade">  
       <div class="modal-dialog">  
-           <form method="post" id="user_form">  
+           <form method="post" id="assign_order_form">  
                 <div class="modal-content">  
                      <div class="modal-header">  
                           <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                          <h4 class="modal-title">Add User</h4>  
+                          <h4 class="modal-title">Order ID <span id="order_id"></span> </h4>  
                      </div>  
                      <div class="modal-body">  
-                        <label>Order Id</label>
-                        <label id="order_id"></label>
+                       
+                        <br>
                           <label>Select employee</label>  
                           <select id="employeeDropdown">
                               
                           </select>                        
                      </div>  
                      <div class="modal-footer">  
-                          <input type="submit" name="action" class="btn btn-success" value="Add" id="assign_employee"/>  
+                          <input type="submit" name="action" class="btn btn-success" k="Assign" id="assign_employee"/>  
                           <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>  
                      </div>  
                 </div>  
@@ -115,7 +93,8 @@
            ],  
       });  
   });
-  $(document).on('click', '.assign', function(){  
+  $(document).on('click', '.assign', function(){     
+    $("#order_id").text($(this).data("id"));
            $.ajax({  
                     url:"<?php echo base_url(); ?>view_orders_controller/get_employee", 
                     method:"POST",   
@@ -124,38 +103,59 @@
                     jsonpCallback: 'callback', 
                     success: function(json) {
                     $('#assignOrderModal').modal('show');  
+                    
                         var $select = $('#employeeDropdown');
                         $select.empty();
 
-                        $select.append($('<option></option>').attr("value", '').text("Select Employee"));
+                        $select.append($('<option></option>').attr("value",'').text("Select Employee"));
                         
-                        $.each(json, function(value, key) {
-                            $select.append($('<option></option>').attr("value", value).text(key));
+                        $.each(json, function(key, value) {
+                            console.log(key, value);
+                            $select.append($('<option></option>').attr("id", value.employee_id).text(value.full_name));
                         
                         });
                     }   
             })  
       });  
-    $(document).on('click', '#assign_employee', function(){  
-           $.ajax({  
-                    url:"<?php echo base_url(); ?>view_orders_controller/assign_order", 
-                    method:"POST",   
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    jsonpCallback: 'callback', 
-                    success: function(json) {
-                    $('#assignOrderModal').modal('show');  
-                        var $select = $('#employeeDropdown');
-                        $select.empty();
+      $("#employeeDropdown").change(function() {
+            var id = $(this).children(":selected").attr("id");
+            assign_order(id);
+            });
 
-                        $select.append($('<option></option>').attr("value", '').text("Select Employee"));
-                        
-                        $.each(json, function(value, key) {
-                            $select.append($('<option></option>').attr("value", value).text(key));
-                        
-                        });
-                    }   
-            })  
+    function assign_order(id){
+        $(document).on('submit', '#assign_order_form', function(event){  
+            event.preventDefault();  
+            var employee_name = $('#employeeDropdown').val();  
+            var order_id = $("#order_id").text();
+            var emp_id=id;
+
+            var data_details={
+                    emp_id=id;
+                    employee_name : employee_name,
+                    order_id : order_id
+                }
+
+            if(employee_name != 'Select Employee')  
+            {  
+                    $.ajax({  
+                        url:"<?php echo base_url() . 'view_orders_controller/assign_order'?>",  
+                        method:'POST',  
+                        data:data_details,  
+                        contentType:false,  
+                        processData:false,  
+                        success:function(data)  
+                        {  
+                            alert(data);  
+                            $('#user_form')[0].reset();  
+                            $('#userModal').modal('hide');  
+                            dataTable.ajax.reload();  
+                        }  
+                    });  
+            }  
+            else  
+            {  
+                    alert("Select employee");  
+            }  
       });  
  </script>   
  </html>  

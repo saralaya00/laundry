@@ -57,7 +57,17 @@ class View_orders_model extends CI_Model
               
             $query=$this->db->get('employee');  
             return $query->result();
-	}
+      }
+      
+      public function get_tracking_data()
+      {
+            
+      }
+      public function assign_order($data)
+      {
+            $this->get_tracking_data(); 
+            $this->db->insert('order_tracking', $data);  
+      }
      
 }  
 ?>

@@ -57,10 +57,28 @@ class View_orders_controller extends CI_Controller {
             $data = $this->view_orders_model->getEmployeeRows();  
             foreach($data as $row)  
             {  
-                 $output[$i] = $row->full_name;  
+                 $output[$i] = $row;  
                  $i++;
             }  
             echo json_encode($output);
+      }
+
+      function assign_order()
+      {
+            $data=array(
+                  'employee_name'=> $this->input->post('employee_name'),
+                  'order_id'=> $this->input->post('order_id')
+                  );
+                  
+                  $this->load->model('view_orders_model');  
+                  $result = $this->view_orders_model->assign_order($data);  
+                  if($result==true){
+                        $res='Order assigned sucessfully';  
+                    }
+                    else{
+                        $res='Order not assigned';  
+                    }
+                   echo json_encode($res) ;
       }
  }
  ?>  
