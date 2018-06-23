@@ -51,5 +51,13 @@ class View_orders_model extends CI_Model
           $this->db->from($this->table);  
           return $this->db->count_all_results();  
      }  
+
+     public function getEmployeeRows()
+	{
+              
+            $query=$this->db->get('employee');  
+            return $query->result();
+	}
+     
 }  
 ?>
