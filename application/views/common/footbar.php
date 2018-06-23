@@ -104,9 +104,9 @@
 
                     <ul class="sub-menu collapse" id="sidebar-add">
                         <!-- Items -->
-                        <li class="active"><a href="">Employee </a></li>
-                        <li><a href="">Service </a></li>
-                        <li><a href="">Item </a></li>
+                        <li id="add-emp" class="active" data-toggle="modal" data-target="#modal-template">Employee</li>
+                        <li id="add-service" data-toggle="modal" data-target="#modal-template">Service</li>
+                        <li id="add-item" data-toggle="modal" data-target="#modal-template">Item</li>
                     </ul>
 
                     <li>
@@ -152,6 +152,30 @@
         
     </div> 
     <!-- (-) Main Wrapper -->
+    
+    <!-- (+) Modal Template -->
+    <div id="modal-template" class="modal fade">  
+        <div class="modal-dialog">  
+            <form method="post" id="modal-form">  
+                <div class="modal-content">  
+                    <div class="modal-header">  
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                        <h4 class="modal-title"></h4>  
+                    </div>
+
+                    <div class="modal-body">  
+ 
+                    </div>
+
+                    <div class="modal-footer">  
+                        <input type="submit" name="action" class="btn btn-success" value="Add" />  
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                    </div>  
+                </div>  
+            </form>  
+        </div> 
+    </div>
+    <!-- (-) Modal Template -->
     
     <!-- (+) Page Wrapper : Container/Body -->
     <div class="page-wrapper">
