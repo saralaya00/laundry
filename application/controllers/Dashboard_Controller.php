@@ -10,8 +10,12 @@
         {
             $data['title'] = "Dashboard";
             $this->load->view('common/footbar.php');
-            $this->load->view('view_orders.php');
+            $this->load->view('dashboard/view_cards.php');
             $this->load->view('common/end_wrapper.php');
+        }
+        public function md_employee()
+        {
+            return $this->load->view('dashboard/md_employee.php');
         }
     }
 ?>

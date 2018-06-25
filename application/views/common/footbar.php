@@ -37,7 +37,7 @@
     <script src="assets/js/common.js"></script>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-header fix-sidebar" data-baseurl="<?php echo base_url();?>">
     <!-- Preloader : if any-->
 
     <!-- (+) Main Wrapper : Header -->

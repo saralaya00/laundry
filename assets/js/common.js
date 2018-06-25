@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    var baseURL = $('body').data('baseurl');
+
     //Modal variables
     var md_head = $('.modal-header');
     var md_title = $('.modal-title');
@@ -7,14 +9,19 @@ $(document).ready(function(){
     var md_foot = $('.modal-footer');
 
     //Clear Function
-    // $('.modal').click(function()
-    // {
-    //     md_title.html('');
-    //     md_foot.find('input').val('Add');
-    // });
+    $('.modal').click(function()
+    {
+        md_title.html('');
+
+        md_foot.find('input').val('Add');
+    });
 
     $('#add-emp').click(function(){
         md_title.html('Add Employee');
+        
+        $.post(baseURL + 'Dashboard_Controller/md_employee', function (data){
+            md_body.html(data);
+        });
         md_foot.find('input').val('Add Employee');
     });
 
