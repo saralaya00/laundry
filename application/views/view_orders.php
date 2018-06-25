@@ -36,16 +36,20 @@
                 <div class="modal-content">  
                      <div class="modal-header">  
                           <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                          <h4 class="modal-title">Order ID <span id="order_id"></span> </h4>  
+                          <h4 class="modal-title">Order ID <span id="order_id_label"></span> </h4>  
                      </div>  
                      <div class="modal-body">  
-                       
+                     <label>Order id</label>
+                     <input type="text" id="order_id" val="">
                         <br>
                           <label>Select employee</label>  
                           <select id="employeeDropdown">
                               
-                          </select>                        
+                          </select>  
+                          <label>Order id</label>
+                     <input type="text" id="employee_id" val="">                      
                      </div>  
+
                      <div class="modal-footer">  
                           <input type="submit" name="action" class="btn btn-success" k="Assign" id="assign_employee"/>  
                           <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>  
@@ -56,89 +60,90 @@
  </div>   
 
  <script type="text/javascript" language="javascript">
+
   $(document).ready(function(){  
-      var dataTable = $('#user_data').DataTable({  
-           "processing":true,  
-           "serverSide":true,  
-           "order":[],  
-           "ajax":{  
-                url:"<?php echo base_url() . 'view_orders_controller/fetch_orders'; ?>",  
-                type:"POST"  
-           },  
-           "columnDefs":[  
-                {  
-                     "targets":[0, 1, 2, 3, 4],  
-                     "orderable":false,  
-                },  
-           ],  
-      });  
+    var dataTable = $('#user_data').DataTable({  
+        "processing":true,  
+        "serverSide":true,  
+        "order":[],  
+        "ajax":{  
+            url:"<?php echo base_url() . 'view_orders_controller/fetch_orders'; ?>",  
+            type:"POST"  
+        },  
+        "columnDefs":[  
+            {  
+                    "targets":[0, 1, 2, 3, 4],  
+                    "orderable":false,  
+            },  
+        ],  
+    });  
   });
+
   $(document).on('click', '.assign', function(){     
-    $("#order_id").text($(this).data("id"));
-           $.ajax({  
-                    url:"<?php echo base_url(); ?>view_orders_controller/get_employee", 
-                    method:"POST",   
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    jsonpCallback: 'callback', 
-                    success: function(json) {
-                    $('#assignOrderModal').modal('show');  
+    $("#order_id").val($(this).data("id"));
+        $.ajax({  
+                url:"<?php echo base_url(); ?>view_orders_controller/get_employee", 
+                method:"POST",   
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                jsonpCallback: 'callback', 
+                success: function(json) {
+                $('#assignOrderModal').modal('show');  
+                
+                    var $select = $('#employeeDropdown');
+                    $select.empty();
+
+                    $select.append($('<option></option>').attr("value",'').text("Select Employee"));
                     
-                        var $select = $('#employeeDropdown');
-                        $select.empty();
+                    $.each(json, function(key, value) {
+                        $select.append($('<option></option>').attr("value", value.employee_id).text(value.full_name));
+                    });
+                }   
+        })  
+    });  
 
-                        $select.append($('<option></option>').attr("value",'').text("Select Employee"));
-                        
-                        $.each(json, function(key, value) {
-                            console.log(key, value);
-                            $select.append($('<option></option>').attr("id", value.employee_id).text(value.full_name));
-                        
-                        });
-                    }   
-            })  
-      });  
+    $("#employeeDropdown").change(function() {
+        var id = $(this).children(":selected").attr("value");
+        $("#employee_id").val(id);
 
-      $("#employeeDropdown").change(function() {
-            var id = $(this).children(":selected").attr("id");
-            assign_order(id);
-            });
+        assign_order();
+        });
 
-    function assign_order(id){
-        $(document).on('submit', '#assign_order_form', function(event){  
+    function assign_order(){
+        $(document).on('click', '#assign_employee', function(event){  
             event.preventDefault();  
-           // var employee_name = $('#employeeDropdown').val();  
-            var order_id = $("#order_id").text();
-            var employee_id=id;
-
-            var data_details={
-                    employee_id : employee_id,
-                  //  employee_name : employee_name,
-                    order_id : order_id
-                };
-
-            if(employee_name != 'Select Employee')  
-            {  
-                    $.ajax({  
-                        url:"<?php echo base_url() . 'view_orders_controller/assign_order'?>",  
-                        method:'POST',  
-                        data:data_details,  
-                        contentType:false,  
-                        processData:false,  
-                        success:function(data)  
-                        {  
-                            alert(data);  
-                            $('#assign_order_form')[0].reset();  
-                            $('#assignOrderModal').modal('hide');  
-                            dataTable.ajax.reload();  
-                        }  
-                    });  
-            }  
-            else  
-            {  
-                    alert("Select employee");  
-            }  
+           var employee_name = $('#employeeDropdown').val();  
+            var order_id = $("#order_id").val();
+            var employee_id= $("#employee_id").val();
+            
+            // var data_details={
+            //         "order_id" : order_id,
+            //         "employee_id" : employee_id
+            //     };
+            
+            $.ajax({  
+                type:"POST",
+                url:"<?php echo site_url('view_orders_controller/assign_order')?>",  
+                dataType : "JSON",
+                //data : {"order_id" : 'hello',"employee_id" : 'hi'},
+                // data :  $('#assign_order_form').serialize(),
+                // data : {'order_id':order_id,
+                //     'employee_id':employee_id},
+                data: {order_id:order_id,employee_id:employee_id},
+                success:function(data)  
+                {  
+                   if(data=="Order assigned sucessfully")
+                   {
+                    $('#assignOrderModal').modal('hide');  
+                    dataTable.ajax.reload();  
+                   }
+                }  
+            });  
+            
+           
       });  
     }
+
  </script>   
  </html>  
  

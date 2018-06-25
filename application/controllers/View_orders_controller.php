@@ -27,7 +27,7 @@ class View_orders_controller extends CI_Controller {
                   $sub_array[] = '<button type="button" name="view" data-id="'.$row->order_id.'" class="btn btn-success btn-xs" data-toggle="modal" data-target="#userModal">View Order</button>';  
                   
                   if($row->status=="delivered"){
-                        $sub_array[]="--";
+                        $sub_array[]="-";
                   }
                   else if($row->status == "not assigned"){
                          $sub_array[] = '<button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-warning btn-xs assign" data-toggle="modal" data-target="#assignOrderModal">Assign order</button>';  
@@ -63,23 +63,21 @@ class View_orders_controller extends CI_Controller {
             echo json_encode($output);
       }
 
-      function assign_order()
+      public function assign_order()
       {
-            $data=array(
-                  'employee_id' => $this->input->post('employee_id'),
-                  'employee_name'=> $this->input->post('employee_name'),
-                  'order_id'=> $this->input->post('order_id')
-                  );
-                  
-                  $this->load->model('view_orders_model');  
-                  $result = $this->view_orders_model->assign_order($data);  
-                  if($result==true){
-                        $res='Order assigned sucessfully';  
-                    }
-                    else{
-                        $res='Order not assigned';  
-                    }
-                   echo json_encode($res) ;
+            $data = array('order_id' => $this->input->post('order_id'),
+                        'employee_id' => $this->input->post('employee_id'),
+                        'status' => '');
+            print_r($data);
+            $result = $this->view_orders_model->assign_order($data);
+            if($result==true)
+            {
+                  $res='Order assigned sucessfully';  
+              }
+              else{
+                  $res='Order not assigned';  
+              }
+             echo json_encode($res);
       }
  }
  ?>  
