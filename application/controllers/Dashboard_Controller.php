@@ -13,9 +13,21 @@
             $this->load->view('dashboard/view_cards.php');
             $this->load->view('common/end_wrapper.php');
         }
+
         public function md_employee()
         {
             return $this->load->view('dashboard/md_employee.php');
+        }
+
+        public function add_employee()
+        {
+            //todo: Add Validation rules
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                return $this->load->view('dashboard/md_employee.php');
+            }
+            else return $this->load->view('dashboard/succ_employee.php');
         }
     }
 ?>
