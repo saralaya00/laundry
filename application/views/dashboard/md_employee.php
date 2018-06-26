@@ -1,18 +1,31 @@
 
-<form action="" method="post">
-    <br>
-    <label> Full Name </label>
-    <input type="text" name="full_name">
+<div class="container-fluid">
+    <?php echo validation_errors(); ?>
+    <?php echo form_open('form')?>
+        <div class="row form-group">
+            <div class="col-md-3"><label> Full Name </label></div>
+            <div class="col-md-6"><input class="form-control" type="text" name="full_name"></div>
 
-    <br>
-    <label> Address </label>
-    <textarea name="address" id="" cols="30" rows="3"></textarea>
+        </div>
+        
 
-    <br>
-    <label> Email </label>
-    <input type="text" name="email">
+        <div class="row form-group">
+            <div class="col-md-3"><label> Address </label></div>
+            <div class="col-md-6"><textarea class="form-control" name="address" id="" rows="4"></textarea></div>
+        </div>
+        
 
-    <br>
-    <label> Contact No </label>
-    <input type="text" name="contact_no">
-</form>
+        <div class="row form-group">
+            <div class="col-md-3"><label> Email </label></div>
+            <div class="col-md-6"><input class="form-control" type="text" name="email"></div>
+        </div>
+        
+
+        <div class="row form-group">
+            <div class="col-md-3"><label> Contact No </label></div>
+            <div class="col-md-6"><input class="form-control" type="text" name="contact_no"></div>
+        </div>
+        
+    </form>
+</div>
+

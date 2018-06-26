@@ -9,14 +9,15 @@ $(document).ready(function(){
     var md_foot = $('.modal-footer');
 
     //Clear Function
-    $('.modal').click(function()
+    function md_clear()
     {
         md_title.html('');
-
+        md_body.html('');
         md_foot.find('input').val('Add');
-    });
+    };
 
     $('#add-emp').click(function(){
+        md_clear();
         md_title.html('Add Employee');
         
         $.post(baseURL + 'Dashboard_Controller/md_employee', function (data){
@@ -26,6 +27,7 @@ $(document).ready(function(){
     });
 
     $('#add-service').click(function(){
+        md_clear();
         md_title.html('Add Service');
         md_foot.find('input').val('Add Service');
     });
