@@ -23,11 +23,11 @@
         {
             //todo: Add Validation rules
 
-            if ($this->form_validation->run() == FALSE)
-            {
-                return $this->load->view('dashboard/md_employee.php');
-            }
-            else return $this->load->view('dashboard/succ_employee.php');
+            // if ($this->form_validation->run() == FALSE)
+            // {
+            //     return $this->load->view('dashboard/md_employee.php');
+            // }
+             return $this->load->view('dashboard/succ_employee.php');
         }
     }
 ?>
