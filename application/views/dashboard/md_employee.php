@@ -1,3 +1,4 @@
+<span data-returnval="0"></span>
 
 <div class="container-fluid">
     <?php echo validation_errors(); ?>
