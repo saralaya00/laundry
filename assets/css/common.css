@@ -182,11 +182,15 @@ body {
      margin-top:10px;  
 }   */
 
-/* Modal */
-#modal-template
-{
-  margin-top:120px;
+/* From bootstrap 4 */
+.col-form-label{
+  padding-top: calc(.375rem + 1px);
+  padding-bottom: calc(.375rem + 1px);
+  margin-bottom: 0;
+  font-size: inherit;
+  line-height: 1.5;
 }
+
 /* Footer */
 footer
 {
