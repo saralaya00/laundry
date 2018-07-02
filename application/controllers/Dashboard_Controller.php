@@ -4,7 +4,8 @@
         public function __construct()
         {
             parent::__construct();
-            $this -> form_validation -> set_error_delimiters('<label class="col-md-5 col-form-label text-danger">', '</label>');
+            $this->load->model('Dashboard_Model');
+            $this -> form_validation -> set_error_delimiters('<span>', '</span>');
         }
 
         public function index()
@@ -22,8 +23,6 @@
 
         public function add_employee()
         {
-            //todo: Add Validation rules
-
             $this -> form_validation -> set_rules($this -> rules_list('employee'));
 
             // $this -> form_validation -> set_rules('full_name', 'Full name', $rules_fullname);
@@ -35,14 +34,29 @@
             {
                 return $this->load->view('dashboard/md_employee.php');
             }
-             return $this->load->view('dashboard/succ_employee.php');
+            else {
+                $empdata = array(
+                    'user_id' => '', //UserID is the generated autonum from users table
+                    'full_name' => $this -> input -> post('full_name'),
+                    'address' => $this -> input -> post('address'),
+                    'email' => $this -> input -> post('email'),
+                    'contact_no' => $this -> input -> post('contact_no')
+                );
+
+                if ($this->Dashboard_Model->add_employee($empdata))
+                {
+                    return $this->load->view('dashboard/succ_employee.php');
+                }
+
+                else return $this->load->view('dashboard/md_employee.php');                
+            }
         }
 
         function rules_list($rule)
         {
             switch ($rule) {
                 case 'employee':{
-                        $employee_rules = array(
+                        return array(
                             array(
                                 'field' => 'full_name',
                                 'label' => 'Full name',
@@ -56,16 +70,14 @@
                             array(
                                 'field' => 'email',
                                 'label' => 'Email',
-                                'rules' => 'required|valid_email|max_length[30]'
+                                'rules' => 'valid_email|max_length[30]'
                             ),
                             array(
                                 'field' => 'contact_no',
                                 'label' => 'Contact No',
-                                'rules' => 'required|numeric|exact_length[10]'
+                                'rules' => 'required|numeric|exact_length[10]|is_unique[employee.contact_no]'
                             )
                         );
-
-                        return $employee_rules;
                     }
                     break;
                 

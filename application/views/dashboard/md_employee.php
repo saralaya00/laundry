@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <input class="form-control" type="text" placeholder="Firstname Lastname" name="full_name" value="<?php echo set_value('full_name'); ?>">
             </div>
-            <?php echo form_error('full_name');?>
+            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('full_name');?></label>
         </div>
         
         <div class="form-group row">
@@ -18,7 +18,7 @@
             <div class="col-md-4">
                 <textarea class="form-control" name="address" placeholder="Enter Address"  rows="4"><?php echo trim(set_value('address')); ?></textarea>
             </div>
-            <?php echo form_error('address');?>
+            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('address');?></label>
         </div>
 
         <div class="form-group row">
@@ -26,7 +26,7 @@
             <div class="col-md-4">
                 <input class="form-control" type="text" name="email" placeholder="Enter Email" value="<?php echo set_value('email'); ?>">
             </div>
-            <?php echo form_error('email');?>
+            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('email');?></label>
         </div>
         
         <div class="form-group row">
@@ -34,7 +34,7 @@
             <div class="col-md-4">
                 <input class="form-control" type="text" name="contact_no" placeholder="Enter your 10 digits contact number" value="<?php echo set_value('contact_no'); ?>">
             </div>
-            <?php echo form_error('contact_no');?>
+            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('contact_no');?></label>
         </div>
     </form>
 </div>
