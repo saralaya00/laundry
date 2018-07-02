@@ -87,11 +87,9 @@ class View_orders_model extends CI_Model
       public function getEmployeeName($order_id)
       {
             $emp_id = $this->getEmployeeID($order_id);
-
             $this->db->select('full_name'); 
             $this->db->from('employee');   
             $this->db->where('employee_id', $emp_id);
-
            return $this->db->get()->row()->full_name;
       }
 
@@ -100,9 +98,7 @@ class View_orders_model extends CI_Model
             $this->db->select('employee_id'); 
             $this->db->from('order_tracking');   
             $this->db->where('order_id', $order_id);
-
             return $this->db->get()->row()->employee_id;
-
       }
 
       public function updateEmployeeId($employee_id,$order_id)
@@ -126,36 +122,33 @@ class View_orders_model extends CI_Model
 
       public function getItemName($item_id = array())
       {
-            // //print_r($item_id);
             $this->db->distinct();
-            $this->db->select('items.name');
+            $this->db->select('items.item_name');
             $this->db->join('item_service','items.item_id = item_service.item_id');
             $this->db->where_in('items.item_id',$item_id);  
             $this->db->from('items');
-            return $this->db->get();
-            //$this->db->select
+            $query = $this->db->get();
+            return $query->result_array();
       }
 
       public function getServiceName($service_id = array())
       {
             $this->db->distinct();
-            $this->db->select('name');
+            $this->db->select('services.service_name');
             $this->db->join('item_service', 'services.service_id=item_service.service_id','left');
             $this->db->where_in('item_service.service_id',$service_id);  
             $this->db->from('services');
-            return $this->db->get();
+            $query = $this->db->get();
+            return $query->result_array();
       }
-
 
       public function getQuantity($id = array(),$order_id)
       {
-           ///print_r($id);
-      //      $array = array('id' => $id,
-      //                   'order_id' => $order_id);
             $this->db->select('quantity');
             $this->db->from('order_details');
             $this->db->where_in('id',$id)->where('order_id',$order_id);
-            return $this->db->get();
+            $query = $this->db->get();
+            return $query->result_array();
       }
 
       public function getPrice($id = array())
@@ -163,9 +156,8 @@ class View_orders_model extends CI_Model
             $this->db->select('price');
             $this->db->from('item_service');
             $this->db->where_in('id',$id);
-            return $this->db->get();
+            $query = $this->db->get();
+            return $query->result_array();
       }
-
-      
 }  
 ?>

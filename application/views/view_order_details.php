@@ -57,12 +57,7 @@
                     url:"<?php echo base_url() . 'view_orders_controller/fetchOrderDetails'; ?>",  
                     type:"POST",
                     data : {order_id : order_id},
-                    dataType : 'json',
-                    successs : function(data)
-                                {
-                                    
-                                }  
-        },  
+                },  
         "columnDefs":[{  
                 "targets":[0, 1, 2, 3],  
                 "orderable":false,  
