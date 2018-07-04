@@ -106,20 +106,20 @@
                     </ul>
 
                     <li>
-                        <a href="#">
-                        <i class="fa fa-user fa-lg"></i> View Employee
+                        <a href="<?php echo base_url();?>employees">
+                        <i class="fa fa-user fa-lg"></i> Employee Records
                         </a>
                     </li>
 
                     <li>
                         <a href="#">
-                        <i class="fa fa-list-alt fa-lg"></i> View Item
+                        <i class="fa fa-list-alt fa-lg"></i> Items &amp; Services
                         </a>
                     </li>
 
                     <li>
-                        <a href="#">
-                        <i class="fa fa-book fa-lg"></i> View Order History
+                        <a href="<?php echo base_url();?>orders">
+                        <i class="fa fa-book fa-lg"></i> Order History
                         </a>
                     </li>
             

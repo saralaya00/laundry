@@ -45,16 +45,14 @@ $(document).ready(function(){
                 md_body.html(data);
                 let returnval = md_body.find('span').data('returnval');
 
-                console.log(returnval);
                 if (returnval == "1")
                 {
-                    
                     md_submit.hide();   
                 }
 
                 else if (returnval == "0")
                 {
-                    console.log('tis bad fren');
+                    alert('Error: Unable to send data!');
                 }
             });
         });

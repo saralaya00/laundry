@@ -9,7 +9,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label text-right"> Address </label>
             <div class="col-md-4">
-                <textarea readonly class="form-control" rows="4"><?php echo trim(set_value('address')); ?></textarea>
+                <textarea readonly class="form-control resize-vert" rows="4"><?php echo trim(set_value('address')); ?></textarea>
             </div>
         </div>
 

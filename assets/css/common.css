@@ -171,16 +171,6 @@ body {
   padding-bottom: 100px;
   z-index: 97!important;                        /* Z-INDEX */
 }
-  
-/* .box
-{  
-     width:900px;  
-     padding:20px;  
-     background-color:#fff;  
-     border:1px solid #ccc;  
-     border-radius:5px;  
-     margin-top:10px;  
-}   */
 
 /* From bootstrap 4 */
 .col-form-label{
@@ -201,4 +191,12 @@ footer
 footer > .jumbotron{
   padding: 30px;
   margin-bottom: 0;
+}
+
+/* Form-Controls */
+.resize-vert
+{
+  max-height:250px; 
+  min-height:100px;
+  resize: vertical;
 }

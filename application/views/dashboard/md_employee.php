@@ -10,15 +10,15 @@
             <div class="col-md-4">
                 <input class="form-control" type="text" placeholder="Firstname Lastname" name="full_name" value="<?php echo set_value('full_name'); ?>">
             </div>
-            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('full_name');?></label>
+            <label class="col-md-5 col-form-label form-text text-danger">* &nbsp;<?php echo form_error('full_name');?></label>
         </div>
         
         <div class="form-group row">
             <label class="col-md-3 col-form-label text-right"> Address </label>
             <div class="col-md-4">
-                <textarea class="form-control" name="address" placeholder="Enter Address"  rows="4"><?php echo trim(set_value('address')); ?></textarea>
+                <textarea class="form-control resize-vert" name="address" placeholder="Enter Address"  rows="4"><?php echo trim(set_value('address')); ?></textarea>
             </div>
-            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('address');?></label>
+            <label class="col-md-5 col-form-label form-text text-danger">* &nbsp;<?php echo form_error('address');?></label>
         </div>
 
         <div class="form-group row">
@@ -26,7 +26,7 @@
             <div class="col-md-4">
                 <input class="form-control" type="text" name="email" placeholder="Enter Email" value="<?php echo set_value('email'); ?>">
             </div>
-            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('email');?></label>
+            <label class="col-md-5 col-form-label form-text text-danger"><?php echo form_error('email');?></label>
         </div>
         
         <div class="form-group row">
@@ -34,7 +34,7 @@
             <div class="col-md-4">
                 <input class="form-control" type="text" name="contact_no" placeholder="Enter your 10 digits contact number" value="<?php echo set_value('contact_no'); ?>">
             </div>
-            <label class="col-md-5 col-form-label text-danger"><?php echo form_error('contact_no');?></label>
+            <label class="col-md-5 col-form-label form-text text-danger">* &nbsp;<?php echo form_error('contact_no');?></label>
         </div>
     </form>
 </div>
