@@ -9,7 +9,10 @@
         public function index()
         {
             $data['title'] = "Employee Records";
-            $this->load->view('dashboard/view_cards.php');
+            $this->load->view('common/footbar.php');
+            $this->load->view('employee/view_employee.php');
+            $this->load->view('common/end_wrapper.php');
+            //$this->load->view('dashboard/view_cards.php');
         }
     }
 ?>

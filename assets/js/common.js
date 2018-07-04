@@ -47,12 +47,13 @@ $(document).ready(function(){
 
                 if (returnval == "1")
                 {
+                    //On Successful Send, and the return
                     md_submit.hide();   
                 }
 
                 else if (returnval == "0")
                 {
-                    alert('Error: Unable to send data!');
+                    // todo : Error or nothing
                 }
             });
         });
