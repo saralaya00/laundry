@@ -115,5 +115,4 @@
                     <h4 class="text-right">50</h4>
                     </div>
                 </div>
-
             </div>

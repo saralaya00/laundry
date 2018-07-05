@@ -27,6 +27,9 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <!-- dataTable css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />  
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/common.css">
     <link rel="stylesheet" href="assets/css/mystyle.css">
@@ -112,7 +115,7 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="<?php echo base_url();?>item_service">
                         <i class="fa fa-list-alt fa-lg"></i> Items &amp; Services
                         </a>
                     </li>

@@ -8,7 +8,10 @@ class View_orders_controller extends CI_Controller {
       
       function index(){  
            $data["title"] = "Orders";  
-           $this->load->view('view_orders', $data);  
+           $this->load->view('common/footbar.php');
+           $this->load->view('orders/view_orders.php',$data);
+           $this->load->view('common/end_wrapper.php');
+           //$this->load->view('view_orders', $data);  
       }  
       function fetch_orders(){  
            $fetch_data = $this->view_orders_model->make_orders_datatables();  
@@ -16,7 +19,7 @@ class View_orders_controller extends CI_Controller {
  
             foreach($fetch_data as $row)  
             {  
-                  $sub_array = array();  
+                  $sub_array = array();
                   $sub_array[] = $row->order_id;
                   $sub_array[] = $row->full_name;
                   $sub_array[] = $row->order_date;  
@@ -28,10 +31,10 @@ class View_orders_controller extends CI_Controller {
                         $sub_array[]="-";
                   }
                   else if($row->status == "not assigned"){
-                         $sub_array[] = '<button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-warning btn-xs assign" data-toggle="modal" data-target="#userModal">Assign order</button>';  
+                         $sub_array[] = '<button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-warning btn-xs assign" data-toggle="modal" data-target="#modal-template">Assign order</button>';  
                   }
                   else{
-                         $sub_array[] = '<button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-primary btn-xs changeEmployee" data-toggle="modal" data-target="#changeEmployeeModal">Change Employee</button>';  
+                         $sub_array[] = '<button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-primary btn-xs changeEmployee" data-toggle="modal" data-target="#modal-template">Change Employee</button>';  
                   }
                   
                   $data[] = $sub_array;  
@@ -39,15 +42,23 @@ class View_orders_controller extends CI_Controller {
            }  
           
            $output = array(  
-                "draw"                    =>     intval($_POST["draw"]),  
-                "recordsTotal"          =>      $this->view_orders_model->get_all_data(),  
-                "recordsFiltered"     =>     $this->view_orders_model->get_filtered_data(),  
-                "data"                    =>     $data  
+                "draw"              =>    intval($_POST["draw"]),  
+                "recordsTotal"      =>    $this->view_orders_model->get_all_data(),  
+                "recordsFiltered"   =>    $this->view_orders_model->get_filtered_data(),  
+                "data"              =>    $data  
            );  
 
            echo json_encode($output);  
           
       }  
+
+      public function md_assignOrder(){
+            return $this->load->view('orders/md_assignOrder.php');
+      }
+
+      public function md_changeEmployee(){
+            return $this->load->view('orders/md_changeEmployee.php');
+      }
 
       function get_employee()
       {
@@ -66,7 +77,6 @@ class View_orders_controller extends CI_Controller {
       public function getEmployeeName()
       {
             $order_id = $this->input->post('order_id');
-
             $this->load->model("view_orders_model");  
             $data = $this->view_orders_model->getEmployeeName($order_id);  
 
@@ -100,8 +110,10 @@ class View_orders_controller extends CI_Controller {
                         'order_date' => $this->input->post('order_date'),
                         'delivery_date' => $this->input->post('delivery_date')
                   );
-            $output_page = $this->load->view('view_order_details', $data,TRUE);
-
+            $this->load->view('common/footbar.php');
+            $output_page = $this->load->view('orders/view_order_details', $data,TRUE);
+            $this->load->view('common/end_wrapper.php');
+          
             echo json_encode($output_page);
             die();
       }
@@ -139,12 +151,16 @@ class View_orders_controller extends CI_Controller {
       
             $data_details = array();
             $j = 0;
+            $total = 0;
             foreach( $single_data as $key => $value) {
             $sub_array = array();
+                  $sub_array[] = $j+1;
                   $sub_array[] = $value['item_name']; 
                   $sub_array[] = $value['service_name']; 
                   $sub_array[] = $value['quantity']; 
                   $sub_array[] = $value['price']; 
+                  $total = (($value['quantity'])*($value['price']));
+                  $sub_array[] = $total;
                   $j++;
                   $data_details[] = $sub_array; 
             }
