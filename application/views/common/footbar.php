@@ -50,7 +50,7 @@
                         <span class="fa fa-angle-down fa-lg"></span>
                     </button>
 
-                    <a href="#">
+                    <a href="<?php echo base_url();?>">
                         <div class="row">
                             <div class="col-xs-3">
                                 <img src="assets/icons/cloth.png" alt="homepage" class="header-icon" />
