@@ -55,5 +55,6 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['orders'] = 'View_orders_controller';
+$route['item_service'] = 'Item_service_controller';
 $route['employees'] = 'Employee_Controller';
 //$route['md_employee'] = 'Dashboard_Controller/md_employee';
