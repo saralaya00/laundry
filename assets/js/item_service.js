@@ -12,6 +12,7 @@ $(document).ready(function(){
         "columnDefs":[{  
                 "targets":[0, 1, 2, 3, 4],  
                 "orderable":false,  
+                "className": "text-center",
             },  
         ],  
     });  
