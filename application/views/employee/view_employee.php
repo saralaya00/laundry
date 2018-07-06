@@ -4,21 +4,32 @@
     <h3 class="center"><?php echo $title; ?></h3>
     <br>
     <div class="table-responsive">
-        <table id="table-emp" class="table table-striped table-bordered">
+        <table id="table_emp" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th width="10%">Employee ID</th>
-                    <th width="20%">Full Name</th>
+                    <th width="15%">Full Name</th>
                     <th width="35%">Address</th>
-                    <th width="15%">Email</th>
+                    <th width="20%">Email</th>
                     <th width="10%">Contact No</th>
                     <th width="10%">Actions</th>
                 </tr>
             </thead>
-
-            <tbody>
-            
-            </tbody>
         </table>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('#table_emp').DataTable({
+            "ajax" : {
+                url: '<?php echo site_url('Employee_Controller/get_employees')?>',
+                type: 'GET'
+            }
+        });
+
+        $(document).on('click', '.btn_edit', function(){
+            console.log($(this).data('employee_id'));
+        });
+    });
+</script>

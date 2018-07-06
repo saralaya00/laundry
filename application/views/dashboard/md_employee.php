@@ -16,7 +16,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label text-right"> Address </label>
             <div class="col-md-4">
-                <textarea class="form-control resize-vert" name="address" placeholder="Enter Address"  rows="4"><?php echo trim(set_value('address')); ?></textarea>
+                <textarea class="form-control resize-vert" name="address" maxlength=100 placeholder="Enter Address"  rows="4"><?php echo trim(set_value('address')); ?></textarea>
             </div>
             <label class="col-md-5 col-form-label form-text text-danger">* &nbsp;<?php echo form_error('address');?></label>
         </div>
@@ -32,7 +32,7 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label text-right"> Contact No </label>
             <div class="col-md-4">
-                <input class="form-control" type="text" name="contact_no" placeholder="Enter your 10 digits contact number" value="<?php echo set_value('contact_no'); ?>">
+                <input class="form-control" type="text" name="contact_no" maxlength=10 placeholder="Enter your 10 digits contact number" value="<?php echo set_value('contact_no'); ?>">
             </div>
             <label class="col-md-5 col-form-label form-text text-danger">* &nbsp;<?php echo form_error('contact_no');?></label>
         </div>
