@@ -70,10 +70,9 @@ $(document).ready(function(){
         md_submit.html('Add Item');
     });
 
-
     // Sidebar Animation
     $('#sidebarToggle').on('click', function(){
         //Test it with collapsed to make it responsive
-        $('#sidebar').animate({width: 'toggle', opacity: 'toggle'},  500);
+        $('#sidebar').animate({width: 'toggle', opacity: 'toggle'},  200);
     });
 });

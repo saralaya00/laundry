@@ -6,5 +6,10 @@
             parent::__construct();
             $this->load->database();
         }
+
+        public function get_employees()
+        {
+            return $this->db->get('employee');
+        }
     }
 ?>
