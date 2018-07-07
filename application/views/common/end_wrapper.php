@@ -9,5 +9,6 @@
     <script src="assets/js/common.js"></script>
     <script src="assets/js/order.js"></script>
     <script src="assets/js/item_service.js"></script>
+    <script src="assets/js/bootbox.min.js"></script>
 </body>
 </html>
