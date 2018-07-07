@@ -146,7 +146,7 @@ $(document).on('click', '.changeEmployee', function(){
     mdl_title.html('Change Employee');
     mdl_submit.html('Change Employee');
     
-    $.post(baseURL + 'View_orders_controller/mdl_changeEmployee', function (data){
+    $.post(baseURL + 'View_orders_controller/md_changeEmployee', function (data){
         mdl_body.html(data);
         changeEmployee(order_id);
     });
