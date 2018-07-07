@@ -33,10 +33,10 @@
                     $row->address,
                     $row->email,
                     $row->contact_no,
-                    '<button class="btn_edit btn btn-secondary btn-sm text-center" data-employee_id="'.$row->employee_id.'">
+                    '<button class="btn_edit btn btn-secondary btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-toggle="modal" data-target="#modal-template">
                         <span class="fa fa-pencil"></span>
                     </button> &nbsp;
-                    <button class="btn_delete btn btn-danger btn-sm text-center" data-employee_id="'.$row->employee_id.'">
+                    <button class="btn_delete btn btn-danger btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-toggle="modal" data-target="#modal-template">
                         <span class="fa fa-times"></span>
                     </button>'
                 );
@@ -51,6 +51,14 @@
 
             echo json_encode($output);
             // exit();
+        }
+
+        //Baad Naming convention
+        public function view_delete_employee($id)
+        {
+            //Used in Modal
+            $data = $this->Employee_Model->get_employee($id);
+            $this->load->view('employee/view_delete_employee.php', $data);
         }
     }
 ?>

@@ -9,7 +9,14 @@
 
         public function get_employees()
         {
+            //Multiple Rows
             return $this->db->get('employee');
+        }
+
+        public function get_employee($id)
+        {
+            //Single Row Result
+            return $this->db->get_where('employee', array('id' => $id))->result();
         }
     }
 ?>

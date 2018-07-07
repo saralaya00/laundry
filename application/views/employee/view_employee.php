@@ -1,5 +1,3 @@
-
-
 <div class="container">
     <h3 class="center"><?php echo $title; ?></h3>
     <br>
@@ -21,6 +19,11 @@
 
 <script>
     $(document).ready(function(){
+        //$.getScript('<?php echo base_url( 'assets/js/common.js');?>');
+
+        //let common_js = document.createElement("script");
+        //common_js.src = '<?php echo base_url( 'assets/js/common.js');?>';
+
         $('#table_emp').DataTable({
             "ajax" : {
                 url: '<?php echo site_url('Employee_Controller/get_employees')?>',
@@ -30,6 +33,13 @@
 
         $(document).on('click', '.btn_edit', function(){
             console.log($(this).data('employee_id'));
+        });
+        
+        $(document).on('click', '.btn_delete', function(){
+            common_js.md_clear();
+            
+            // $(this).data('employee_id');
+            // $.post('<?php echo base_url();?>')
         });
     });
 </script>
