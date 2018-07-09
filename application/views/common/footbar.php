@@ -106,6 +106,7 @@
                         <li id="add-emp" class="active" data-toggle="modal" data-target="#modal-template">Employee</li>
                         <li id="add-service" data-toggle="modal" data-target="#modal-template">Service</li>
                         <li id="add-item" data-toggle="modal" data-target="#modal-template">Item</li>
+                        <li id="add-item_service" data-toggle="modal" data-target="#modal-template">Item + Service</li>
                     </ul>
 
                     <li>
