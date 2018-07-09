@@ -46,7 +46,8 @@
 
                 if ($this->Dashboard_Model->add_employee($empdata))
                 {
-                    return $this->load->view('employee/succ_employee.php');
+                    $_POST['message'] = 'Employee Added!';
+                    return $this->load->view('employee/rdonly_employee.php');
                 }
 
                 else return $this->load->view('employee/md_employee.php');                

@@ -1,3 +1,6 @@
+<?php
+    // Employee View, with Datatables
+?>
 <div class="container">
     <h3 class="center"><?php echo $title; ?></h3>
     <br>

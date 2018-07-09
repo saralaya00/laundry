@@ -13,10 +13,16 @@
             return $this->db->get('employee');
         }
 
-        public function get_employee($id)
+        public function get_employee($empID)
         {
             //Single Row Result
-            return $this->db->get_where('employee', array('employee_id' => $id))->result();
+            return $this->db->get_where('employee', array('employee_id' => $empID))->result();
+        }
+
+        public function delete_employee($empID)
+        {
+            //Single Record Delete
+            return $this->db->delete('employee', array('employee_id' => $empID));
         }
     }
 ?>

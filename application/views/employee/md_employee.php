@@ -1,3 +1,6 @@
+<?php 
+    //A Reusable Modal-body for Add/Edit Employee
+?>
 <span data-returnval="0"></span>
 
 <div class="container-fluid">

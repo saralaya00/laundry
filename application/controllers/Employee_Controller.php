@@ -50,16 +50,16 @@
             );
 
             echo json_encode($output);
-            // exit();
         }
 
         //Baad Naming convention
-        public function view_delete_employee($id)
+        public function view_delete_employee($empID)
         {
-            //Used in Modal
-            $employee = $this->Employee_Model->get_employee($id);
+            //result() returns an object/array : index[0] has the row
+            $employee = $this->Employee_Model->get_employee($empID);
             $employee = $employee[0];
 
+            //Used by set_value()
             $_POST = array(
                 'full_name' => $employee->full_name,
                 'address' => $employee->address,
@@ -67,13 +67,12 @@
                 'contact_no' => $employee->contact_no
             );
 
-            $data = array(
-                'title' => "Delete Employee",
-            );
+            $this->load->view('employee/rdonly_employee.php');
+        }
 
-
-            $this->load->view('employee/succ_employee.php', $data);
-            // $this->load->view('employee/view_deleteEmp.php', $data);
+        public function delete_employee($empID)
+        {
+            return $this->Employee_Model->delete_employee($empID);
         }
     }
 ?>
