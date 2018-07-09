@@ -57,8 +57,23 @@
         public function view_delete_employee($id)
         {
             //Used in Modal
-            $data = $this->Employee_Model->get_employee($id);
-            $this->load->view('employee/view_delete_employee.php', $data);
+            $employee = $this->Employee_Model->get_employee($id);
+            $employee = $employee[0];
+
+            $_POST = array(
+                'full_name' => $employee->full_name,
+                'address' => $employee->address,
+                'email' => $employee->email,
+                'contact_no' => $employee->contact_no
+            );
+
+            $data = array(
+                'title' => "Delete Employee",
+            );
+
+
+            $this->load->view('employee/succ_employee.php', $data);
+            // $this->load->view('employee/view_deleteEmp.php', $data);
         }
     }
 ?>

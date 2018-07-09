@@ -19,10 +19,25 @@
 
 <script>
     $(document).ready(function(){
-        //$.getScript('<?php echo base_url( 'assets/js/common.js');?>');
+        
+        let baseURL = $('body').data('baseurl');
+    
+        //Modal variables
+        let md_head = $('.modal-header');
+        let md_title = $('.modal-title');
+        let md_body = $('.modal-body');
+        
+        let md_foot = $('.modal-footer');
+        let md_submit = md_foot.find('#btn-submit');
 
-        //let common_js = document.createElement("script");
-        //common_js.src = '<?php echo base_url( 'assets/js/common.js');?>';
+        //Clear Function
+        function md_clear()
+        {
+            md_title.html('');
+            md_body.html('');
+            md_submit.show();
+            md_submit.html('Add');
+        };
 
         $('#table_emp').DataTable({
             "ajax" : {
@@ -36,7 +51,14 @@
         });
         
         $(document).on('click', '.btn_delete', function(){
-            common_js.md_clear();
+            
+            md_clear();
+            md_title.html('Remove Employee');
+            md_submit.html('Remove Employee');
+
+            $.post(baseURL + 'Employee_Controller/view_delete_employee/' + $(this).data('employee_id'), function(data){
+                md_body.html(data);
+            });
             
             // $(this).data('employee_id');
             // $.post('<?php echo base_url();?>')

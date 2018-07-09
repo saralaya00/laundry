@@ -18,7 +18,8 @@
 
         public function md_employee()
         {
-            return $this->load->view('dashboard/md_employee.php');
+            //Called by Modal
+            return $this->load->view('employee/md_employee.php');
         }
 
         public function add_employee()
@@ -32,7 +33,7 @@
 
             if ($this->form_validation->run() == FALSE)
             {
-                return $this->load->view('dashboard/md_employee.php');
+                return $this->load->view('employee/md_employee.php');
             }
             else {
                 $empdata = array(
@@ -45,10 +46,10 @@
 
                 if ($this->Dashboard_Model->add_employee($empdata))
                 {
-                    return $this->load->view('dashboard/succ_employee.php');
+                    return $this->load->view('employee/succ_employee.php');
                 }
 
-                else return $this->load->view('dashboard/md_employee.php');                
+                else return $this->load->view('employee/md_employee.php');                
             }
         }
 
