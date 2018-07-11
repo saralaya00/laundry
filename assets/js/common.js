@@ -19,6 +19,11 @@ $(document).ready(function(){
         md_submit.html('Add');
     };
 
+
+    //Initailze Plugins
+    $('[data-toggle="tooltip"]').tooltip(); 
+
+    //Callback Function
     $('#add-emp').click(function(){
 
         md_clear();
@@ -29,8 +34,6 @@ $(document).ready(function(){
             md_body.html(data);
         });
         
-        //md_add_emp();
-
         md_submit.click(function(e){
             e.preventDefault();
             let postData = {

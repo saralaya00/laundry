@@ -25,55 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
---
-
-CREATE TABLE `customer` (
-  `customer_id` int(10) NOT NULL,
-  `user_id` int(10) NOT NULL,
-  `full_name` varchar(30) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  `contact_no` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`customer_id`, `user_id`, `full_name`, `address`, `email`, `contact_no`) VALUES
-(1, 2, 'Deepa V Tendulkar', 'kajaraguttu,hiriadka,udupi', ' deepa123@gmail.com ', '9976890870'),
-(2, 3, 'Amey Kamath', 'kulur,mangalore', 'ameykamatH@gmail.com', '9234567810'),
-(3, 6, 'Deepak Shetty', 'lalbagh,mangalore', 'deepak34@gmail.com', '9976890870');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employee`
---
-
-CREATE TABLE `employee` (
-  `employee_id` int(10) NOT NULL,
-  `user_id` int(10) NOT NULL,
-  `full_name` varchar(30) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  `contact_no` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `employee`
---
-
-INSERT INTO `employee` (`employee_id`, `user_id`, `full_name`, `address`, `email`, `contact_no`) VALUES
-(1, 1, 'Pooja V Tendulkar', 'Parashuramanagar,kavoor', 'pooja@gmail.com', '7541258965'),
-(2, 4, 'Rakshith  Kumar', 'Hampankatte, mangalore', 'rakshithkumar@gmail.com', '9900667233'),
-(3, 5, 'Rakesh Nayak', 'bondel,mangalore', 'rakeshnayak@gmail.com', '7890765431'),
-(8, 12, 'Saurabh Saralaya', 'as', 'nogtx7k@gmail.com', '8971056410');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `items`
 --
 
@@ -256,6 +207,57 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `role`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `customer_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `full_name` varchar(30) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `contact_no` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customer_id`, `user_id`, `full_name`, `address`, `email`, `contact_no`) VALUES
+(1, 2, 'Deepa V Tendulkar', 'kajaraguttu,hiriadka,udupi', ' deepa123@gmail.com ', '9976890870'),
+(2, 3, 'Amey Kamath', 'kulur,mangalore', 'ameykamatH@gmail.com', '9234567810'),
+(3, 6, 'Deepak Shetty', 'lalbagh,mangalore', 'deepak34@gmail.com', '9976890870');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee`
+--
+
+CREATE TABLE `employee` (
+  `employee_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `full_name` varchar(30) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `contact_no` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`employee_id`, `user_id`, `full_name`, `address`, `email`, `contact_no`) VALUES
+(1, 1, 'Pooja V Tendulkar', 'Parashuramanagar,kavoor', 'pooja@gmail.com', '7541258965'),
+(2, 4, 'Rakshith  Kumar', 'Hampankatte, mangalore', 'rakshithkumar@gmail.com', '9900667233'),
+(3, 5, 'Rakesh Nayak', 'bondel,mangalore', 'rakeshnayak@gmail.com', '7890765431'),
+(8, 12, 'Saurabh Saralaya', 'as', 'nogtx7k@gmail.com', '8971056410');
+
+-- --------------------------------------------------------
+
 
 --
 -- Indexes for table `customer`

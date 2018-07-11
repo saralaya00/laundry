@@ -6,6 +6,7 @@
         {
             parent::__construct();
             $this->load->model('Employee_Model');
+            $this -> form_validation -> set_error_delimiters('<span>', '</span>');
         }
 
         public function index()
@@ -33,11 +34,11 @@
                     $row->address,
                     $row->email,
                     $row->contact_no,
-                    '<button class="btn_edit btn btn-secondary btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-toggle="modal" data-target="#modal-template">
-                        <span class="fa fa-pencil"></span>
+                    '<button class="btn_edit btn btn-primary btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-toggle="modal" data-target="#modal-template">
+                        <span class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></span>
                     </button> &nbsp;
-                    <button class="btn_delete btn btn-danger btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-toggle="modal" data-target="#modal-template">
-                        <span class="fa fa-times"></span>
+                    <button class="btn_delete btn btn-danger btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-user_id="'.$row->user_id.'" data-toggle="modal" data-target="#modal-template">
+                        <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="Delete"></span>
                     </button>'
                 );
             }
@@ -70,9 +71,55 @@
             $this->load->view('employee/rdonly_employee.php');
         }
 
-        public function delete_employee($empID)
+        public function delete_employee($userID)
         {
-            return $this->Employee_Model->delete_employee($empID);
+            return $this->Employee_Model->delete_employee($userID);
+        }
+
+        //Edit and Update Employee Details
+        public function view_update_employee($empID)
+        {
+            //result() returns an object/array : index[0] has the row
+            $employee = $this->Employee_Model->get_employee($empID);
+            $employee = $employee[0];
+
+            //Used by set_value()
+            $_POST = array(
+                'full_name' => $employee->full_name,
+                'address' => $employee->address,
+                'email' => $employee->email,
+                'contact_no' => $employee->contact_no
+            );
+
+            $this->load->view('employee/md_employee.php');
+        }
+
+        public function update_employee($empID)
+        {
+            //Load the library
+            $this -> form_validation -> set_rules($this -> rules_list('employee'));
+
+            // if ($this->form_validation->run() == FALSE)
+            // {
+            //     return $this->load->view('employee/md_employee.php');
+            // }
+            // else {
+            //     $empdata = array(
+            //         'user_id' => '', //UserID is the generated autonum from users table
+            //         'full_name' => $this -> input -> post('full_name'),
+            //         'address' => $this -> input -> post('address'),
+            //         'email' => $this -> input -> post('email'),
+            //         'contact_no' => $this -> input -> post('contact_no')
+            //     );
+
+            //     if ($this->Dashboard_Model->add_employee($empdata))
+            //     {
+            //         $_POST['message'] = 'Employee Added!';
+            //         return $this->load->view('employee/rdonly_employee.php');
+            //     }
+
+            //     else return $this->load->view('employee/md_employee.php');                
+            // }
         }
     }
 ?>

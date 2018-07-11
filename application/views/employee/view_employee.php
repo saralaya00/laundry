@@ -42,29 +42,66 @@
             md_submit.html('Add');
         };
 
+        //Initialze Plugins
+        $('[data-toggle="tooltip"]').tooltip(); 
+
         $('#table_emp').DataTable({
             "ajax" : {
                 url: '<?php echo site_url('Employee_Controller/get_employees')?>',
                 type: 'GET'
+            },
+
+            drawCallback: function(){
+                $('[data-toggle="tooltip"]').tooltip(); 
             }
         });
 
         $(document).on('click', '.btn_edit', function(){
-            console.log($(this).data('employee_id'));
+
+            md_clear();
+            md_title.html('Edit Employee');
+            md_submit.html('Update');
+
+            let employee_id = $(this).data('employee_id');
+
+            $.post(baseURL + 'Employee_Controller/view_update_employee/' + employee_id, function(data){
+                md_body.html(data);
+            });
+
+            // md_submit.click(function(e){
+            //     e.preventDefault();
+
+            //     let postRequest = $.post(baseURL + 'Employee_Controller/update_employee/' + employee_id);
+                
+            //     postRequest.done(function(data){
+                    
+            //         md_submit.hide();
+            //     });
+            // });
         });
         
         $(document).on('click', '.btn_delete', function(){
             
             md_clear();
             md_title.html('Remove Employee');
-            md_submit.html('Remove Employee');
+            md_submit.html('Delete');
 
-            $.post(baseURL + 'Employee_Controller/view_delete_employee/' + $(this).data('employee_id'), function(data){
+            let employee_id = $(this).data('employee_id');
+            let user_id = $(this).data('user_id');
+
+            $.post(baseURL + 'Employee_Controller/view_delete_employee/' + employee_id, function(data){
                 md_body.html(data);
             });
             
-            // $(this).data('employee_id');
-            // $.post('<?php echo base_url();?>')
+            md_submit.click(function(e){
+                e.preventDefault();
+
+                let postRequest = $.post(baseURL + 'Employee_Controller/delete_employee/' + user_id);
+                
+                postRequest.done(function(data){
+                    location.reload();
+                });
+            });
         });
     });
 </script>

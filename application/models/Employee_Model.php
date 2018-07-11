@@ -19,10 +19,12 @@
             return $this->db->get_where('employee', array('employee_id' => $empID))->result();
         }
 
-        public function delete_employee($empID)
+        public function delete_employee($userID)
         {
             //Single Record Delete
-            return $this->db->delete('employee', array('employee_id' => $empID));
+            //Employee Table / User Table
+            $this->db->delete('employee', array('user_id' => $userID));
+            $this->db->delete('users', array('user_id' => $userID));
         }
     }
 ?>
