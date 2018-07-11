@@ -66,18 +66,38 @@
 
             $.post(baseURL + 'Employee_Controller/view_update_employee/' + employee_id, function(data){
                 md_body.html(data);
+                md_body.find('input[name="contact_no"]').attr('readonly', true);
             });
 
-            // md_submit.click(function(e){
-            //     e.preventDefault();
+            md_submit.click(function(e){
+                e.preventDefault();
 
-            //     let postRequest = $.post(baseURL + 'Employee_Controller/update_employee/' + employee_id);
+                let postData = {
+                    employee_id: employee_id,
+                    full_name: md_body.find('input[name="full_name"]').val(),
+                    address: md_body.find('textarea[name="address"]').val(),
+                    email: md_body.find('input[name="email"]').val(),
+                    contact_no: md_body.find('input[name="contact_no"]').val()
+                };
+                let postRequest = $.post(baseURL + 'Employee_Controller/update_employee', postData);
                 
-            //     postRequest.done(function(data){
+                postRequest.done(function(data){
+                    md_body.html(data);
                     
-            //         md_submit.hide();
-            //     });
-            // });
+                    let returnval = md_body.find('span').data('returnval');
+
+                    if (returnval == "1")
+                    {
+                        //On Successful Send, and the return
+                        md_submit.hide();   
+                    }
+
+                    else if (returnval == "0")
+                    {
+                        // todo : Error or nothing
+                    }
+                });
+            });
         });
         
         $(document).on('click', '.btn_delete', function(){

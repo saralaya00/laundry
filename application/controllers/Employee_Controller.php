@@ -94,32 +94,41 @@
             $this->load->view('employee/md_employee.php');
         }
 
-        public function update_employee($empID)
+        public function update_employee()
         {
-            //Load the library
-            $this -> form_validation -> set_rules($this -> rules_list('employee'));
+            $empID = $this -> input -> post('employee_id');
 
-            // if ($this->form_validation->run() == FALSE)
+            // if ($this->input->post('contact_no') != $this->input->post('contact_no_o'))
             // {
-            //     return $this->load->view('employee/md_employee.php');
+            //     $contactNoRule = 'required|numeric|exact_length[10]|is_unique[employee.contact_no]';
             // }
-            // else {
-            //     $empdata = array(
-            //         'user_id' => '', //UserID is the generated autonum from users table
-            //         'full_name' => $this -> input -> post('full_name'),
-            //         'address' => $this -> input -> post('address'),
-            //         'email' => $this -> input -> post('email'),
-            //         'contact_no' => $this -> input -> post('contact_no')
-            //     );
 
-            //     if ($this->Dashboard_Model->add_employee($empdata))
-            //     {
-            //         $_POST['message'] = 'Employee Added!';
-            //         return $this->load->view('employee/rdonly_employee.php');
-            //     }
+            // else $contactNoRule = 'required|numeric|exact_length[10]';
 
-            //     else return $this->load->view('employee/md_employee.php');                
-            // }
+            // $this->form_validation->set_rules('contact_no', 'Contact No', $contactNoRule);
+
+
+            if ($this->form_validation->run('employee_update') == FALSE)
+            {
+                return $this->load->view('employee/md_employee.php');
+            }
+
+            else {
+                $empData = array(
+                    'full_name' => $this -> input -> post('full_name'),
+                    'address' => $this -> input -> post('address'),
+                    'email' => $this -> input -> post('email'),
+                    'contact_no' => $this -> input -> post('contact_no')
+                );
+
+                if ($this->Employee_Model->update_employee($empID, $empData))
+                {
+                    $_POST['message'] = 'Employee details updated!';
+                    return $this->load->view('employee/rdonly_employee.php');
+                }
+
+                else return $this->load->view('employee/md_employee.php');                
+            }
         }
     }
 ?>
