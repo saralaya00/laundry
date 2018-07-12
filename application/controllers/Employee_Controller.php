@@ -98,16 +98,6 @@
         {
             $empID = $this -> input -> post('employee_id');
 
-            // if ($this->input->post('contact_no') != $this->input->post('contact_no_o'))
-            // {
-            //     $contactNoRule = 'required|numeric|exact_length[10]|is_unique[employee.contact_no]';
-            // }
-
-            // else $contactNoRule = 'required|numeric|exact_length[10]';
-
-            // $this->form_validation->set_rules('contact_no', 'Contact No', $contactNoRule);
-
-
             if ($this->form_validation->run('employee_update') == FALSE)
             {
                 return $this->load->view('employee/md_employee.php');
