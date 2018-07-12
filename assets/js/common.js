@@ -11,18 +11,23 @@ $(document).ready(function(){
     let md_foot = $('.modal-footer');
     let md_submit = md_foot.find('#btn-submit');
 
-    modal.on('hide.bs.modal', function(){
-        md_clear();
-    });
-
     //Clear Function
     function md_clear()
     {
+        console.log(' common.js :: md_clear()');
         md_title.html('');
-        md_body.html('');
+        md_body.empty();
         md_submit.show();
+        md_submit.off('click');
         md_submit.html('Add');
     };
+
+    modal.on('hide.bs.modal', function()
+    {
+        //Dont add this event in other boilerplate
+        //It will auto invoke from here
+        setTimeout(md_clear, 300); 
+    }); 
 
     //Initailze Plugins
     $('[data-toggle="tooltip"]').tooltip(); 
@@ -38,9 +43,10 @@ $(document).ready(function(){
             md_body.html(data);
         });
         
-        md_submit.click(function(e){
+        md_submit.on('click', function(e){
             e.preventDefault();
 
+            console.log('Add');
             let postData = {
                 full_name: md_body.find('input[name="full_name"]').val(),
                 address: md_body.find('textarea[name="address"]').val(),

@@ -36,9 +36,11 @@
         //Clear Function
         function md_clear()
         {
+            console.log(' view_employee.php <script>:: md_clear()');
             md_title.html('');
-            md_body.html('');
+            md_body.empty();
             md_submit.show();
+            md_submit.off('click');
             md_submit.html('Add');
         };
 
@@ -69,9 +71,10 @@
                 md_body.find('input[name="contact_no"]').attr('readonly', true);
             });
 
-            md_submit.click(function(e){
+            md_submit.on('click', function(e){
                 e.preventDefault();
 
+                console.log('Update');
                 let postData = {
                     employee_id: employee_id,
                     full_name: md_body.find('input[name="full_name"]').val(),
@@ -113,7 +116,7 @@
                 md_body.html(data);
             });
             
-            md_submit.click(function(e){
+            md_submit.on('click', function(e){
                 e.preventDefault();
 
                 let postRequest = $.post(baseURL + 'Employee_Controller/delete_employee/' + user_id);
