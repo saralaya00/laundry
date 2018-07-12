@@ -71,11 +71,70 @@ $(document).ready(function(){
         md_clear();
         md_title.html('Add Service');
         md_submit.html('Add Service');
+
+        $.post(baseURL + 'Dashboard_Controller/md_service', function (data){
+            md_body.html(data);
+        });
+
+        md_submit.click(function(e){
+            e.preventDefault();
+
+            let service_data = {
+                service_name: md_body.find('input[name="service_name"]').val(),
+                description: md_body.find('textarea[name="description"]').val(),
+            };
+            let service_req = $.post(baseURL + 'Dashboard_Controller/add_service', service_data);
+            
+            service_req.done(function(data){
+                md_body.html(data);
+                let service_val = md_body.find('span').data('returnval');
+
+                if (service_val == "1")
+                {
+                    //On Successful Send, and the return
+                    md_submit.hide();   
+                }
+
+                else if (service_val == "0")
+                {
+                    // todo : Error or nothing
+                }
+            });
+        });
     });
 
     $('#add-item').click(function(){
+        md_clear();
         md_title.html('Add Item');
         md_submit.html('Add Item');
+        $.post(baseURL + 'Dashboard_Controller/md_item', function (data){
+            md_body.html(data);
+        });
+
+        md_submit.click(function(e){
+            e.preventDefault();
+
+            let item_data = {
+                item_name: md_body.find('input[name="item_name"]').val(),
+            };
+            let item_req = $.post(baseURL + 'Dashboard_Controller/add_item', item_data);
+            
+            item_req.done(function(data){
+                md_body.html(data);
+                let item_val = md_body.find('span').data('returnval');
+
+                if (item_val == "1")
+                {
+                    //On Successful Send, and the return
+                    md_submit.hide();   
+                }
+
+                else if (item_val == "0")
+                {
+                    // todo : Error or nothing
+                }
+            });
+        });
     });
 
     // Sidebar Animation

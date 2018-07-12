@@ -41,6 +41,25 @@
             //Set Contact_no VRules Manually or dont set it at all
             //is_unique constraint for same contact no can cause problems
             //Contact no is also the username, so changing it would not be wise
+        ),
+        'service' => array(
+            array(
+                'field' => 'service_name',
+                'label' => 'service name',
+                'rules' => 'required|trim|regex_match[/^[a-zA-Z\s-_]+$/]|max_length[30]'
+            ),
+            array(
+                'field' => 'description',
+                'label' => 'Description',
+                'rules' => 'required|max_length[100]'
+            )
+        ),
+        'item' => array(
+            array(
+                'field' => 'item_name',
+                'label' => 'item name',
+                'rules' => 'required|trim|regex_match[/^[a-zA-Z\s-_]+$/]|max_length[30]'
+            )
         )
     );
 ?>
