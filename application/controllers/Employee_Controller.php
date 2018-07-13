@@ -34,7 +34,7 @@
                     $row->address,
                     $row->email,
                     $row->contact_no,
-                    '<button class="btn_edit btn btn-primary btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-toggle="modal" data-target="#modal-template">
+                    '<button class="btn_edit btn btn-secondary btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-toggle="modal" data-target="#modal-template">
                         <span class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></span>
                     </button> &nbsp;
                     <button class="btn_delete btn btn-danger btn-sm text-center" data-employee_id="'.$row->employee_id.'" data-user_id="'.$row->user_id.'" data-toggle="modal" data-target="#modal-template">
