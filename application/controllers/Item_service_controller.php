@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 class Item_service_controller extends CI_Controller {  
     public function __construct()
     {
@@ -100,4 +100,4 @@ class Item_service_controller extends CI_Controller {
         }
     }
 }
-?>
+?> -->

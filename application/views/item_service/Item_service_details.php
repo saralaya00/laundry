@@ -1,4 +1,4 @@
-<div class="body_id">
+<!-- <div class="body_id">
     <div class="container box">  
         <h3 align="center"><?php echo $title; ?></h3><br />  
         <div class="table-responsive">  
@@ -17,4 +17,4 @@
             </table>  
         </div>  
     </div>  
-</div>
+</div> -->
