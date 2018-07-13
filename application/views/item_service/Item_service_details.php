@@ -1,12 +1,20 @@
 <div class="body_id">
-    <div class="container box">  
-        <h3 align="left"><?php echo $title; ?></h3><br />  
+    <div class="container">  
+        <h3 align="left"><?php echo $title; ?></h3><br/>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <?php echo form_dropdown('data', ['Dummi', 'Boddi', 'Kulli'], '', 'class="form-control"'); ?>
+            </div>
+        </div>
+        
+
         <div class="table-responsive">  
             <br /><br />  
             <table id="item_price" class="table table-bordered table-striped" width="100%">  
                 <thead>  
                     <tr>  
-                        <th width="10%">Huccha</th>  
+                        <th width="10%"></th>  
                         <th width="15%">Item Name</th>  
                         <th width="10%">Price</th>
                         <th width="5%">Actions</th>   
