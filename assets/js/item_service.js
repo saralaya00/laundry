@@ -36,58 +36,59 @@ $(document).ready(function(){
             $('#c_service_name').text(t_service_name);
             $('#c_item_name').text(t_item_name);
             $('#c_price').text(t_price);
-            getItem();
-            getService();
+            $('#price').val(t_price);
+            // getItem();
+            // getService();
             updateItem_service();
         }); 
 
-        function getItem(){
-            $.ajax({  
-                url : baseURL + "Item_service_controller/getItem", 
-                method:"POST",   
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                jsonpCallback: 'callback', 
-                success: function(json){
-                    var $select = $('#itemDropdown');
-                    $select.empty();
+        // function getItem(){
+        //     $.ajax({  
+        //         url : baseURL + "Item_service_controller/getItem", 
+        //         method:"POST",   
+        //         contentType: "application/json; charset=utf-8",
+        //         dataType: "json",
+        //         jsonpCallback: 'callback', 
+        //         success: function(json){
+        //             var $select = $('#itemDropdown');
+        //             $select.empty();
         
-                    $select.append($('<option></option>').attr("value",'').text("Change Item"));
+        //             $select.append($('<option></option>').attr("value",'').text("Change Item"));
                     
-                    $.each(json, function(key, value){
-                        $select.append($('<option></option>').attr("value", value.item_id).text(value.item_name));
-                    });
+        //             $.each(json, function(key, value){
+        //                 $select.append($('<option></option>').attr("value", value.item_id).text(value.item_name));
+        //             });
 
-                    $("#itemDropdown").change(function(){
-                        display();
-                    });
-                }   
-            })  
-        }  
+        //             $("#itemDropdown").change(function(){
+        //                 display();
+        //             });
+        //         }   
+        //     })  
+        // }  
 
-        function getService(){
-            $.ajax({  
-                url : baseURL + "Item_service_controller/getService", 
-                method:"POST",   
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                jsonpCallback: 'callback', 
-                success: function(json){
-                    var $select = $('#serviceDropdown');
-                    $select.empty();
+        // function getService(){
+        //     $.ajax({  
+        //         url : baseURL + "Item_service_controller/getService", 
+        //         method:"POST",   
+        //         contentType: "application/json; charset=utf-8",
+        //         dataType: "json",
+        //         jsonpCallback: 'callback', 
+        //         success: function(json){
+        //             var $select = $('#serviceDropdown');
+        //             $select.empty();
         
-                    $select.append($('<option></option>').attr("value",'').text("Change Service"));
+        //             $select.append($('<option></option>').attr("value",'').text("Change Service"));
                     
-                    $.each(json, function(key, value){
-                        $select.append($('<option></option>').attr("value", value.service_id).text(value.service_name));
-                    });
+        //             $.each(json, function(key, value){
+        //                 $select.append($('<option></option>').attr("value", value.service_id).text(value.service_name));
+        //             });
 
-                    $("#serviceDropdown").change(function(){
-                       display(); 
-                    }); 
-                }   
-            })  
-        }
+        //             $("#serviceDropdown").change(function(){
+        //                display(); 
+        //             }); 
+        //         }   
+        //     })  
+        // }
         function updateItem_service() 
         {
             mdl_submit.click(function(e){    
@@ -139,104 +140,107 @@ $(document).ready(function(){
         });
     });    
 });
-function showTextPrice()
-{
-    $('#price_check').change(function() {
-        if(this.checked) {
-            $('.price').show();
-        }
-        else{
-            $('.price').hide();
-        }
-    });
-}
-function showItemDropdown(){
-    $('#item_check').change(function() {
-        if(this.checked) {
-            $('.itemDropdown').show();
-        }
-        else{
-            $('.itemDropdown').hide();
-        }
-    });
-}
-function showServiceDropdown(){
-    $('#service_check').change(function() {
-        if(this.checked) {
-            $('.serviceDropdown').show();
-        }
-        else{
-            $('.serviceDropdown').hide();
-        }
-    });
-}
+// function showTextPrice()
+// {
+//     $('#price_check').change(function() {
+//         if(this.checked) {
+//             $('.price').show();
+//         }
+//         else{
+//             $('.price').hide();
+//         }
+//     });
+// }
+// function showItemDropdown(){
+//     $('#item_check').change(function() {
+//         if(this.checked) {
+//             $('.itemDropdown').show();
+//         }
+//         else{
+//             $('.itemDropdown').hide();
+//         }
+//     });
+// }
+// function showServiceDropdown(){
+//     $('#service_check').change(function() {
+//         if(this.checked) {
+//             $('.serviceDropdown').show();
+//         }
+//         else{
+//             $('.serviceDropdown').hide();
+//         }
+//     });
+// }
 function display(){
     $price = $('#price').val();
-    var item_name = $('#itemDropdown').children(":selected").text();
-    var service_name = $('#serviceDropdown').children(":selected").text();
+    // var item_name = $('#itemDropdown').children(":selected").text();
+    // var service_name = $('#serviceDropdown').children(":selected").text();
 
     var t_service_name = $('#c_service_name').text();
     var t_item_name = $('#c_item_name').text();
     var t_price = $('#c_price').text();
     $('.status').show();
-
+    $('#u_price').text($price);
+    $('#u_item_name').text(t_item_name);
+    $('#u_service_name').text(t_service_name);
+    //     $('#u_item_name').text(t_item_name);
     //don't edit anything
-    if((item_name == "Change Item" || item_name == undefined) && (service_name == "Change Service" || service_name == undefined) && ($price == "" || $price == undefined))
-    {
-        $('#u_service_name').text(t_service_name);
-        $('#u_item_name').text(t_item_name);
-        $('#u_price').text(t_price);
-    }
-    //edit item only
-    else if((item_name != "Change Item" || item_name != undefined) && (service_name == "Change Service" || service_name == undefined) && ($price == "" || $price == undefined))
-    {
-        $('#u_service_name').text(t_service_name);
-        $('#u_item_name').text(item_name);
-        $('#u_price').text(t_price);
-    }
-    //edit service only
-    else if((item_name == "Change Item" || item_name == undefined) && (service_name != "Change Service" || service_name != undefined) && ($price == "" || $price == undefined))
-    {
-        $('#u_service_name').text(service_name);
-        $('#u_item_name').text(t_item_name);
-        $('#u_price').text(t_price);
-    }
-    //edit price only
-    else if((item_name == "Change Item" || item_name == undefined) && (service_name == "Change Service" || service_name == undefined) && ($price != "" || $price != undefined))
-    {
-        $('#u_service_name').text(t_service_name);
-        $('#u_item_name').text(t_item_name);
-        $('#u_price').text($price);
-    }
-    //edit item and service
-    else if((item_name != "Change Item" || item_name != undefined) && (service_name != "Change Service" || service_name != undefined) && ($price == "" || $price == undefined))
-    {
-        $('#u_service_name').text(service_name);
-        $('#u_item_name').text(item_name);
-        $('#u_price').text(t_price);
-    }
-    //edit item and price
-    else if((item_name != "Change Item" || item_name != undefined) && (service_name == "Change Service" || service_name == undefined) && ($price != "" || $price != undefined))
-    {
-        $('#u_service_name').text(t_service_name);
-        $('#u_item_name').text(item_name);
-        $('#u_price').text($price);
-    }
-    //edit service and item
-    else if((item_name == "Change Item" || item_name == undefined) && (service_name != "Change Service" || service_name != undefined) && ($price != "" || $price != undefined))
-    {
-        $('#u_service_name').text(service_name);
-        $('#u_item_name').text(t_item_name);
-        $('#u_price').text($price);
-    }
-    //edit all
-    else
-    {
-        console.log("if 8");
-        $('#u_service_name').text(service_name);
-        $('#u_item_name').text(item_name);
-        $('#u_price').text($price);
-    }
+    // if((item_name == "Change Item" || item_name == undefined) && (service_name == "Change Service" || service_name == undefined) && ($price == "" || $price == undefined))
+    // {
+    //     $('#u_service_name').text(t_service_name);
+    //     $('#u_item_name').text(t_item_name);
+    //     $('#u_price').text(t_price);
+    // }
+    // //edit item only
+    // else if((item_name != "Change Item" || item_name != undefined) && (service_name == "Change Service" || service_name == undefined) && ($price == "" || $price == undefined))
+    // {
+    //     $('#u_service_name').text(t_service_name);
+    //     $('#u_item_name').text(item_name);
+    //     $('#u_price').text(t_price);
+    // }
+    // //edit service only
+    // else if((item_name == "Change Item" || item_name == undefined) && (service_name != "Change Service" || service_name != undefined) && ($price == "" || $price == undefined))
+    // {
+    //     $('#u_service_name').text(service_name);
+    //     $('#u_item_name').text(t_item_name);
+    //     $('#u_price').text(t_price);
+    // }
+    // //edit price only
+    // else if((item_name == "Change Item" || item_name == undefined) && (service_name == "Change Service" || service_name == undefined) && ($price != "" || $price != undefined))
+    // {
+    //     $('#u_service_name').text(t_service_name);
+    //     $('#u_item_name').text(t_item_name);
+    //     $('#u_price').text($price);
+    // }
+    // //edit item and service
+    // else if((item_name != "Change Item" || item_name != undefined) && (service_name != "Change Service" || service_name != undefined) && ($price == "" || $price == undefined))
+    // {
+    //     $('#u_service_name').text(service_name);
+    //     $('#u_item_name').text(item_name);
+    //     $('#u_price').text(t_price);
+    // }
+    // //edit item and price
+    // else if((item_name != "Change Item" || item_name != undefined) && (service_name == "Change Service" || service_name == undefined) && ($price != "" || $price != undefined))
+    // {
+    //     $('#u_service_name').text(t_service_name);
+    //     $('#u_item_name').text(item_name);
+    //     $('#u_price').text($price);
+    // }
+    // //edit service and item
+    // else if((item_name == "Change Item" || item_name == undefined) && (service_name != "Change Service" || service_name != undefined) && ($price != "" || $price != undefined))
+    // {
+    //     $('#u_service_name').text(service_name);
+    //     $('#u_item_name').text(t_item_name);
+    //     $('#u_price').text($price);
+    // }
+    // //edit all
+    // else
+    // {
+    //     console.log("if 8");
+    //     $('#u_service_name').text(service_name);
+    //     $('#u_item_name').text(item_name);
+    //     $('#u_price').text($price);
+    // }
 }
 
 
