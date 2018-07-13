@@ -4,7 +4,7 @@
         
         <div class="row">
             <div class="col-md-4">
-                <?php echo form_dropdown('data', ['Dummi', 'Boddi', 'Kulli'], '', 'class="form-control"'); ?>
+                <?php echo form_dropdown('services', set_value('services'), '', 'class="form-control"'); ?>
             </div>
         </div>
         
@@ -14,7 +14,7 @@
             <table id="item_price" class="table table-bordered table-striped" width="100%">  
                 <thead>  
                     <tr>  
-                        <th width="10%"></th>  
+                        <th width="10%">Current Items</th>  
                         <th width="15%">Item Name</th>  
                         <th width="10%">Price</th>
                         <th width="5%">Actions</th>   
@@ -27,6 +27,12 @@
 
 <script type="text/javascript">
 $(document).ready(function(){  
+
+    $('[name="services"]').change(function(){
+        var id = $(this).children(":selected").attr("value");
+        console.log(id);
+    }); 
+
     var item_service = $('#item_price').DataTable({  
         "processing":true,  
         "serverSide":true,  

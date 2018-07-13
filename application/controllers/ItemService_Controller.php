@@ -9,14 +9,31 @@ class ItemService_Controller extends CI_Controller {
     function index()
     {  
         $data["title"] = "Items and Services Configuration";  
+
+        $_POST['services'] = $this->getServices();
+
         $this->load->view('common/footbar.php');
         $this->load->view('item_service/Item_service_details.php',$data);
         $this->load->view('common/end_wrapper.php');
     }
 
+    public function getServices()
+    {
+        //Returns an array with service id as index and service name as value
+        $services = $this->Item_service_model->getServices();
+        $data[] = array();
+
+        foreach ($services as $index => $service) {
+            $data[$service['service_id']] = $service['service_name'];
+        }
+
+        return $data;
+    }
+
     public function getItemServiceDetails()
     {
-    
+        //$service_id = $this->input->post('id');
+        
         $item_service= $this->Item_service_model->getItemServiceDetails();  
         $i = 0;
         foreach($item_service as $key => $value)  

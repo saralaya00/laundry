@@ -49,11 +49,10 @@ class Item_service_model extends CI_Model
         return $query;
     }
 
-    function getService()
+    function getServices()
     {
-        $this->db->from('item_service');
-        $query = $this->db->get();
-        return $query;
+        $this->db->from('services');
+        return $this->db->get()->result_array();
     }
 
     function getItems()
