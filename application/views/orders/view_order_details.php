@@ -15,7 +15,7 @@
     <div class="container box">  
         <div class="table-responsive">  
             <br /><br />  
-            <table id="itemDetails" class="table table-bordered table-striped">  
+            <table id="itemdletails" class="table table-bordered table-striped">  
                     <thead>
                     <!-- <input type="text" class="form-control" id="bookSearch" placeholder="Search book..."> -->
                         <tr>  

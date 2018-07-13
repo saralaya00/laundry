@@ -122,10 +122,10 @@ class View_orders_model extends CI_Model
 
       public function getItemName($item_id = array())
       {
-            $this->db->select('items.item_name');
-            $this->db->join('item_service','items.item_id = item_service.item_id');
-            $this->db->where_in('item_service.item_id',$item_id);  
-            $this->db->from('items,item_service');
+            $this->db->select('i.item_name');
+            $this->db->join('item_service as is','i.item_id = is.item_id');
+            $this->db->where_in('is.item_id',$item_id);  
+            $this->db->from('items as i');
             $query = $this->db->get();
             return $query->result_array();
       }
