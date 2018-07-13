@@ -1,6 +1,6 @@
 <!-- <div class="body_id">
     <div class="container box">  
-        <h3 align="center"><?php echo $title; ?></h3><br />  
+        <h3 align="left"><?php echo $title; ?></h3><br />  
         <div class="table-responsive">  
             <br /><br />  
             <table id="item_service" class="table table-bordered table-striped" width="100%">  
