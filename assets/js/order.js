@@ -86,7 +86,7 @@ $(document).on('click', '.assign', function(){
     mdl_submit.html('Assign Order');
 
     let order_id = $(this).data("id");
-    $.post(baseURL + 'View_orders_controller/mdl_assignOrder', function (data){
+    $.post(baseURL + 'View_orders_controller/md_assignOrder', function (data){
         mdl_body.html(data);
         getEmployee(order_id);
     });   

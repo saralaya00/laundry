@@ -57,7 +57,15 @@ class Item_service_model extends CI_Model
 
     function getItems()
     {
+        $i_id_result = $this->getItemId();
+        $item_id = array();
+        foreach ($i_id_result->result_array() as $row)
+        {
+            $item_id[] = $row['item_id'];
+        }
+
         $this->db->from('items');
+        $this->db->where_not_in('item_id', $item_id);
         $query = $this->db->get()->result_array();
         return $query;
     }
