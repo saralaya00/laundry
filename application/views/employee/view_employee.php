@@ -36,7 +36,7 @@
         //Clear Function
         function md_clear()
         {
-            console.log(' view_employee.php <script>:: md_clear()');
+            //console.log(' view_employee.php <script>:: md_clear()');
             md_title.html('');
             md_body.empty();
             md_submit.show();
@@ -74,7 +74,6 @@
             md_submit.on('click', function(e){
                 e.preventDefault();
 
-                console.log('Update');
                 let postData = {
                     employee_id: employee_id,
                     full_name: md_body.find('input[name="full_name"]').val(),

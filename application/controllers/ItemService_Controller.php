@@ -22,6 +22,7 @@ class ItemService_Controller extends CI_Controller {
         //Returns an array with service id as index and service name as value
         $services = $this->Item_service_model->getServices();
         $data[] = array();
+        $data['placeholder'] = 'Select a Service';
 
         foreach ($services as $index => $service) {
             $data[$service['service_id']] = $service['service_name'];
@@ -84,18 +85,24 @@ class ItemService_Controller extends CI_Controller {
             $sub_array[] = $value['price'];  
 
             if(intval($value['price'])){
-                $sub_array[] = '<button type="button" name="edit" data-id="'.$value['id'].'" class="btn btn-secondary btn-sm edit" data-toggle="modal" data-target="#modal-template" width="150%">
-                <span class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></span>
-                </button> &nbsp;'  
-                            .'<button type="button" name="delete" data-id="'. $value['id'].'" class="btn btn-danger btn-sm delete" width="150%">
-                            <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="Delete"></span>
-                            </button>';
+                $sub_array[] = 
+                '<div class="text-center">
+                    <button type="button" name="edit" data-id="'.$value['id'].'" class="btn btn-secondary btn-sm edit" data-toggle="modal" data-target="#modal-template" width="150%">
+                    <span class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></span>
+                    </button>  
+                    <button type="button" name="delete" data-id="'. $value['id'].'" class="btn btn-danger btn-sm delete" width="150%">
+                    <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="Delete"></span>
+                    </button>
+                </div>';
             }
             else
             {
-                $sub_array[] = '<button type="button" name="add" data-id="'. $value['id'].'" class="btn btn-success btn-sm add" width="180%">
-                            <span class="fa fa-plus"></span>&nbsp;&nbsp;&nbsp;ADD
-                            </button>';
+                $sub_array[] = 
+                '<div class="text-center">
+                    <button type="button" name="add" data-id="'. $value['id'].'" class="btn btn-success btn-sm add" width="180%">
+                    <span class="fa fa-plus"></span>&nbsp;&nbsp;&nbsp;ADD
+                    </button>
+                </div>';
             }
            
             $data[] = $sub_array;  
