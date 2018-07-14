@@ -32,41 +32,55 @@ class ItemService_Controller extends CI_Controller {
 
     public function getItemServiceDetails()
     {
-        //$service_id = $this->input->post('id');
+        $service_id = $this->input->post('id');
         
-        $item_service= $this->Item_service_model->getItemServiceDetails();  
+        $item_service= $this->Item_service_model->getItemServiceDetails($service_id);  
         $items = $this->Item_service_model->getItems();
-
+        
         foreach ($items as $key=>$value) {
             $items[$key] = array("item_id" => $value['item_id'],
                         "item_name" => $value['item_name'],
                         "price" => $value['item_name'] );
         } 
-
+        
         $data_items = array();
         $i = 0;
-        foreach ($item_service as $key=>$value) {
-            $data_items[$i] = array("id" => $value['id'],
-                       "item_name" => $value['item_name'],
-                       "price" => $value['price'] 
-                    );
-            $i++;
-        } 
-        foreach ($items as $key=>$value) {
-            $data_items[$i] = array("id" => $value['item_id'],
-                       "item_name" => $value['item_name'],
-                       "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'">'
-                    );
-            $i++;
-        } 
 
+        if(count($item_service)>0)
+        {
+            foreach ($item_service as $key=>$value) {
+                $data_items[$i] = array("id" => $value['id'],
+                           "item_name" => $value['item_name'],
+                           "price" => $value['price'] 
+                        );
+                $i++;
+            } 
+            foreach ($items as $key=>$value) {
+                $data_items[$i] = array("id" => $value['item_id'],
+                           "item_name" => $value['item_name'],
+                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price" readonly>'
+                        );
+                $i++;
+            }  
+        }
+        else{
+            foreach ($items as $key=>$value) {
+                $data_items[$i] = array("id" => $value['item_id'],
+                           "item_name" => $value['item_name'],
+                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price" readonly>'
+                        );
+                $i++;
+            } 
+        }
+     
+       
+        $j=0;
         foreach($data_items as $key => $value)  
         {  
             $sub_array = array();
-            // $sub_array[] = $i+1;
-            $sub_array[]='<input type="checkbox" name="check">';
+            $sub_array[]='<input type="checkbox" name="check" data-check_id ="'.$value['id'].'" >';
             $sub_array[] = $value['item_name'];
-            // $sub_array[] = $value['service_name'];
+
             $sub_array[] = $value['price'];  
 
             if(intval($value['price'])){
@@ -85,13 +99,13 @@ class ItemService_Controller extends CI_Controller {
             }
            
             $data[] = $sub_array;  
-            $i++;
+            $j++;
         } 
 
         $output = array(  
             "draw"              =>    intval($_POST["draw"]),  
-            "recordsTotal"      =>    $i,
-            "recordsFiltered"   =>    $i,  
+            "recordsTotal"      =>    $j,
+            "recordsFiltered"   =>    $j,  
             "data"              =>    $data  
         );  
 

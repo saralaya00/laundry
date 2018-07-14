@@ -30,22 +30,47 @@ $(document).ready(function(){
 
     $('[name="services"]').change(function(){
         var id = $(this).children(":selected").attr("value");
-        console.log(id);
+        // fill_details(id);
+        var item_service = $('#item_price').DataTable({  
+            "processing":true,  
+            "serverSide":true,  
+            "order":[],  
+            "ajax":{  
+                url: baseURL + 'ItemService_Controller/getItemServiceDetails',  
+                type:"POST",
+                data: {id:id},
+                sucess:function(){
+                    item_service.ajax.reload();  
+                }
+            },  
+            "columnDefs":[{  
+                    "targets":[0, 1, 2, 3],  
+                    "orderable":false,  
+                },  
+            ], 
+        }); 
     }); 
 
-    var item_service = $('#item_price').DataTable({  
-        "processing":true,  
-        "serverSide":true,  
-        "order":[],  
-        "ajax":{  
-            url: baseURL + 'ItemService_Controller/getItemServiceDetails',  
-            type:"POST"  
-        },  
-        "columnDefs":[{  
-                "targets":[0, 1, 2, 3],  
-                "orderable":false,  
-            },  
-        ], 
-    }); 
+    function fill_details(id){
+       
+    }
+    
+
+     $(document).on('change', 'input[type="checkbox"]', function(e){
+
+        if($(this).is(":checked"))
+        {
+            $("#price").prop('readonly', false);
+        }
+        else
+        {
+       
+        }
+    });
+
+     $(document).on('click', '.add', function(){
+
+
+     });
 });  
 </script>
