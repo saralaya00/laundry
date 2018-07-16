@@ -82,7 +82,7 @@ $(document).on('click', '.viewOrder', function(){
 //Assign Order button in View orders clicked
 $(document).on('click', '.assign', function(){ 
     mdl_clear();
-    mdl_title.html('Assign Order');
+    mdl_title.html('<span class="fa fa-user-plus"></span> <span class="col-form-label">&nbsp;Assign Order</span>');
     mdl_submit.html('Assign Order');
 
     let order_id = $(this).data("id");
@@ -143,7 +143,7 @@ $(document).on('click', '.assign', function(){
 $(document).on('click', '.changeEmployee', function(){ 
     let order_id = $(this).data("id");
     mdl_clear();
-    mdl_title.html('Change Employee');
+    mdl_title.html('<span class="fa fa-exchange"></span> <span class="col-form-label">&nbsp;Change Employee</span>');
     mdl_submit.html('Change Employee');
     
     $.post(baseURL + 'View_orders_controller/md_changeEmployee', function (data){

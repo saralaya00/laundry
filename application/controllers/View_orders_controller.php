@@ -28,13 +28,19 @@ class View_orders_controller extends CI_Controller {
                   $sub_array[] = '<button type="button" name="view" data-id="'.$row->order_id.'" class="btn btn-success btn-xs viewOrder">View Order</button>';  
                   
                   if($row->status=="delivered"){
-                        $sub_array[]="-";
+                        $sub_array[]='<div class="text-center"><span class="fa fa-check-square fa-lg"></span></div>';
                   }
                   else if($row->status == "not assigned"){
-                         $sub_array[] = '<button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-warning btn-xs assign" data-toggle="modal" data-target="#modal-template">Assign order</button>';  
+                        $sub_array[] = 
+                        '<div class="text-center">
+                              <button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-warning btn-xs assign" data-toggle="modal" data-target="#modal-template">Assign order</button>
+                        </div>';  
                   }
                   else{
-                         $sub_array[] = '<button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-primary btn-xs changeEmployee" data-toggle="modal" data-target="#modal-template">Change Employee</button>';  
+                        $sub_array[] = 
+                        '<div class="text-center">
+                              <button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-primary btn-xs changeEmployee" data-toggle="modal" data-target="#modal-template">Change Employee</button>
+                        </div>';  
                   }
                   
                   $data[] = $sub_array;  

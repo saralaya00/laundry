@@ -61,7 +61,7 @@
         $(document).on('click', '.btn_edit', function(){
 
             md_clear();
-            md_title.html('Edit Employee');
+            md_title.html('<span class="fa fa-edit"></span> <span class="col-form-label">&nbsp;Edit Employee</span>');
             md_submit.html('Update');
 
             let employee_id = $(this).data('employee_id');
@@ -105,7 +105,7 @@
         $(document).on('click', '.btn_delete', function(){
             
             md_clear();
-            md_title.html('Remove Employee');
+            md_title.html('<span class="fa fa-user-times"></span> <span class="col-form-label">&nbsp;Remove Employee</span>');
             md_submit.html('Delete');
 
             let employee_id = $(this).data('employee_id');
