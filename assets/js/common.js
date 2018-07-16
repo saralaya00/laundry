@@ -36,7 +36,7 @@ $(document).ready(function(){
     $('#add-emp').click(function(){
 
         md_clear();
-        md_title.html('Add Employee');
+        md_title.html('<span class="fa fa-user-plus"></span> <span class="col-form-label">&nbsp;Add Employee</span>');
         md_submit.html('Add Employee');
 
         $.post(baseURL + 'Dashboard_Controller/md_employee', function (data){
@@ -75,7 +75,7 @@ $(document).ready(function(){
 
     $('#add-service').click(function(){
         md_clear();
-        md_title.html('Add Service');
+        md_title.html('<span class="fa fa-list-ul"></span> <span class="col-form-label">&nbsp;Add Service</span>');
         md_submit.html('Add Service');
 
         $.post(baseURL + 'Dashboard_Controller/md_service', function (data){
@@ -111,7 +111,7 @@ $(document).ready(function(){
 
     $('#add-item').click(function(){
         md_clear();
-        md_title.html('Add Item');
+        md_title.html('<span class="fa fa-clone"></span> <span class="col-form-label">&nbsp;Add Item</span>');
         md_submit.html('Add Item');
         $.post(baseURL + 'Dashboard_Controller/md_item', function (data){
             md_body.html(data);

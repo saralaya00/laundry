@@ -59,7 +59,7 @@ class ItemService_Controller extends CI_Controller {
             foreach ($items as $key=>$value) {
                 $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
                            "item_name" => $value['item_name'],
-                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price" readonly>'
+                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price">'
                         );
                 $i++;
             }  
@@ -68,7 +68,7 @@ class ItemService_Controller extends CI_Controller {
             foreach ($items as $key=>$value) {
                 $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
                            "item_name" => $value['item_name'],
-                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price" readonly>'
+                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price">'
                         );
                 $i++;
             } 
