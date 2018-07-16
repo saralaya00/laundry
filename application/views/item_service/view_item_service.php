@@ -12,7 +12,7 @@
         <table id="item_price" class="table table-bordered table-striped" width="100%">  
             <thead>  
             <tr>  
-                <th width="5%">Current Items</th>  
+                <th width="5%">Serial Number</th>  
                 <th width="10%">Item Name</th>  
                 <th width="10%">Price</th>
                 <th width="5%">Actions</th>   

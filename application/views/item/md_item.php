@@ -8,11 +8,11 @@
     <?php echo form_open(); ?> 
 
         <div class="form-group row">
-            <label class="col-md-3 col-form-label text-right">Item Name </label>
+            <label class="col-md-3 col-form-label text-right">Item Name<span class="text-danger">&nbsp; *</span></label>
             <div class="col-md-4">
                 <input class="form-control" type="text" placeholder="Enter item name" name="item_name" value="<?php echo set_value('item_name'); ?>">
             </div>
-            <label class="col-md-5 col-form-label form-text text-danger">* &nbsp;<?php echo form_error('item_name');?></label>
+            <label class="col-md-5 col-form-label form-text text-danger"><?php echo form_error('item_name');?></label>
         </div>
         
     </form>

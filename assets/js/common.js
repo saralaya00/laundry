@@ -14,7 +14,7 @@ $(document).ready(function(){
     //Clear Function
     function md_clear()
     {
-        console.log(' common.js :: md_clear()');
+        //console.log(' common.js :: md_clear()');
         md_title.html('');
         md_body.empty();
         md_submit.show();
