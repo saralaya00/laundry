@@ -4,7 +4,7 @@
             array(
                 'field' => 'full_name',
                 'label' => 'Full name',
-                'rules' => 'required|trim|regex_match[/^[A-z]*(\s)[A-z]*$/]|max_length[30]'
+                'rules' => 'required|trim|ucwords|regex_match[/^[A-z]*(\s)[A-z]*$/]|max_length[30]'
             ),
             array(
                 'field' => 'address',
@@ -26,7 +26,7 @@
             array(
                 'field' => 'full_name',
                 'label' => 'Full name',
-                'rules' => 'required|trim|regex_match[/^[A-z]*(\s)[A-z]*$/]|max_length[30]'
+                'rules' => 'required|trim|ucwords|regex_match[/^[A-z]*(\s)[A-z]*$/]|max_length[30]'
             ),
             array(
                 'field' => 'address',
@@ -46,7 +46,7 @@
             array(
                 'field' => 'service_name',
                 'label' => 'service name',
-                'rules' => 'required|trim|regex_match[/^[a-zA-Z\s-_]+$/]|max_length[30]'
+                'rules' => 'required|trim|ucwords|regex_match[/^[a-zA-Z\s-_]+$/]|max_length[30]|is_unique[services.service_name]'
             ),
             array(
                 'field' => 'description',
@@ -58,7 +58,7 @@
             array(
                 'field' => 'item_name',
                 'label' => 'item name',
-                'rules' => 'required|trim|regex_match[/^[a-zA-Z\s-_]+$/]|max_length[30]'
+                'rules' => 'required|trim|ucwords|regex_match[/^[a-zA-Z\s-_]+$/]|max_length[30]|is_unique[items.item_name]'
             )
         )
     );

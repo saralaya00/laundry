@@ -25,6 +25,9 @@ class Item_service_model extends CI_Model
         // }
         
         if(count($item_id)>0){
+
+            // Test case with a new service
+            // resulted in not all items being shown
             $this->db->select('is.id,it.item_name,s.service_name,is.price');
             $this->db->join('items as it','is.item_id=it.item_id');
             $this->db->join('services as s','s.service_id=is.service_id');
