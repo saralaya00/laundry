@@ -34,10 +34,9 @@ class ItemService_Controller extends CI_Controller {
     public function getItemServiceDetails()
     {
         $service_id = $this->input->post('id');
-        
-        $item_service= $this->Item_service_model->getItemServiceDetails($service_id);  
         $items = $this->Item_service_model->getItems();
-        
+
+        $item_service= $this->Item_service_model->getItemServiceDetails($service_id);  
         foreach ($items as $key=>$value) {
             $items[$key] = array("item_id" => $value['item_id'],
                         "item_name" => $value['item_name'],
@@ -47,7 +46,7 @@ class ItemService_Controller extends CI_Controller {
         $data_items = array();
         $i = 0;
 
-        if(count($item_service)>0)
+        if(count($item_service)>0 && count($items)>0)
         {
             foreach ($item_service as $key=>$value) {
                 $data_items[$i] = array("id" => $value['id'],
@@ -84,7 +83,7 @@ class ItemService_Controller extends CI_Controller {
 
             $sub_array[] = $value['price'];  
 
-            if(intval($value['price'])){
+            if(intval($value['price']) && $value['price'] != 0){
                 $sub_array[] = 
                 '<div class="text-center">
                     <button type="button" name="edit" data-id="'.$value['id'].'" class="btn btn-secondary btn-sm edit" data-toggle="modal" data-target="#modal-template" width="150%">
@@ -118,5 +117,38 @@ class ItemService_Controller extends CI_Controller {
 
         echo json_encode($output);  
     }
+
+    public function md_edit()
+    {
+        return $this->load->view('item_service/md_editDetails.php');
+
+    }
+
+    public function updateItem_service()
+    {
+        $input = array('id' => $this->input->post('id'),
+                        // 'service_id' => $this->input->post('service_id'),
+                        // 'item_name' => $this->input->post('item_name'),
+                        'price' => $this->input->post('price')
+                );
+    
+        $result = $this->Item_service_model->updateItem_service($input);
+        if($result == true)
+        {    
+        echo json_encode("Updated");
+        }
+    }
+
+    public function deleteItem_service()
+    {
+        $id = $this->input->post('id');
+        $result = $this->Item_service_model->deleteItem_service($id);
+        if($result == true)
+        {    
+            echo json_encode("deleted");
+        }
+    }
+
+    
 }
 ?>
