@@ -116,8 +116,6 @@
                         <th width="35%">Rate</th>
                         <th width="35%">Quantity</th>
                         <th width="35%">Price</th>
-                        <th width="35%">edit</th>
-                        <th width="35%">Delete</th>
                         <th width="35%">select</th>
                     </tr>    
                 </thead>  
@@ -163,7 +161,7 @@ $(document).ready(function(){
        },
        "columnDefs":[
            {
-              "targets":[0,1,2,3,4,7,8], 
+              "targets":[0,1,2,3,4,6], 
               "orderable":false,
            }
        ]

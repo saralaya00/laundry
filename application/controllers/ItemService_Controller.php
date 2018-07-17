@@ -148,7 +148,6 @@ class ItemService_Controller extends CI_Controller {
     }
 
     public function addItemService(){
-       
         $data = array('service_id' => $this->input->post('service_id'),
                     'id' => $this->input->post('id'),
                     'item_name' => $this->input->post('item_name')
@@ -158,9 +157,6 @@ class ItemService_Controller extends CI_Controller {
         {    
             echo json_encode("Inserted");
         }        
-
     }
-
-    
 }
 ?>

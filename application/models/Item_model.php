@@ -12,5 +12,10 @@ class Item_model extends CI_Model
         $this->db->insert('items',$item_data);
         return $this->db->affected_rows();
     }
+
+    public function fetch_items()
+    {
+        return $this->db->get('items');
+    }
 }
 ?>
