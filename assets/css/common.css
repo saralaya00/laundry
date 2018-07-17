@@ -200,3 +200,11 @@ footer > .jumbotron{
   min-height:100px;
   resize: vertical;
 }
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.is-valid{
+  border-color: #28a745;
+}

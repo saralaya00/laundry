@@ -82,6 +82,11 @@ $(document).ready(function(){
     }); 
 
     $(document).on('click', '.add', function(e){
+
+
+        //Not used
+
+        
         var table = $('#item_price').DataTable();
         var data = table.row( $(this).parents('tr') ).data();
         // var price = ;
@@ -195,6 +200,38 @@ $(document).ready(function(){
 
             mdl_body.html(data);
         });
+    });
+
+    $(document).on('click', '.btn_add', function(){
+        //id here is item_id
+        let item_id = $(this).data('id');
+        let service_id = $('#serviceDropdown').children(":selected").attr("value");
+        
+        let text_box = $('input[name="price-' + item_id + '"]');
+        let price_value = text_box.val();
+
+        if (!$.isNumeric(price_value) || price_value > 9999)
+        {
+            text_box.removeClass('is-valid');
+            text_box.addClass('is-invalid');
+        }
+        
+        else 
+        {
+            text_box.removeClass('is-invalid');
+            text_box.addClass('is-valid');
+
+            let data = {
+                item_id: item_id,
+                service_id: service_id,
+                price: price_value
+            };
+
+            $.post(baseURL + 'ItemService_Controller/add_item_service', data)
+            .done(function(){
+                $('#item_price').DataTable().ajax.reload();
+            });
+        }
     });
 });
 </script>

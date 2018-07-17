@@ -98,6 +98,11 @@ class Item_service_model extends CI_Model
 
     public function addItemService($data = array())
     {
+
+        
+        //Not used
+
+
         $service_id = $data['service_id'];
         $price = $data['price'];
 
@@ -113,6 +118,11 @@ class Item_service_model extends CI_Model
                         
         $result = $this->db->insert('item_service', $record); 
         
+    }
+
+    public function add_item_service($data)
+    {
+        return $this->db->insert('item_service', $data);
     }
 }
 ?>

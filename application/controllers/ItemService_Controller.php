@@ -71,7 +71,7 @@ class ItemService_Controller extends CI_Controller {
                 $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
                            "item_name" => $value['item_name'],
                             //create text box to enter price
-                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price">'
+                            "price" => '<input class="form-control" type="text" maxlength="4" placeholder="Enter Price" name="price-'. $value['item_id'].'">'
                         );
                 $i++;
             }  
@@ -82,7 +82,7 @@ class ItemService_Controller extends CI_Controller {
                 $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
                            "item_name" => $value['item_name'],
                            //create text box to enter price
-                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" data-price= >'
+                           "price" => '<input class="form-control" type="text" maxlength="4" placeholder="Enter Price" name="price-'. $value['item_id'].'">'
                         );
                 $i++;
             } 
@@ -115,7 +115,7 @@ class ItemService_Controller extends CI_Controller {
                 //button for adding for item service details
                 $sub_array[] = 
                 '<div class="text-center">
-                    <button type="button" name="add" data-id="'. $value['id'].'" class="btn btn-success btn-sm add" width="180%">
+                    <button type="button" name="add" data-id="'. $value['id'].'" class="btn_add btn btn-success btn-sm">
                     <span class="fa fa-plus"></span>&nbsp;&nbsp;&nbsp;ADD
                     </button>
                 </div>';
@@ -166,6 +166,11 @@ class ItemService_Controller extends CI_Controller {
 
     //to add item and service details to item service table
     public function addItemService(){
+
+
+        //Not used anymore
+
+
         $data = array('service_id' => $this->input->post('service_id'),
                     'id' => $this->input->post('id'),
                     'item_name' => $this->input->post('item_name'),
@@ -176,6 +181,19 @@ class ItemService_Controller extends CI_Controller {
         {    
             echo json_encode("Inserted");
         }        
+    }
+
+    //Add item_service directly >>>> final
+    public function add_item_service()
+    {
+        $data = array(
+            'item_id' => $this->input->post('item_id'),
+            'service_id' => $this->input->post('service_id'),
+            'price' => $this->input->post('price')
+        );
+
+        $result = $this->Item_service_model->add_item_service($data);
+        return $result;
     }
 }
 ?>
