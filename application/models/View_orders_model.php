@@ -84,13 +84,25 @@ class View_orders_model extends CI_Model
             $this->db->update("orders",$data);
       }
 
+      // public function getEmployeeName($order_id)
+      // {
+      //       $emp_id = $this->getEmployeeID($order_id);
+      //       $this->db->select('full_name'); 
+      //       $this->db->from('employee');   
+      //       $this->db->where('employee_id', $emp_id);
+      //      return $this->db->get()->row()->full_name;
+      // }
       public function getEmployeeName($order_id)
       {
+            // todo: Fixes
+            //Sends Emp name and Contact no
+            //If errors use the above and make required changes in view_orders_controller
             $emp_id = $this->getEmployeeID($order_id);
-            $this->db->select('full_name'); 
+            $this->db->select('full_name,contact_no'); 
             $this->db->from('employee');   
             $this->db->where('employee_id', $emp_id);
-           return $this->db->get()->row()->full_name;
+            $empDetails = $this->db->get()->row();
+            return array('full_name' => $empDetails->full_name, 'contact_no' => $empDetails->contact_no);
       }
 
       public function getEmployeeID($order_id)

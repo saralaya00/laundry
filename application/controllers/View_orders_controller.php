@@ -98,8 +98,8 @@ class View_orders_controller extends CI_Controller {
             $order_id = $this->input->post('order_id');
             $this->load->model("view_orders_model");  
             $data = $this->view_orders_model->getEmployeeName($order_id);  
-
-            echo json_encode($data);
+            //echo json_encode($data); 
+            echo json_encode($data['full_name'] . ' (' . $data['contact_no'] . ')');
       }
 
       //when assign button in assign order modal is clicked
