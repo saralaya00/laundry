@@ -1,6 +1,6 @@
 
     <div class="body_id">
-        <div class="container box">  
+        <div class="container-fluid">  
             <h3 align="center"><?php echo $title; ?></h3><br />  
             <div class="table-responsive">  
                 <br /><br />  

@@ -1,6 +1,6 @@
 
     <h3 align="center"></h3><br />  
-    <div class="container box ">
+    <div class="container-fluid text-center">
         <div >
             <label for=""  id="order_id_label">Order Id: <span id="order_id"><?php echo $order_id; ?></span></label>
             <br>
@@ -12,18 +12,18 @@
             <br>
         </div>
     </div>
-    <div class="container box">  
+    <div class="container-fluid">  
         <div class="table-responsive">  
             <br /><br />  
-            <table id="itemdletails" class="table table-bordered table-striped">  
+            <table id="itemdletails" class="table table-striped table-bordered" width="100%">
                     <thead>
                         <tr>  
-                            <th width="5%">Serial No.</th>  
-                            <th width="10%">Item Name</th>
-                            <th width="10%">Service Name</th>  
-                            <th width="10%">Quantity</th>  
-                            <th width="10%">Price</th> 
-                            <th width="10%">Total</th>   
+                            <th width="15%">Serial No.</th>  
+                            <th width="20%">Item Name</th>
+                            <th width="20%">Service Name</th>  
+                            <th width="15%">Quantity</th>  
+                            <th width="15%">Price</th> 
+                            <th width="15%">Total</th>   
                         </tr>  
                     </thead>  
             </table>  
