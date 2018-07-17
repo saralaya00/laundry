@@ -63,18 +63,23 @@ $(document).ready(function(){
     }); 
 
     $(document).on('click', '.add', function(){
-        $("#item_price").find('tr text').each(function (i) { 
-        var $fieldset = $(this);
-       
-        price = PhoneNumber+','+ $('input:text:eq(2)', $fieldset).val();
-    
-        if(price == ' ' || t_price == 0)
-        {
-            alert("enter price");
-        }
-       
-    });
-   
+        var table = $('#item_price').DataTable();
+        var data = table.row( $(this).parents('tr') ).data();
+        var price = data[2];
+        var item_name = data[1];
+        service_id = $('#serviceDropdown').children(":selected").attr("value");
+        let id = $(this).data("id");
+        e.preventDefault();         
+        $. ajax({
+            url:baseURL + "ItemService_Controller/addItemService", 
+            method:"POST", 
+            data : {service_id:service_id,
+                    id:id,
+                    price:price},
+            success : function(){
+                        table.ajax.reload();
+            } 
+        })
     });
     
     //when edit button clicked
@@ -104,8 +109,6 @@ $(document).ready(function(){
         function updateItem_service() 
         {
             mdl_submit.click(function(e){    
-                var service_name = $('#u_service_name').text();
-                var item_name = $('#u_item_name').text();
                 var price = $('#price').val();
 
                 if(price == t_price){

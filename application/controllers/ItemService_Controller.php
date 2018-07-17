@@ -127,8 +127,6 @@ class ItemService_Controller extends CI_Controller {
     public function updateItem_service()
     {
         $input = array('id' => $this->input->post('id'),
-                        // 'service_id' => $this->input->post('service_id'),
-                        // 'item_name' => $this->input->post('item_name'),
                         'price' => $this->input->post('price')
                 );
     
@@ -147,6 +145,20 @@ class ItemService_Controller extends CI_Controller {
         {    
             echo json_encode("deleted");
         }
+    }
+
+    public function addItemService(){
+       
+        $data = array('service_id' => $this->input->post('service_id'),
+                    'id' => $this->input->post('id'),
+                    'item_name' => $this->input->post('item_name')
+                );
+        $result = $this->Item_service_model->addItemService($data);
+        if($result == true)
+        {    
+            echo json_encode("Inserted");
+        }        
+
     }
 
     
