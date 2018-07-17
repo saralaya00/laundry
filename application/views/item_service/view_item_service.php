@@ -8,7 +8,7 @@
             </div>
 
             <div class="col-md-8">
-                <button class="btn_items btn btn-secondary" data-toggle="modal" data-target="#modal-template"><span data-toggle="tooltip" data-placement="bottom" title="Edit or delete services">List of service</span></button>
+                <button class="btn_services btn btn-secondary" data-toggle="modal" data-target="#modal-template"><span data-toggle="tooltip" data-placement="bottom" title="Edit or delete services">List of service</span></button>
                 <button class="btn_items btn btn-secondary" data-toggle="modal" data-target="#modal-template"><span data-toggle="tooltip" data-placement="bottom" title="Edit or delete items">List of items</button>
 
             </div>
@@ -181,6 +181,16 @@ $(document).ready(function(){
         .done(function(data){
 
             mdl_title.html('<span class="fa fa-columns"></span> <span class="col-form-label">&nbsp;Items List</span>');
+            mdl_submit.hide();
+
+            mdl_body.html(data);
+        });
+    });
+
+    $(document).on('click', '.btn_services', function(){
+        $.post(baseURL + 'Services_Controller')
+        .done(function(data){
+            mdl_title.html('<span class="fa fa-columns"></span> <span class="col-form-label">&nbsp;Services List</span>');
             mdl_submit.hide();
 
             mdl_body.html(data);

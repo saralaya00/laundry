@@ -12,5 +12,10 @@
             $this->db->insert('services',$service_data);
             return $this->db->affected_rows();
         }
+
+        public function fetch_services()
+        {
+            return $this->db->get('services');
+        }
     }
 ?>
