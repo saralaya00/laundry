@@ -6,6 +6,10 @@
             <div class="col-md-4">
                 <?php echo form_dropdown('services', set_value('services'), '', 'class="form-control" id="serviceDropdown"'); ?>
             </div>
+
+            <div class="col-md-4">
+                <button class="btn_items btn btn-secondary" data-toggle="modal" data-target="#modal-template"> Items List</button>
+            </div>
         </div>
         
         <br><br>
@@ -80,12 +84,13 @@ $(document).ready(function(){
                         table.ajax.reload();
             } 
         })
+   
     });
     
     //when edit button clicked
     $(document).on('click', '.edit', function(){ 
         mdl_clear();
-        mdl_title.html('Edit price');
+        mdl_title.html('<span class="fa fa-edit"></span> <span class="col-form-label">&nbsp;Edit price</span>');
         mdl_submit.html('Update');
 
         var table = $('#item_price').DataTable();
@@ -114,9 +119,11 @@ $(document).ready(function(){
                 if(price == t_price){
                     alert("Please change price");
                 }
-                else{
-                        e.preventDefault();         
-                    $. ajax({
+                else
+                {
+                    e.preventDefault();         
+                
+                    $.ajax({
                         url:baseURL + "ItemService_Controller/updateItem_service", 
                         method:"POST", 
                         data : {id:id,
@@ -125,9 +132,9 @@ $(document).ready(function(){
                                     $('.modal').modal('toggle');
                                     table.ajax.reload();
                         } 
-                    })
-                } 
-            })
+                    });
+                }
+            });
         }  
     });  
 
@@ -152,5 +159,16 @@ $(document).ready(function(){
             }
         });
     });    
+
+    $(document).on('click', '.btn_items', function(){
+        $.post(baseURL + 'Items_Controller')
+        .done(function(data){
+
+            mdl_title.html('<span class="fa fa-columns"></span> <span class="col-form-label">&nbsp;Items List</span>');
+            mdl_submit.hide();
+
+            mdl_body.html(data);
+        });
+    });
 });
 </script>
