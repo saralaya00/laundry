@@ -65,9 +65,7 @@
                 $sub_array[] = $value['service_name'];
                 $sub_array[] = $value['price'];
                 $sub_array[]='<input type="text" name="check2" size="3">';
-                $sub_array[]='<input type="text" name="check3" size="3">';  
-                $sub_array[] = '<button type="button" name="edit" data-id="'.$value['id'].'" class="btn btn-success btn-xs edit" data-toggle="modal" data-target="#modal-template" width="150%">Edit</button>';  
-                $sub_array[] = '<button type="button" name="delete" data-id="'. $value['id'].'" class="btn btn-warning btn-xs delete" width="150%">Delete</button>';  
+                $sub_array[]='<input type="text" name="check3" size="3" readonly>';  
                 $sub_array[]='<input type="checkbox" name="check">';
 
                 $data[] = $sub_array;  
