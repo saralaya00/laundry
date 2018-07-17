@@ -74,7 +74,6 @@ class Item_service_model extends CI_Model
         else
         {
             $this->db->from('items');
-           // $this->db->where_not_in('item_id', $item_id);
             $query = $this->db->get()->result_array();
             return $query;
         }
@@ -84,32 +83,12 @@ class Item_service_model extends CI_Model
     public function updateItem_service($input = array())
     {
         $id = $input['id'];
-
         $price = $input['price'];
-        echo $price;
 
         $this->db->set('price',$price);
         $this->db->where('id',$id);  
-        $query2 = $this->db->update("item_service");
-        
+        $query2 = $this->db->update("item_service");   
     }
-
-    // public function getUpdateItemId($item_name)
-    // {
-    //     $this->db->select('item_id');
-    //     $this->db->from('items');
-    //     $this->db->where('item_name',$item_name,NULL, FALSE);
-    //     return $this->db->get()->result_array();
-    // }
-
-    // public function getUpdateServiceId($service_name)
-    // {
-       
-    //     $this->db->select('service_id');
-    //     $this->db->from('services');
-    //     $this->db->where('service_name',$service_name);
-    //     return $this->db->get()->result_array();
-    // }
 
     public function deleteItem_service($id)
     {
@@ -117,12 +96,23 @@ class Item_service_model extends CI_Model
         $this->db->delete('item_service'); 
     }
 
-    public function addItemService($data)
+    public function addItemService($data = array())
     {
-        // item_id = 
+        $service_id = $data['service_id'];
+        $price = $data['price'];
+
         $this->db->select('item_id');
-        $this->db->from('item_service');
-        $this->db->where('item_id');
+        $this->db->from('items');
+        $this->db->where('item_name',$data['item_name']);
+        $item_id = $this->db->get()->result_array();
+
+        $item_id = $item_id[0]['item_id'];
+        $record = array('service_id' => $service_id,
+                        'item_id' => $item_id,
+                        'price' => $price);
+                        
+        $result = $this->db->insert('item_service', $record); 
+        
     }
 }
 ?>

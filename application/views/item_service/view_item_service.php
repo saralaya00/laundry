@@ -7,9 +7,14 @@
                 <?php echo form_dropdown('services', set_value('services'), '', 'class="form-control" id="serviceDropdown"'); ?>
             </div>
 
-            <div class="col-md-4">
-                <button class="btn_items btn btn-secondary" data-toggle="modal" data-target="#modal-template"> Items List</button>
+            <div class="col-md-8">
+                <button class="btn_items btn btn-secondary" data-toggle="modal" data-target="#modal-template"><span data-toggle="tooltip" data-placement="bottom" title="Edit or delete services">List of service</span></button>
+                <button class="btn_items btn btn-secondary" data-toggle="modal" data-target="#modal-template"><span data-toggle="tooltip" data-placement="bottom" title="Edit or delete items">List of items</button>
+
             </div>
+            <!-- <div class="col-md-4">
+            </div> -->
+            
         </div>
         
         <br><br>
@@ -28,7 +33,17 @@
 
 <script type="text/javascript">
 $(document).ready(function(){  
+    
+    let baseURL = $('body').data('baseurl');
+    let modal = $('.modal');
+    let mdl_head = $('.modal-header');
+    let mdl_title = $('.modal-title');
+    let mdl_body = $('.modal-body');
+    
+    let mdl_foot = $('.modal-footer');
+    let mdl_submit = mdl_foot.find('#btn-submit');
     $('#item_price').DataTable();
+
     $('[name="services"]').change(function(){
         var id = $('#serviceDropdown').children(":selected").attr("value");
         //Preemptive clear for a change in selected Service.
@@ -66,10 +81,11 @@ $(document).ready(function(){
         }); 
     }); 
 
-    $(document).on('click', '.add', function(){
+    $(document).on('click', '.add', function(e){
         var table = $('#item_price').DataTable();
         var data = table.row( $(this).parents('tr') ).data();
-        var price = data[2];
+        // var price = ;
+        console.log(price);
         var item_name = data[1];
         service_id = $('#serviceDropdown').children(":selected").attr("value");
         let id = $(this).data("id");
@@ -79,6 +95,7 @@ $(document).ready(function(){
             method:"POST", 
             data : {service_id:service_id,
                     id:id,
+                    item_name : item_name,
                     price:price},
             success : function(){
                         table.ajax.reload();
@@ -122,7 +139,6 @@ $(document).ready(function(){
                 else
                 {
                     e.preventDefault();         
-                
                     $.ajax({
                         url:baseURL + "ItemService_Controller/updateItem_service", 
                         method:"POST", 

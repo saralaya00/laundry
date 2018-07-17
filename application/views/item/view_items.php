@@ -3,8 +3,9 @@
         <table id="table_items_list" class="table table-striped table-bordered" width="100%">
             <thead>
                 <tr>
-                    <th width="50%">Item ID</th>
-                    <th width="50%">Item Name</th>
+                    <th width="33%">Item ID</th>
+                    <th width="33%">Item Name</th>
+                    <th width="34%">Action</th>
                 </tr>
             </thead>
         </table>

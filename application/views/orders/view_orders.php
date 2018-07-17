@@ -1,28 +1,27 @@
-
-    <div class="body_id">
-        <div class="container-fluid">  
-            <h3 align="center"><?php echo $title; ?></h3><br />  
-            <div class="table-responsive">  
-                <br /><br />  
-                    <table id="order_data" class="table table-bordered table-striped">  
-                        <thead>  
-                            <tr>  
-                                <th width="10%">Order Id</th>  
-                                <th width="25%" id="full_name">Full name</th>  
-                                <th width="25%">Order Date</th>  
-                                <th width="25%">Delivery Date</th>  
-                                <th width="25%">status</th>  
-                                <th width="25%">View Order</th>  
-                                <th width="25%">Assign Order</th>     
-                            </tr>  
-                        </thead>  
-                    </table>  
-            </div>  
+<!-- display all orders -->
+<div class="body_id">
+    <div class="container-fluid">  
+        <h3 align="center"><?php echo $title; ?></h3><br />  
+        <div class="table-responsive">  
+            <br /><br />  
+            <table id="order_data" class="table table-bordered table-striped">  
+                <thead>  
+                    <tr>  
+                        <th width="10%">Order Id</th>  
+                        <th width="25%" id="full_name">Full name</th>  
+                        <th width="25%">Order Date</th>  
+                        <th width="25%">Delivery Date</th>  
+                        <th width="25%">status</th>  
+                        <th width="25%">Action</th>  
+                        <th width="25%">Action</th>     
+                    </tr>  
+                </thead>  
+            </table>  
         </div>  
-    </div>
-    <script type="text/javascript">
-
-    //base URL
+    </div>  
+</div>
+<script type="text/javascript">
+//base URL
 let baseURL = $('body').data('baseurl');
 
 //Modal variables
@@ -71,40 +70,41 @@ $(document).on('click', '.viewOrder', function(){
     var delivery_date = data[3];
 
     $. ajax({
-        url:baseURL + "view_orders_controller/viewOrderDetailsPage",
+        url:baseURL + "view_orders_controller/viewOrderDetailsPage",//load view order deatils page
         method:"POST", 
-        data : {order_id : order_id,
+        data :{
+                order_id : order_id,
                 full_name : full_name,
                 order_date : order_date,
-                delivery_date : delivery_date},
+                delivery_date : delivery_date
+              },
         dataType :"json",
         success : function(data){ 
                     mdl_clear();
                     mdl_title.html('<span class="fa fa-columns"></span> <span class="col-form-label">&nbsp;Order Details</span>');
                     mdl_submit.hide();
-
                     mdl_body.html(data);
-                   
-
-                   
                 },
         error: function(data){
         }
     })
 })
 
-
 //Assign Order button in View orders clicked
 $(document).on('click', '.assign', function(){ 
+
     mdl_clear();
     mdl_title.html('<span class="fa fa-user-plus"></span> <span class="col-form-label">&nbsp;Assign Order</span>');
     mdl_submit.html('Assign Order');
 
     let order_id = $(this).data("id");
+
+    //load assign_order modal
     $.post(baseURL + 'View_orders_controller/md_assignOrder', function (data){
         mdl_body.html(data);
         getEmployee(order_id);
     });   
+
     //fill dropdown of assignOrder modal
     function getEmployee(order_id){
         $("#order_id").text(order_id);
@@ -131,6 +131,7 @@ $(document).on('click', '.assign', function(){
             }   
         })  
     } 
+
     //Assign Employee button in assign_order modal clicked
     function assign_order(id){
         mdl_submit.click(function(e){  
@@ -231,5 +232,5 @@ $(document).on('click', '.changeEmployee', function(){
         })
     }
 });
-    </script>
+</script>
  

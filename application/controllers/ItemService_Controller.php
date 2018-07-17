@@ -3,15 +3,19 @@ class ItemService_Controller extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-            $this->load->model("Item_service_model");  
+        //load item_service_model
+        $this->load->model("Item_service_model");  
     }
 
     function index()
     {  
+        //title of page
         $data["title"] = "Items and Services Configuration";  
 
+        //retrieve service to fill dropdown
         $_POST['services'] = $this->getServices();
 
+        //load view_item_service page
         $this->load->view('common/footbar.php');
         $this->load->view('item_service/view_item_service.php',$data);
         $this->load->view('common/end_wrapper.php');
@@ -31,22 +35,30 @@ class ItemService_Controller extends CI_Controller {
         return $data;
     }
 
+    //get item and service details which is alredy added in item_service table for selected service
     public function getItemServiceDetails()
     {
         $service_id = $this->input->post('id');
+
+        //get item and service details which is alredy added in item_service table for selected service
+        $item_service= $this->Item_service_model->getItemServiceDetails($service_id);  
+       
+        //get item details which is not added to item_service table
         $items = $this->Item_service_model->getItems();
 
-        $item_service= $this->Item_service_model->getItemServiceDetails($service_id);  
-        foreach ($items as $key=>$value) {
+        //change items to associative array
+        foreach ($items as $key=>$value)
+        {
             $items[$key] = array("item_id" => $value['item_id'],
-                        "item_name" => $value['item_name'],
-                        "price" => $value['item_name'] );
+                                "item_name" => $value['item_name'],
+                                "price" => ' '
+                            );
         } 
         
         $data_items = array();
         $i = 0;
 
-        if(count($item_service)>0 && count($items)>0)
+        if(count($item_service)>0 && count($items)>0)//items already there in item_service table for selected service
         {
             foreach ($item_service as $key=>$value) {
                 $data_items[$i] = array("id" => $value['id'], //id from item_service table
@@ -58,16 +70,19 @@ class ItemService_Controller extends CI_Controller {
             foreach ($items as $key=>$value) {
                 $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
                            "item_name" => $value['item_name'],
+                            //create text box to enter price
                            "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price">'
                         );
                 $i++;
             }  
         }
-        else{
+        else//add only items from items table
+        {
             foreach ($items as $key=>$value) {
                 $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
                            "item_name" => $value['item_name'],
-                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" id = "price">'
+                           //create text box to enter price
+                           "price" => '<input class="form-control" type="text" name="price-'. $value['item_id'].'" data-price= >'
                         );
                 $i++;
             } 
@@ -81,10 +96,10 @@ class ItemService_Controller extends CI_Controller {
             $sub_array = array();
             $sub_array[]= $j;
             $sub_array[] = $value['item_name'];
-
             $sub_array[] = $value['price'];  
 
             if(intval($value['price']) && $value['price'] != 0){
+                //button for edit and delete for items which is already added
                 $sub_array[] = 
                 '<div class="text-center">
                     <button type="button" name="edit" data-id="'.$value['id'].'" class="btn btn-secondary btn-sm edit" data-toggle="modal" data-target="#modal-template">
@@ -97,6 +112,7 @@ class ItemService_Controller extends CI_Controller {
             }
             else
             {
+                //button for adding for item service details
                 $sub_array[] = 
                 '<div class="text-center">
                     <button type="button" name="add" data-id="'. $value['id'].'" class="btn btn-success btn-sm add" width="180%">
@@ -104,7 +120,6 @@ class ItemService_Controller extends CI_Controller {
                     </button>
                 </div>';
             }
-           
             $data[] = $sub_array;  
         } 
 
@@ -114,16 +129,17 @@ class ItemService_Controller extends CI_Controller {
             "recordsFiltered"   =>    $j,  
             "data"              =>    $data  
         );  
-
         echo json_encode($output);  
     }
 
+    //to display edit modal to edit price
     public function md_edit()
     {
         return $this->load->view('item_service/md_editDetails.php');
 
     }
 
+    //to update price when update button of edit modal is clicked
     public function updateItem_service()
     {
         $input = array('id' => $this->input->post('id'),
@@ -137,6 +153,7 @@ class ItemService_Controller extends CI_Controller {
         }
     }
 
+    //to delete item and service details
     public function deleteItem_service()
     {
         $id = $this->input->post('id');
@@ -147,10 +164,12 @@ class ItemService_Controller extends CI_Controller {
         }
     }
 
+    //to add item and service details to item service table
     public function addItemService(){
         $data = array('service_id' => $this->input->post('service_id'),
                     'id' => $this->input->post('id'),
-                    'item_name' => $this->input->post('item_name')
+                    'item_name' => $this->input->post('item_name'),
+                    'price' => $this->input->post('item_name')
                 );
         $result = $this->Item_service_model->addItemService($data);
         if($result == true)

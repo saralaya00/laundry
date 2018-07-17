@@ -21,7 +21,15 @@ class Items_Controller extends CI_Controller
         foreach ($itemsList->result() as $row) {
             $data[] = array(
                 $row->item_id,
-                $row->item_name
+                $row->item_name,
+                '<div class="text-center">
+                <button class="btn_edit btn btn-secondary btn-sm text-center" data-employee_id="'.$row->item_id.'" data-toggle="modal" data-target="#modal-template">
+                    <span class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></span>
+                </button>
+                <button class="btn_delete btn btn-danger btn-sm text-center" data-employee_id="'.$row->item_id.'" data-toggle="modal" data-target="#modal-template">
+                    <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="Delete"></span>
+                </button>
+            </div>'
             );
         }
 

@@ -31,7 +31,7 @@ class View_orders_model extends CI_Model
             }  
       }  
 
-      function make_orders_datatables()
+      function fetchOrders()
       {  
             $this->make_query();  
             if($_POST["length"] != -1)  
