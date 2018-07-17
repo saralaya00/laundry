@@ -112,8 +112,8 @@ class View_orders_model extends CI_Model
       public function getItemServiceId($order_id)
       {
             $this->db->distinct();
-             $this->db->select('item_id,service_id,od.id');
-             $this->db->from('item_service as is,order_details as o');
+             $this->db->select('is.item_id,is.service_id,od.id');
+             $this->db->from('item_service as is');
              $this->db->join('order_details as od', 'od.id=is.id');
              $this->db->where('od.order_id',$order_id);
              $query = $this->db->get();
