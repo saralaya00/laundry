@@ -55,6 +55,11 @@
             echo json_encode($output);
         }
 
+        public function get_emp_order_count($empID)
+        {
+            echo $this->Employee_Model->get_emp_order_count($empID);
+        }
+
         //Baad Naming convention
         public function view_delete_employee($empID)
         {

@@ -111,18 +111,37 @@
             let employee_id = $(this).data('employee_id');
             let user_id = $(this).data('user_id');
 
-            $.post(baseURL + 'Employee_Controller/view_delete_employee/' + employee_id, function(data){
-                md_body.html(data);
-            });
+            let postRequest = $.post(baseURL + 'Employee_Controller/get_emp_order_count/' + employee_id);
             
-            md_submit.on('click', function(e){
-                e.preventDefault();
+            postRequest.done(function(data){
+                let count = data;
+                // console.log(count);
+                if (count == 0)
+                {
+                    $.post(baseURL + 'Employee_Controller/view_delete_employee/' + employee_id, function(data){
+                        md_body.html(data);
+                    });
+            
+                    md_submit.on('click', function(e){
+                        e.preventDefault();
 
-                let postRequest = $.post(baseURL + 'Employee_Controller/delete_employee/' + user_id);
-                
-                postRequest.done(function(data){
-                    location.reload();
-                });
+                        let postRequest = $.post(baseURL + 'Employee_Controller/delete_employee/' + user_id);
+                        
+                        postRequest.done(function(data){
+                            location.reload();
+                        });
+                    });
+                }
+
+                else
+                {
+                    $.post(baseURL + 'Employee_Controller/view_delete_employee/' + employee_id, function(data){
+                        md_body.html(data);
+                        md_body.find('.label_message').html('Cannot delete an employee who was assigned to an order');
+                    });
+
+                    md_submit.hide();
+                }
             });
         });
     });

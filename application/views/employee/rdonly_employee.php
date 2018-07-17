@@ -29,7 +29,7 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-md-12 col-form-label text-primary text-center"> <?php echo set_value('message'); ?> </label>
+        <label class="label_message col-md-12 col-form-label text-primary text-center"> <?php echo set_value('message'); ?> </label>
     </div>
     
 </div>

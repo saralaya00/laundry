@@ -42,12 +42,28 @@
             return $this->db->get_where('employee', array('employee_id' => $empID))->result();
         }
 
+        public function get_emp_order_count($empID)
+        {
+            //Sends the Count of employee from order tracking if ever assigned to an order
+            
+            //return $this->db->get_where('order_tracking', array('employee_id' => $empID))->result();
+            $this->db->where('employee_id', $empID);
+            $this->db->from('order_tracking');
+            return $this->db->count_all_results();
+        }
+
         public function delete_employee($userID)
         {
             //Single Record Delete
             //Employee Table / User Table
+            
+            //Employee should not be deleted if ever assigned to an order
+            //Employee could be marked unemployed otherwise -> User.role ?
+            
             $this->db->delete('employee', array('user_id' => $userID));
             $this->db->delete('users', array('user_id' => $userID));
         }
+
+
     }
 ?>
