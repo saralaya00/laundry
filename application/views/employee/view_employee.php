@@ -92,6 +92,7 @@
                     {
                         //On Successful Send, and the return
                         md_submit.hide();   
+                        $('#table_emp').DataTable().ajax.reload();
                     }
 
                     else if (returnval == "0")
@@ -128,7 +129,9 @@
                         let postRequest = $.post(baseURL + 'Employee_Controller/delete_employee/' + user_id);
                         
                         postRequest.done(function(data){
-                            location.reload();
+                            // location.reload();
+                            md_submit.hide();
+                            $('#table_emp').DataTable().ajax.reload();
                         });
                     });
                 }

@@ -42,6 +42,18 @@ $(document).ready(function(){
     
     let mdl_foot = $('.modal-footer');
     let mdl_submit = mdl_foot.find('#btn-submit');
+
+    //Clear Function
+    function mdl_clear()
+    {
+        //console.log(' common.js :: md_clear()');
+        mdl_title.html('');
+        mdl_body.empty();
+        mdl_submit.show();
+        mdl_submit.off('click');
+        mdl_submit.html('Add');
+    };
+
     $('#item_price').DataTable();
 
     $('[name="services"]').change(function(){
@@ -136,19 +148,25 @@ $(document).ready(function(){
         function updateItem_service() 
         {
             mdl_submit.click(function(e){    
-                var price = $('#price').val();
+                let text_box = $('#price');
+                var price_value = $('#price').val();
 
-                if(price == t_price){
-                    alert("Please change price");
+                text_box.removeClass('is-valid');
+                text_box.removeClass('is-invalid');
+
+                if(!$.isNumeric(price_value) || (price_value < 1 || price_value > 9999)){
+                    text_box.addClass('is-invalid');
                 }
                 else
                 {
-                    e.preventDefault();         
+                    e.preventDefault();
+                    text_box.addClass('is-valid');
+                             
                     $.ajax({
                         url:baseURL + "ItemService_Controller/updateItem_service", 
                         method:"POST", 
                         data : {id:id,
-                                price:price},
+                                price:price_value},
                         success : function(){
                                     $('.modal').modal('toggle');
                                     table.ajax.reload();
@@ -210,15 +228,16 @@ $(document).ready(function(){
         let text_box = $('input[name="price-' + item_id + '"]');
         let price_value = text_box.val();
 
-        if (!$.isNumeric(price_value) || price_value > 9999)
+        text_box.removeClass('is-valid');
+        text_box.removeClass('is-invalid');
+
+        if (!$.isNumeric(price_value) || (price_value < 1 || price_value > 9999))
         {
-            text_box.removeClass('is-valid');
             text_box.addClass('is-invalid');
         }
         
         else 
         {
-            text_box.removeClass('is-invalid');
             text_box.addClass('is-valid');
 
             let data = {

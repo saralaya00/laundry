@@ -27,6 +27,8 @@ $(document).ready(function(){
         //Dont add this event in other boilerplate
         //It will auto invoke from here
         setTimeout(md_clear, 300); 
+        // setTimeout("location.reload()",300);
+        // location.reload();
     }); 
 
     //Initailze Plugins
@@ -46,7 +48,6 @@ $(document).ready(function(){
         md_submit.on('click', function(e){
             e.preventDefault();
 
-            console.log('Add');
             let postData = {
                 full_name: md_body.find('input[name="full_name"]').val(),
                 address: md_body.find('textarea[name="address"]').val(),
