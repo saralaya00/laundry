@@ -10,12 +10,14 @@ class Item_service_model extends CI_Model
     public function getItemServiceDetails($service_id)
     {
 
-        $i_id_result = $this->getItemId();
+        $i_id_result = $this->getItemId($service_id);
         $item_id = array();
+
         foreach ($i_id_result->result_array() as $row)
         {
             $item_id[] = $row['item_id'];
         }
+       
         
         if(count($item_id)>0){
 
@@ -25,17 +27,20 @@ class Item_service_model extends CI_Model
             $this->db->where_in('is.item_id',$item_id)->where('is.service_id',$service_id);
             $this->db->from('item_service as is');
             $query = $this->db->get()->result_array();
+
+           
             return $query;
         }
         else{
-            $this->getItems();
+            $this->getItems($service_id);
         }
     }
 
-    function getItemId()
+    function getItemId($service_id)
     {
         $this->db->select('item_id');
         $this->db->from('item_service');
+        $this->db->where('service_id',$service_id);
         $query = $this->db->get();
         return $query;
     }
@@ -54,9 +59,9 @@ class Item_service_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    function getItems()
+    function getItems($service_id)
     {
-        $i_id_result = $this->getItemId();
+        $i_id_result = $this->getItemId($service_id);
         $item_id = array();
 
         foreach ($i_id_result->result_array() as $row)

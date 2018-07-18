@@ -42,9 +42,11 @@ class ItemService_Controller extends CI_Controller {
 
         //get item and service details which is alredy added in item_service table for selected service
         $item_service= $this->Item_service_model->getItemServiceDetails($service_id);  
+
+     
        
         //get item details which is not added to item_service table
-        $items = $this->Item_service_model->getItems();
+        $items = $this->Item_service_model->getItems($service_id);
 
         //change items to associative array
         foreach ($items as $key=>$value)
