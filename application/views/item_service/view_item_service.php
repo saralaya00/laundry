@@ -106,6 +106,7 @@ $(document).ready(function(){
         var item_name = data[1];
         service_id = $('#serviceDropdown').children(":selected").attr("value");
         let id = $(this).data("id");
+        let flag = 1;
         e.preventDefault();         
         $. ajax({
             url:baseURL + "ItemService_Controller/addItemService", 
@@ -113,9 +114,10 @@ $(document).ready(function(){
             data : {service_id:service_id,
                     id:id,
                     item_name : item_name,
-                    price:price},
+                    price:price,
+                    flag : flag},
             success : function(){
-                        table.ajax.reload();
+                       // table.ajax.reload();
             } 
         })
    
@@ -228,6 +230,7 @@ $(document).ready(function(){
         let text_box = $('input[name="price-' + item_id + '"]');
         let price_value = text_box.val();
 
+        let flag = 1;
         text_box.removeClass('is-valid');
         text_box.removeClass('is-invalid');
 
@@ -243,12 +246,13 @@ $(document).ready(function(){
             let data = {
                 item_id: item_id,
                 service_id: service_id,
-                price: price_value
+                price: price_value,
+                flag : flag
             };
 
             $.post(baseURL + 'ItemService_Controller/add_item_service', data)
             .done(function(){
-                $('#item_price').DataTable().ajax.reload();
+               $('#item_price').DataTable().ajax.reload();
             });
         }
     });

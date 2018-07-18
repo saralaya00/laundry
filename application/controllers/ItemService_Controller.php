@@ -215,8 +215,10 @@ class ItemService_Controller extends CI_Controller {
         $data = array('service_id' => $this->input->post('service_id'),
                     'id' => $this->input->post('id'),
                     'item_name' => $this->input->post('item_name'),
-                    'price' => $this->input->post('item_name')
+                    'price' => $this->input->post('item_name'),
+                   
                 );
+       
         $result = $this->Item_service_model->addItemService($data);
         if($result == true)
         {    
@@ -228,11 +230,14 @@ class ItemService_Controller extends CI_Controller {
     public function add_item_service()
     {
         $data = array(
+            
             'item_id' => $this->input->post('item_id'),
             'service_id' => $this->input->post('service_id'),
-            'price' => $this->input->post('price')
+            'price' => $this->input->post('price'),
+            'flag' => $this->input->post('flag')
         );
 
+        print_r($data);
         $result = $this->Item_service_model->add_item_service($data);
         return $result;
     }

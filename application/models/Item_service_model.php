@@ -24,7 +24,7 @@ class Item_service_model extends CI_Model
             $this->db->select('is.id,it.item_name,s.service_name,is.price');
             $this->db->join('items as it','is.item_id=it.item_id');
             $this->db->join('services as s','s.service_id=is.service_id');
-            $this->db->where_in('is.item_id',$item_id)->where('is.service_id',$service_id);
+            $this->db->where_in('is.item_id',$item_id)->where('is.service_id',$service_id)->where('is.flag',1);
             $this->db->from('item_service as is');
             $query = $this->db->get()->result_array();
 
@@ -40,7 +40,7 @@ class Item_service_model extends CI_Model
     {
         $this->db->select('item_id');
         $this->db->from('item_service');
-        $this->db->where('service_id',$service_id);
+        $this->db->where('service_id',$service_id)->where('flag',1);
         $query = $this->db->get();
         return $query;
     }
@@ -97,37 +97,54 @@ class Item_service_model extends CI_Model
 
     public function deleteItem_service($id)
     {
-        $this->db->where('id', $id);
-        $this->db->delete('item_service'); 
+        // $this->db->where('id', $id);
+        // $this->db->delete('item_service'); 
+
+        $this->db->set('flag',0);
+        $this->db->where('id',$id);  
+        $query2 = $this->db->update("item_service");   
     }
 
-    public function addItemService($data = array())
-    {
+    // public function addItemService($data = array())
+    // {
 
         
-        //Not used
+    //     //Not used
 
 
-        $service_id = $data['service_id'];
-        $price = $data['price'];
+    //     $service_id = $data['service_id'];
+    //     $price = $data['price'];
 
-        $this->db->select('item_id');
-        $this->db->from('items');
-        $this->db->where('item_name',$data['item_name']);
-        $item_id = $this->db->get()->result_array();
+    //     $this->db->select('item_id');
+    //     $this->db->from('items');
+    //     $this->db->where('item_name',$data['item_name']);
+    //     $item_id = $this->db->get()->result_array();
 
-        $item_id = $item_id[0]['item_id'];
-        $record = array('service_id' => $service_id,
-                        'item_id' => $item_id,
-                        'price' => $price);
+    //     $item_id = $item_id[0]['item_id'];
+    //     $record = array('service_id' => $service_id,
+    //                     'item_id' => $item_id,
+    //                     'price' => $price,
+    //                     );
                         
-        $result = $this->db->insert('item_service', $record); 
+    //     $result = $this->db->insert('item_service', $record); 
         
-    }
+    // }
 
     public function add_item_service($data)
     {
-        return $this->db->insert('item_service', $data);
+        $this->db->select('item_id');
+        $this->db->from("item_service");
+        $this->db->where('item_id',$data['item_id'])->where('service_id',$data['service_id']);
+        $result = $this->db->get()->result_array();
+
+        if(count($result) > 0){
+            $this->db->set('flag',1);
+            $this->db->where('item_id',$data['item_id'])->where('service_id',$data['service_id']);
+            $query2 = $this->db->update("item_service");
+        }
+        else{
+            return $this->db->insert('item_service', $data);
+        }
     }
 }
 ?>
