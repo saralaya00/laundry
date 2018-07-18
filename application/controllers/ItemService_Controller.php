@@ -58,9 +58,54 @@ class ItemService_Controller extends CI_Controller {
         } 
         
         $data_items = array();
+        $data= array();
+
         $i = 0;
 
-        if(count($item_service)>0 && count($items)>0)//items already there in item_service table for selected service
+        // Has a broken edge case
+        // if item_Service.count > 0 and remaining_items.count = 0  -> false 
+        // else block assumes that there are items
+        // but remaing_items == 0.print(), hence empty
+
+        // Tried || did not work. :/
+
+        // if(count($item_service)>0 && count($items)>0)//items already there in item_service table for selected service
+        // {
+        //     foreach ($item_service as $key=>$value) {
+        //         $data_items[$i] = array("id" => $value['id'], //id from item_service table
+        //                    "item_name" => $value['item_name'],
+        //                    "price" => $value['price'] 
+        //                 );
+        //         $i++;
+        //     } 
+        //     foreach ($items as $key=>$value) {
+        //         $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
+        //                    "item_name" => $value['item_name'],
+        //                     //create text box to enter price
+        //                     "price" => '<input class="form-control" type="text" maxlength="4" placeholder="Enter Price" name="price-'. $value['item_id'].'">'
+        //                 );
+        //         $i++;
+        //     }  
+        // }
+
+        // else//add only items from items table
+        // {
+        //     foreach ($items as $key=>$value) {
+        //         $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
+        //                    "item_name" => $value['item_name'],
+        //                    //create text box to enter price
+        //                    "price" => '<input class="form-control" type="text" maxlength="4" placeholder="Enter Price" name="price-'. $value['item_id'].'">'
+        //                 );
+        //         $i++;
+        //     } 
+        // }
+     
+
+        //Fix
+        //Requires testing
+
+        //Item_Services 
+        if(count($item_service)>0)//items already there in item_service table for selected service
         {
             foreach ($item_service as $key=>$value) {
                 $data_items[$i] = array("id" => $value['id'], //id from item_service table
@@ -69,6 +114,11 @@ class ItemService_Controller extends CI_Controller {
                         );
                 $i++;
             } 
+        }
+        
+        //Only Items or Remiainig Items
+        if (count($items)>0)
+        {
             foreach ($items as $key=>$value) {
                 $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
                            "item_name" => $value['item_name'],
@@ -78,20 +128,9 @@ class ItemService_Controller extends CI_Controller {
                 $i++;
             }  
         }
-        else//add only items from items table
-        {
-            foreach ($items as $key=>$value) {
-                $data_items[$i] = array("id" => $value['item_id'],//item_id from items table
-                           "item_name" => $value['item_name'],
-                           //create text box to enter price
-                           "price" => '<input class="form-control" type="text" maxlength="4" placeholder="Enter Price" name="price-'. $value['item_id'].'">'
-                        );
-                $i++;
-            } 
-        }
-     
-       
+
         $j=0;
+        
         foreach($data_items as $key => $value)  
         {  
             $j++;
