@@ -53,10 +53,13 @@
  }*/
  public function getItemServiceDetails()
     {
-    
-        $item_service= $this->Customer_model->getItemServiceDetails();  
+        $service_id =  $this->input->post('service_id');
+
+        $item_service= $this->Customer_model->getItemServiceDetails($service_id);  
+
        // print_r($item_service);
         $i = 0;
+        $data = array();
         foreach($item_service as $key => $value)  
             {  
                 $sub_array = array();

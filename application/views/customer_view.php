@@ -96,7 +96,7 @@
                 {
            ?>
                 <div>
-                  <button type="button" class="btn btn-success" id="<?php echo $row->service_id; ?>"style=" padding:10%; margin:12%; width:50%;" ><?php echo $row->service_name; ?></button><br/>
+                  <button type="button" class="btn btn-success displayitems" data-id="<?php echo $row->service_id; ?>" style=" padding:10%; margin:12%; width:50%;" ><?php echo $row->service_name; ?></button><br/>
                   </div>
                   <?php
                 }
@@ -180,27 +180,12 @@
             
  
 <script type="text/javascript" language="javascript">
-$(document).on('click', '.displayitems', function(){
+$(document).on('click', '.displayitems', function(event){
  event.preventDefault();
     //fill label text
-    var order_id = $(this).data("id");
-    var table = $('#order_details').DataTable();
-    var data = table.row( $(this).parents('tr') ).data();
-    var full_name = data[1];
-    var order_date = data[2];
-    var delivery_date = data[3];
-    $. ajax({
-        url:baseURL + "view_orders_controller/viewOrderDetailsPage",
-        method:"POST", 
-        data : {order_id : order_id,
-                full_name : full_name,
-                order_date : order_date,
-                delivery_date : delivery_date},
-        dataType :"json",
-        success : function(result){ 
-                    $(".body_id").html(result);
-                    var order_id = $('#order_id').text();
-
+    var service_id = $(this).data("id");
+    var item_service = $('#order_details').DataTable();
+    item_service.destroy();
 
     var dataTable = $('#order_details').DataTable({
        "processing":true, 
@@ -209,6 +194,7 @@ $(document).on('click', '.displayitems', function(){
        "ajax":{
            url:"<?php echo base_url().'customer_controller/getItemServiceDetails';?>",
            type:"POST",
+           data : {service_id : service_id}
        },
        "columnDefs":[
            {
