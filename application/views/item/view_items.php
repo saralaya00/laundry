@@ -5,7 +5,7 @@
                 <tr>
                     <th width="33%">Item ID</th>
                     <th width="33%">Item Name</th>
-                    <th width="34%">Action</th>
+                    <!-- <th width="34%">Action</th> -->
                 </tr>
             </thead>
         </table>

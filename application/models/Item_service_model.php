@@ -97,38 +97,10 @@ class Item_service_model extends CI_Model
 
     public function deleteItem_service($id)
     {
-        // $this->db->where('id', $id);
-        // $this->db->delete('item_service'); 
-
         $this->db->set('flag',0);
         $this->db->where('id',$id);  
         $query2 = $this->db->update("item_service");   
     }
-
-    // public function addItemService($data = array())
-    // {
-
-        
-    //     //Not used
-
-
-    //     $service_id = $data['service_id'];
-    //     $price = $data['price'];
-
-    //     $this->db->select('item_id');
-    //     $this->db->from('items');
-    //     $this->db->where('item_name',$data['item_name']);
-    //     $item_id = $this->db->get()->result_array();
-
-    //     $item_id = $item_id[0]['item_id'];
-    //     $record = array('service_id' => $service_id,
-    //                     'item_id' => $item_id,
-    //                     'price' => $price,
-    //                     );
-                        
-    //     $result = $this->db->insert('item_service', $record); 
-        
-    // }
 
     public function add_item_service($data)
     {

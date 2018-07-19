@@ -59,10 +59,11 @@ $(document).ready(function(){
 });
 
 //when view order button clicked
-$(document).on('click', '.viewOrder', function(){
+$(document).on('click', '.viewOrder', function(event){
     event.preventDefault();
     //fill label text
     var order_id = $(this).data("id");
+    
     var table = $('#order_data').DataTable();
     var data = table.row( $(this).parents('tr') ).data();
     var full_name = data[1];
