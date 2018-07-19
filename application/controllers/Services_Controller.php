@@ -1,16 +1,27 @@
 <?php 
 class Services_Controller extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        //load item_service_model
+        $this->load->model("Service_model");  
+    }
+
     function index()
     {
         $data['title'] = 'View Items';
         $this->load->view('service/view_services', $data);
     }
 
+    public function md_edit()
+    {
+        return $this->load->view('service/md_edit');
+
+    }
     function fetch_services()
     {
-        $this->load->model('Service_model');
-
+      
         $draw = intval($this->input->get('draw'));
         $start = intval($this->input->get('start'));
         $length = intval($this->input->get('length'));
@@ -22,14 +33,11 @@ class Services_Controller extends CI_Controller
             $data[] = array(
                 $row->service_id,
                 $row->service_name,
-                '<div class="text-center">
-                    <button class="btn_edit btn btn-secondary btn-sm text-center" data-employee_id="'.$row->service_id.'" data-toggle="modal" data-target="#modal-template">
-                        <span class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></span>
-                    </button>
-                    <button class="btn_delete btn btn-danger btn-sm text-center" data-employee_id="'.$row->service_id.'" data-toggle="modal" data-target="#modal-template">
-                        <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="Delete"></span>
-                    </button>
-                </div>'
+                // '<div class="text-center">
+                //     <button class="btn_delete btn btn-danger btn-sm text-center" data-service_id="'.$row->service_id.'" data-target="#modal-template">
+                //         <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="Delete"></span>
+                //     </button>
+                // </div>'
             );
         }
 
@@ -41,5 +49,16 @@ class Services_Controller extends CI_Controller
         );
         echo json_encode($serviceDT);
     }
+
+    // public function delete_service(){
+    //     $service_id =  $this->input->post('service_id');
+              
+    //     $result = $this->Service_model->delete_service($service_id);
+
+    //     if($result == true)
+    //     {    
+    //     echo json_encode("Deleted");
+    //     }
+    // }
 }
 ?>

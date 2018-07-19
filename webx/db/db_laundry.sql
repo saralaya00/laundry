@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2018 at 09:36 AM
+-- Generation Time: Jul 19, 2018 at 11:02 AM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -84,7 +84,6 @@ INSERT INTO `employee` (`employee_id`, `user_id`, `full_name`, `address`, `email
 CREATE TABLE IF NOT EXISTS `items` (
   `item_id` int(10) NOT NULL AUTO_INCREMENT,
   `item_name` varchar(30) NOT NULL,
-  `flag` tinyint(1) NOT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
@@ -92,15 +91,15 @@ CREATE TABLE IF NOT EXISTS `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `flag`) VALUES
-(1, 'SILK SAREE', 0),
-(2, 'FANCY SAREE', 0),
-(3, 'BLANKET', 0),
-(4, 'JEANS', 0),
-(5, 'CURTAINS', 0),
-(6, 'PANT', 0),
-(7, 't-shirt', 0),
-(8, 'Shirt', 0);
+INSERT INTO `items` (`item_id`, `item_name`) VALUES
+(1, 'SILK SAREE'),
+(2, 'FANCY SAREE'),
+(3, 'BLANKET'),
+(4, 'JEANS'),
+(5, 'CURTAINS'),
+(6, 'PANT'),
+(7, 't-shirt'),
+(8, 'Shirt');
 
 -- --------------------------------------------------------
 
@@ -117,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `item_service` (
   PRIMARY KEY (`id`),
   KEY `FK_item_service_item_id` (`item_id`) USING BTREE,
   KEY `FK_item_service_service_id` (`service_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `item_service`
@@ -125,12 +124,13 @@ CREATE TABLE IF NOT EXISTS `item_service` (
 
 INSERT INTO `item_service` (`id`, `item_id`, `service_id`, `price`, `flag`) VALUES
 (35, 1, 1, 10, 0),
-(36, 1, 5, 50, 1),
-(37, 1, 3, 10, 1),
+(37, 1, 3, 10, 0),
 (38, 1, 2, 20, 1),
 (39, 2, 2, 30, 1),
 (40, 3, 2, 50, 1),
-(41, 4, 2, 40, 1);
+(41, 4, 2, 40, 1),
+(42, 1, 4, 50, 1),
+(43, 2, 3, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -221,21 +221,18 @@ CREATE TABLE IF NOT EXISTS `services` (
   `service_id` int(10) NOT NULL AUTO_INCREMENT,
   `service_name` varchar(30) NOT NULL,
   `description` text,
-  `flag` tinyint(1) NOT NULL,
   PRIMARY KEY (`service_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `services`
 --
 
-INSERT INTO `services` (`service_id`, `service_name`, `description`, `flag`) VALUES
-(1, 'Dyeing', 'its colouring of the cloths.', 1),
-(2, 'Dry clean', 'washing the cloths adding chemical', 1),
-(3, 'Iron', 'ironing of cloths.', 1),
-(4, 'wash', 'machine wash/ hand wash of cloths.', 1),
-(5, 'Bleaching', '..', 1),
-(7, 'Garning', '/.,', 1);
+INSERT INTO `services` (`service_id`, `service_name`, `description`) VALUES
+(1, 'Dyeing', 'its colouring of the cloths.'),
+(2, 'Dry clean', 'washing the cloths adding chemical'),
+(3, 'Iron', 'ironing of cloths.'),
+(4, 'wash', 'machine wash/ hand wash of cloths.');
 
 -- --------------------------------------------------------
 

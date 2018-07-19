@@ -27,7 +27,13 @@
                 <th width="5%">Actions</th>   
             </tr>  
             </thead>  
-        </table>  
+        </table>
+        
+        <div class="row">
+            <label class="text-danger">
+                * Service with no Items, will not be shown to the customer
+            </label>
+        </div>
     </div>  
 </div>
 
@@ -92,36 +98,6 @@ $(document).ready(function(){
             ], 
         }); 
     }); 
-
-    $(document).on('click', '.add', function(e){
-
-
-        //Not used
-
-        
-        var table = $('#item_price').DataTable();
-        var data = table.row( $(this).parents('tr') ).data();
-        // var price = ;
-        console.log(price);
-        var item_name = data[1];
-        service_id = $('#serviceDropdown').children(":selected").attr("value");
-        let id = $(this).data("id");
-        let flag = 1;
-        e.preventDefault();         
-        $. ajax({
-            url:baseURL + "ItemService_Controller/addItemService", 
-            method:"POST", 
-            data : {service_id:service_id,
-                    id:id,
-                    item_name : item_name,
-                    price:price,
-                    flag : flag},
-            success : function(){
-                       // table.ajax.reload();
-            } 
-        })
-   
-    });
     
     //when edit button clicked
     $(document).on('click', '.edit', function(){ 
@@ -182,6 +158,7 @@ $(document).ready(function(){
     //when delete button clicked
     $(document).on('click', '.delete', function(){
         let id = $(this).data("id");
+        
         var table = $('#item_price').DataTable();
         var data = table.row( $(this).parents('tr') ).data();
         var t_item_name = data[1];

@@ -59,7 +59,7 @@ class View_orders_model extends CI_Model
       public function getEmployeeRows()
       {
             $query=$this->db->get('employee');  
-            return $query->result();
+            return $query->result_array();
       }
 
       public function assign_order()
