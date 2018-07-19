@@ -11,4 +11,7 @@
             <select id="employeeDropdown" class="form-control"></select>  
         </div>
     </div>
+    <div class="form-group row text-primary text-center">
+        <label class="status" id="status"></label>
+    </div>
 </div>

@@ -84,10 +84,10 @@ class View_orders_controller extends CI_Controller {
             $i=0;
             $this->load->model("view_orders_model");  
             $data = $this->view_orders_model->getEmployeeRows();  
-            print_r($data);
+          
             foreach($data as $row)  
             {  
-                 $output[$i] = $row->employee_id;  
+                 $output[$i] = $row;  
                  $i++;
             } 
           

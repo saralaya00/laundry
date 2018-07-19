@@ -56,7 +56,8 @@ $(document).ready(function(){
             },  
         ],  
     });  
-});
+    let table = $('#order_data').DataTable();
+
 
 //when view order button clicked
 $(document).on('click', '.viewOrder', function(event){
@@ -148,8 +149,10 @@ $(document).on('click', '.assign', function(){
                 cache: "false",
                 success:function(data)  
                 {  
-                    alert("Order assigned successfuly");
-                    location.reload();
+                    $('#status').text('Order assigned successfully');
+                           
+                            table.ajax.reload();
+                            // $('.modal').modal('toggle');
                 }   
             });  
         });  
@@ -217,6 +220,7 @@ $(document).on('click', '.changeEmployee', function(){
     //Change Employee button in change Employee Modal clicked
     function updateEmployeeID(employee_id,order_id) 
     {
+
         mdl_submit.click(function(e){    
             e.preventDefault();         
             $. ajax({
@@ -225,13 +229,15 @@ $(document).on('click', '.changeEmployee', function(){
                 data : {employee_id:employee_id,
                         order_id:order_id},
                 success : function(){
-                            alert("Employee changed successfully");
-                            $('#assignOrderModal').modal('hide');  
-                            location.reload();
+                            $('#status').text('Employee changed successfully');
+                           
+                            table.ajax.reload();
+                            // $('.modal').modal('toggle');
                 } 
             })
         })
     }
+});
 });
 </script>
  

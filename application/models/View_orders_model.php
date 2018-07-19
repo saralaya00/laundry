@@ -98,9 +98,10 @@ class View_orders_model extends CI_Model
             //Sends Emp name and Contact no
             //If errors use the above and make required changes in view_orders_controller
             $emp_id = $this->getEmployeeID($order_id);
+           
             $this->db->select('full_name,contact_no'); 
             $this->db->from('employee');   
-            $this->db->where('employee_id', $emp_id);
+            $this->db->where('employee_id', $emp_id[0]['employee_id']);
             $empDetails = $this->db->get()->row();
             return array('full_name' => $empDetails->full_name, 'contact_no' => $empDetails->contact_no);
       }
@@ -110,15 +111,27 @@ class View_orders_model extends CI_Model
             $this->db->select('employee_id'); 
             $this->db->from('order_tracking');   
             $this->db->where('order_id', $order_id);
-            return $this->db->get()->row()->employee_id;
+            $this->db->order_by('tracking_id', 'DESC');
+            $result = $this->db->get()->result_array();
+            return $result;
       }
 
       public function updateEmployeeId($employee_id,$order_id)
       {
-            $data = array('employee_id' => $employee_id);
-            $this->db->set('employee_id');
-            $this->db->where("order_id",$order_id);  
-            $this->db->update("order_tracking",$data);
+            $this->db->select('status');
+            $this->db->from('orders');
+            $this->db->where('order_id',$order_id);
+            $status = $this->db->get()->result_array();
+
+            
+            $data = array('employee_id' => $employee_id,
+                        'order_id' => $order_id,
+                        'status' => $status[0]['status']);
+
+            // $this->db->set('employee_id');
+            // $this->db->where("order_id",$order_id);  
+            // $this->db->update("order_tracking",$data);
+            $this->db->insert('order_tracking',$data);
       }
 
       public function getItemServiceId($order_id)
