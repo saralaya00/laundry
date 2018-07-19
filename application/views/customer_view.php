@@ -38,13 +38,13 @@
   <div id="main-wrapper">
             <div class="header">
                 
-                   <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                   <nav class="navbar top-navbar navbar-expand-md navbar-inverse">
                                  <div class="container-fluid">
                                         <div class="navbar-header">
                                                <a class="navbar-brand" href="#">
                                                     <!-- Logo icon -->
                                        
-                                                    <b><img src="assets/images/cloth.png" class="profile-pic" style="max-width: width 20px;max-height:30px;margin-top:-5px;" /></b>
+                                                    <b><img src="assets/icons/cloth.png" class="profile-pic" style="max-width: width 20px;max-height:30px;margin-top:-5px;" /></b>
                                                     <!--End Logo icon -->
                                                     <!-- Logo text -->
                                                     <span> <b> Laundry </b> </span>
@@ -54,9 +54,9 @@
                                       <div class="navbar-header navbar-right pull-right">
                                             <ul class="nav pull-right">
                                               <li class="pull-right"><a href="#">
-                                                <i class="fas fa-user-lock"></i>
+                                              <i class="fas fa-sign-out-alt"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#">
+                                              <li class="pull-right"><a href="#"> 
                                                 <i class="fas fa-clipboard-list"></i>
                                               </a></li>
                                               <li class="pull-right"><a href="#">
@@ -65,9 +65,19 @@
                                               <li class="pull-right"><a href="#">
                                                 <i class="fas fa-cart-arrow-down"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#">
+                                              <li class="pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                 <i class="far fa-thumbs-up"></i>
-                                              </a></li>
+                                              </a> 
+                                              <ul class="dropdown-menu">
+                                               <li><a href="#">Action</a></li>
+                                               <li><a href="#">Another action</a></li>
+                                               <li><a href="#">Something</a></li>
+                                               <li><a href="#">Another action</a></li>
+                                               <li><a href="#">Something</a></li>
+                                               <li class="divider"></li>
+                                               <li><a href="#">Separated link</a></li>
+                                              </ul>
+                                            </li>
                                             </ul>
                                       </div> <!--/.navbar-right -->
                                       
@@ -86,7 +96,7 @@
                 {
            ?>
                 <div>
-                  <button type="button" class="btn btn-success" style=" padding:10%; margin:12%; width:50%;" ><?php echo $row->service_name; ?></button><br/>
+                  <button type="button" class="btn btn-success" id="<?php echo $row->service_id; ?>"style=" padding:10%; margin:12%; width:50%;" ><?php echo $row->service_name; ?></button><br/>
                   </div>
                   <?php
                 }
@@ -135,9 +145,29 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-10"></div>   
-          <div class="col-sm-2"><button type="button" class="btn btn-success">Place Order</button></div>
-    </div>
- </div>
+          <div class="col-sm-2"><button id="document1" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Place Order</button></div>
+               <div class="modal fade" id="myModal" role="dialog">
+                             <div class="modal-dialog">
+                      
+                                 <!-- Modal content-->
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                       <h4 class="modal-title">Your Order Successful</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                    </div>
+
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-default displayitems" data-dismiss="modal">OK</button>
+                                      
+                                  </div>
+                                 </div>
+                              </div>
+                           </div>
+               </div>
+          </div>
 
             <footer class="footer">
               <div class="container">
@@ -150,7 +180,28 @@
             
  
 <script type="text/javascript" language="javascript">
-$(document).ready(function(){
+$(document).on('click', '.displayitems', function(){
+ event.preventDefault();
+    //fill label text
+    var order_id = $(this).data("id");
+    var table = $('#order_details').DataTable();
+    var data = table.row( $(this).parents('tr') ).data();
+    var full_name = data[1];
+    var order_date = data[2];
+    var delivery_date = data[3];
+    $. ajax({
+        url:baseURL + "view_orders_controller/viewOrderDetailsPage",
+        method:"POST", 
+        data : {order_id : order_id,
+                full_name : full_name,
+                order_date : order_date,
+                delivery_date : delivery_date},
+        dataType :"json",
+        success : function(result){ 
+                    $(".body_id").html(result);
+                    var order_id = $('#order_id').text();
+
+
     var dataTable = $('#order_details').DataTable({
        "processing":true, 
        "serverSide":true,
