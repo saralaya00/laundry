@@ -112,7 +112,7 @@
 
         <div class="col-sm-1"> </div>      
         
-        <div class="col-sm-8 box">
+        <div class="col-sm-8 box container-fluid">
           <h3 align="center"><?php echo $title; ?></h3>
             <br/>
             <div class="table-responsive">
@@ -120,7 +120,7 @@
               <table id="order_details" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th width="35%">id</th>
+                        <th width="20%">Serial No</th>
                         <th width="35%">Item</th>
                         <th width="35%">Service</th>
                         <th width="35%">Rate</th>
@@ -204,6 +204,25 @@ $(document).on('click', '.displayitems', function(event){
        ]
     });
 });
+
+  $(document).on('input', '.text_qty', function(){
+      let text_qty = $(this);
+      let slno = text_qty.data('slno');
+      let qty = text_qty.val().trim();
+      let rate = $('label[name="lbl-rate-' + slno + '"]').html();
+
+      if (!$.isNumeric(qty) || (qty < 1 || qty > 99) )
+      {
+        text_qty.val(qty);
+        $('input[name="txt-total-' + slno + '"]').val(0);
+      }
+
+      else 
+      {
+        text_qty.val(qty);
+        $('input[name="txt-total-' + slno + '"]').val( qty * rate);
+      }
+  });
   </script>
  
 

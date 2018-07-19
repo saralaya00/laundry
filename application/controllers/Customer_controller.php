@@ -11,7 +11,7 @@
 
 
      function index(){
-      $data["title"]="Codeigniter Ajax CRUD with Data Tables and Bootstrap Modals";
+      $data["title"]="Orders";
       $this->load->model("Customer_model");
       $data["fetch_data"]=$this->Customer_model->getServices(); 
       $this->load->view('customer_view', $data);
@@ -63,13 +63,13 @@
         foreach($item_service as $key => $value)  
             {  
                 $sub_array = array();
-                $sub_array[] = $i+1;
+                $sub_array[] = $i + 1;
                 $sub_array[] = $value['item_name'];
                 $sub_array[] = $value['service_name'];
-                $sub_array[] = $value['price'];
-                $sub_array[]='<input type="text" name="check2" size="3">';
-                $sub_array[]='<input type="text" name="check3" size="3" readonly>';  
-                $sub_array[]='<input type="checkbox" name="check">';
+                $sub_array[] = '<label name="lbl-rate-'. ($i+1) . '">'.$value['price'].' </label>';
+                $sub_array[]='<input type="text" maxlength=2 class="text_qty form-control" data-slno="' . ($i+1) .'" size="3">';
+                $sub_array[]='<input type="text" class="form-control" name="txt-total-' . ($i+1) .'" size="3" readonly>';  
+                $sub_array[]='<input type="checkbox" class="checkbox" name="check">';
 
                 $data[] = $sub_array;  
                 $i++;
