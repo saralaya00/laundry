@@ -14,44 +14,11 @@
       $data["title"]="Orders";
       $this->load->model("Customer_model");
       $data["fetch_data"]=$this->Customer_model->getServices(); 
-      
       $this->load->view('customer_view', $data);
     }
 
    
-      
-
-    /*function fetch_user()
-    {
-     $this->load->model("customer_model");
-     $fetch_data=$this->customer_model->make_datatables();
-     $data=array();
-     foreach($fetch_data as $row)
-     {
-       $sub_array=array();
-       $sub_array[]=$row->id;
-          $sub_array[]=$row->item_name;  
-          $sub_array[]=$row->service_name;
-          $sub_array[]=$row->price;
-          $sub_array[]='<input type="text" name="check2" size="3">';
-          $sub_array[]='<input type="text" name="check3" size="3">';
-          $sub_array[]='<button type="button" name="update" id="'.$row->id.'"
-                        class="btn btn-warning btn-xs">Update</button>';
-          $sub_array[]='<button type="button" name="delete" id="'.$row->id.'"
-                        class="btn btn-danger btn-xs">Delete</button>';
-          $sub_array[]='<input type="checkbox" name="check">';
-          $data[]=$sub_array;
-
-        }
-        $output=array(
-          "draw"            => intval($_POST["draw"]),
-          "recordsTotal"    => $this->customer_model->get_all_data(),
-          "recordsFiltered" => $this->customer_model->get_filtered_data(),
-          "data"            => $data
-        );
-        echo json_encode($output);
-    }
- }*/
+  
  public function getItemServiceDetails()
     {
         $service_id =  $this->input->post('service_id');
@@ -66,11 +33,11 @@
                 $sub_array = array();
                 $sub_array[] = $i + 1;
                 $sub_array[] = $value['item_name'];
-                $sub_array[] = $value['service_name'];
+                // $sub_array[] = $value['service_name'];
                 $sub_array[] = '<label name="lbl-rate-'. ($i+1) . '">'.$value['price'].' </label>';
-                $sub_array[]='<input type="text" maxlength=2 class="text_qty form-control" data-slno="' . ($i+1) .'" size="3">';
+                $sub_array[]='<input type="text" name="quantity-'.$value['id'].'" maxlength=2 class="text_qty form-control" data-slno="' . ($i+1) .'" size="3">';
                 $sub_array[]='<input type="text" class="form-control" name="txt-total-' . ($i+1) .'" size="3" readonly>';  
-                $sub_array[]='<input type="checkbox" class="checkbox" name="check">';
+                $sub_array[]='<input type="checkbox" class="checkbox check_order" name="check_order" data-id = "'.$value['id'].'">';
 
                 $data[] = $sub_array;  
                 $i++;
@@ -86,57 +53,22 @@
            echo json_encode($output);  
     }
 
+    function place_order_details()
+    {
+        $data = array("customer_id" => $this->input->post('customer_id'),
+                    "service_id" => $this->input->post('service_id'),
+                    'item_name' => $this->input->post('item_name'),
+                    "quantity" => $this->input->post('quantity'),
+                );
 
+        $result = $this->Customer_model->place_order_details($data);
+
+        if($result)
+        {
+            echo "inserted";
+        }
+    }
    
-    // public function getItem()
-    // {
-    //     $output = array();  
-    //     $i=0;
-    //     $data = $this->Customer_model->getItem();  
-    //     foreach($data as $row)  
-    //     {  
-    //          $output[$i] = $row;  
-    //          $i++;
-    //     }  
-    //     echo json_encode($output);
-    // }
-
-    // public function getService()
-    // {
-    //     $output = array();  
-    //     $i=0;
-    //     $data = $this->Customer_model->getService();  
-    //     foreach($data as $row)  
-    //     {  
-    //          $output[$i] = $row;  
-    //          $i++;
-    //     }  
-    //     echo json_encode($output);
-    // }
-
-    // public function updateItem_service()
-    // {
-    //     $input = array('id' => $this->input->post('id'),
-    //                     'service_name' => $this->input->post('service_name'),
-    //                     'item_name' => $this->input->post('item_name'),
-    //                     'price' => $this->input->post('price')
-    //             );
-    
-    //    $result = $this->customer_model->updateItem_service($input);
-    //    if($result == true)
-    //    {    
-    //     echo json_encode("Updated");
-    //    }
-    // }
-
-    // public function deleteItem_service()
-    // {
-    //     $id = $this->input->post('id');
-    //     $result = $this->customer_model->deleteItem_service($id);
-    //     if($result == true)
-    //     {    
-    //         echo json_encode("deleted");
-    //     }
-    // }
+   
 }
 ?>

@@ -124,7 +124,7 @@
                     <tr>
                         <th width="20%">Serial No</th>
                         <th width="35%">Item</th>
-                        <th width="35%">Service</th>
+                        <!-- <th width="35%">Service</th> -->
                         <th width="35%">Rate</th>
                         <th width="35%">Quantity</th>
                         <th width="35%">Price</th>
@@ -186,7 +186,8 @@ $(document).on('click', '.displayitems', function(event){
  event.preventDefault();
     //fill label text
     var service_id = $(this).data("id");
-    var item_service = $('#order_details').DataTable();
+
+    var item_service = $('#order_details').DataTable();    
     item_service.destroy();
 
     var dataTable = $('#order_details').DataTable({
@@ -200,14 +201,13 @@ $(document).on('click', '.displayitems', function(event){
        },
        "columnDefs":[
            {
-              "targets":[0,1,2,3,4,6], 
+              "targets":[0,1,2,3,4,5], 
               "orderable":false,
            }
        ]
     });
-});
 
-  $(document).on('input', '.text_qty', function(){
+    $(document).on('input', '.text_qty', function(){
       let text_qty = $(this);
       let slno = text_qty.data('slno');
       let qty = text_qty.val().trim();
@@ -225,6 +225,40 @@ $(document).on('click', '.displayitems', function(event){
         $('input[name="txt-total-' + slno + '"]').val( qty * rate);
       }
   });
+
+
+    $(document).on('change','.check_order',function() {
+      let id = $(this).data('id');
+
+          let order_details = $('#order_details').DataTable();
+          let data = order_details.row( $(this).parents('tr') ).data();
+          let item_name = data[1];
+
+          let customer_id = 2;
+          let text_box = $('input[name="quantity-' + id + '"]');
+          let quantity = text_box.val();
+          if(this.checked) {
+          $.ajax({
+              url:"<?php echo base_url().'customer_controller/place_order_details';?>",
+              type:"POST",
+              data : {customer_id : customer_id,
+                      service_id : service_id,
+                      item_name : item_name,
+                      quantity : quantity},
+              success:function(data)  
+              {  
+                  
+              }   
+          });  
+        }
+        else{
+
+           
+        }
+    });
+});
+
+ 
   </script>
  
 

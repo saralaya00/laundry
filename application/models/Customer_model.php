@@ -47,8 +47,7 @@ class Customer_model extends CI_Model
         $this->db->from('item_service');
         $query = $this->db->get();
         return $query;
-    }
-
+    } 
 
     function getServices()
     {
@@ -61,11 +60,77 @@ class Customer_model extends CI_Model
         return $result;
     }
 
-    // function getItem()
-    // {
-    //     $query=$this->db->get('items');  
-    //     return $query->result();
-    // }
+    function place_order_details($data){
+        $order_date = date('Y-m-d H:i:s');
+
+        $id = $this->getId($data);//id from item_service required to insert into order-details
+        $record = array("customer_id" => $data['customer_id'],
+                        "order_date" => $order_date,
+                        "delivery_date" => "",
+                        "status" => ""
+                    );
+
+        $this->db->select('order_id'); 
+        $this->db->from('orders');   
+        $this->db->where('customer_id',$data['customer_id']);
+        $this->db->order_by('order_id', 'DESC');
+        $order_id = $this->db->get()->result_array();
+        
+        //check whether row present in order table
+        $is_exist = $this->check_order_exist($order_id[0]['order_id']);
+
+        print_r($is_exist);
+        if(count($is_exist) > 0){
+            $order_details = array('order_id' => $order_id[0]['order_id'],
+                                'id' => $id[0]['id'],
+                                'quantity' => $data['quantity']
+                        );
+
+            $this->db->insert('order_details',$order_details);
+        }
+        else{
+            $this->db->insert('orders',$record);
+
+            $this->db->select('order_id'); 
+            $this->db->from('orders');   
+            $this->db->where('customer_id',$data['customer_id']);
+            $this->db->order_by('order_id', 'DESC');
+            $order_id = $this->db->get()->result_array();
+
+            $order_details = array('order_id' => $order_id[0]['order_id'],
+                                'id' => $id[0]['id'],
+                                'quantity' => $data['quantity']
+                        );
+
+            $this->db->insert('order_details',$order_details);
+        }
+    }
+
+    function check_order_exist($order_id){
+        $this->db->select('od.order_id'); 
+        $this->db->join('orders as o','o.order_id = od.order_id');
+        $this->db->from('order_details as od');   
+        $this->db->where('o.order_id',$order_id);
+
+        return $this->db->get()->result_array();
+    }
+
+    function getId($data){
+        $item_id = $this->getItemId_forInsert($data['item_name']);
+
+        $this->db->select('id');
+        $this->db->from('item_service');
+        $this->db->where('item_id',$item_id[0]['item_id'])->where('service_id',$data['service_id']);
+        return $this->db->get()->result_array();
+    }
+
+    function getItemId_forInsert($item_name)
+    {
+        $this->db->select('item_id');
+        $this->db->from('items');
+        $this->db->where('item_name',$item_name);
+        return $this->db->get()->result_array();
+    }
 
     // function getService()
     // {
