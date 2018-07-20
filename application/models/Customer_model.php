@@ -1,53 +1,101 @@
 <?php
 class Customer_model extends CI_Model
 {
-    /* var $table = "users";
-    var $select_column=array("id","first_name","last_name","image");
-     var $order_column=array(null,"first_name","last_name",null,null);*/
-    
-
-    public function getItemServiceDetails($service_id)
+    public function __construct() 
     {
+        parent::__construct(); 
+        $this->load->database();
+    }
 
-        // $i_id_result = $this->getItemId();
-        // $item_id = array();
-        // foreach ($i_id_result->result_array() as $row)
-        // {
-        //     $item_id[] = $row['item_id'];
-        // }
+    public function getUnCheckedDetails($service_id)
+    {
+        $order_id = $this->check_existence();
+        if(count($order_id)>0)
+        {
+            $id_result = $this->getItemServiceId();
+            $id = array();
 
-        // $s_id_result = $this->getServiceId();
-        // $service_id = array();
-        // foreach ($s_id_result->result_array() as $row)
-        // {
-        //     $service_id[] = $row['service_id'];
-        // }
+           
+
+            foreach ($id_result->result_array() as $row)
+            {
+                $id[] = $row['id'];
+            }
+            // print_r($id);
+            if(count($id)>0)
+            {
+                    $this->db->select('is.id,it.item_name,s.service_name,is.price');
+                    $this->db->join('items as it','is.item_id=it.item_id');
+                    $this->db->join('services as s','s.service_id=is.service_id');
+                    $this->db->where('s.service_id',$service_id)->where('flag',1)->where_not_in('id',$id);
+                    $this->db->from('item_service as is');
+                    $query = $this->db->get();
+                    return $query->result_array();
+            }
+            else
+            {
+                return $this->getItemService($service_id)->result_array();
+            }
+        }
+        else
+        {
+            return $this->getItemService($service_id)->result_array();
+        }
+        
+       
+    }
+
+    function getCheckedDetails($service_id)
+    {
+        $order_id = $this->check_existence();
+        if(count($order_id)>0)
+        {
+            $id_result = $this->getItemServiceId();
+            $id = array();
+
+            foreach ($id_result->result_array() as $row)
+            {
+                $id[] = $row['id'];
+            }
+        
+            if(count($id)>0)
+            {
+                    $this->db->select('is.id,it.item_name,s.service_name,is.price,od.quantity');
+                    $this->db->join('items as it','is.item_id=it.item_id');
+                    $this->db->join('services as s','s.service_id=is.service_id');
+                    $this->db->join('order_details as od','is.id=od.id');
+                    $this->db->join('orders as o','o.order_id=od.order_id');
+                    $this->db->where('s.service_id',$service_id)->where('flag',1)->where_in('is.id',$id)->where('o.status',1);
+                    $this->db->from('item_service as is');
+                    $query = $this->db->get();
+                    return $query->result_array();
+            }
+        }
         
 
-        $this->db->select('is.id,it.item_name,s.service_name,is.price');
-        $this->db->join('items as it','is.item_id=it.item_id');
-        $this->db->join('services as s','s.service_id=is.service_id');
-        $this->db->where('s.service_id',$service_id)->where('flag',1);
-        $this->db->from('item_service as is');
-        $query = $this->db->get();
-        return $query->result_array();
     }
 
-    function getItemId()
+    function getItemService($service_id)
     {
-        $this->db->select('item_id');
-        $this->db->from('item_service');
-        $query = $this->db->get();
-        return $query;
+       
+            $this->db->select('is.id,it.item_name,s.service_name,is.price');
+            $this->db->join('items as it','is.item_id=it.item_id');
+            $this->db->join('services as s','s.service_id=is.service_id');
+            $this->db->where('s.service_id',$service_id)->where('flag',1);
+            $this->db->from('item_service as is');
+            return $this->db->get();
+        
     }
 
-    function getServiceId()
+    function getItemServiceId()
     {
-        $this->db->select('service_id');
-        $this->db->from('item_service');
-        $query = $this->db->get();
-        return $query;
-    } 
+        $this->db->select('od.id');
+        $this->db->join('item_service as is','od.id = is.id');
+        $this->db->join('orders as o','o.order_id=od.order_id');
+        $this->db->from('order_details as od');
+        $this->db->where('o.status',1);
+        return $this->db->get();
+    }
 
     function getServices()
     {
@@ -60,63 +108,62 @@ class Customer_model extends CI_Model
         return $result;
     }
 
-    function place_order_details($data){
+    function place_order_details($data)
+    {
         $order_date = date('Y-m-d H:i:s');
 
+        //checking for existence
+        $order_id = $this->check_existence();
+        if(count($order_id)>0)
+        {
+            $return_id = $this->insert_to_order_details($data);
+            return  $return_id;
+
+        }
+        else
+        {
+            $record = array("customer_id" => $data['customer_id'],
+                            "order_date" => $order_date,
+                            "delivery_date" => "",
+                            "status" => 1//status changes to "not assigned" when place order is clicked
+                        );
+            $this->db->insert('orders',$record);
+            $return_id = $this->insert_to_order_details($data);
+            return  $return_id;
+        }
+    }
+
+    function insert_to_order_details($data)
+    {
         $id = $this->getId($data);//id from item_service required to insert into order-details
-        $record = array("customer_id" => $data['customer_id'],
-                        "order_date" => $order_date,
-                        "delivery_date" => "",
-                        "status" => ""
-                    );
 
         $this->db->select('order_id'); 
         $this->db->from('orders');   
         $this->db->where('customer_id',$data['customer_id']);
         $this->db->order_by('order_id', 'DESC');
         $order_id = $this->db->get()->result_array();
-        
-        //check whether row present in order table
-        $is_exist = $this->check_order_exist($order_id[0]['order_id']);
 
-        print_r($is_exist);
-        if(count($is_exist) > 0){
-            $order_details = array('order_id' => $order_id[0]['order_id'],
-                                'id' => $id[0]['id'],
-                                'quantity' => $data['quantity']
-                        );
-
-            $this->db->insert('order_details',$order_details);
-        }
-        else{
-            $this->db->insert('orders',$record);
-
-            $this->db->select('order_id'); 
-            $this->db->from('orders');   
-            $this->db->where('customer_id',$data['customer_id']);
-            $this->db->order_by('order_id', 'DESC');
-            $order_id = $this->db->get()->result_array();
-
-            $order_details = array('order_id' => $order_id[0]['order_id'],
-                                'id' => $id[0]['id'],
-                                'quantity' => $data['quantity']
-                        );
-
-            $this->db->insert('order_details',$order_details);
-        }
+        $order_details = array('order_id' => $order_id[0]['order_id'],
+                        'id' => $id[0]['id'],
+                        'quantity' => $data['quantity']
+                );
+        $this->db->insert('order_details',$order_details);
+ 
+        return ($order_id[0]['order_id']);
     }
-
-    function check_order_exist($order_id){
-        $this->db->select('od.order_id'); 
-        $this->db->join('orders as o','o.order_id = od.order_id');
-        $this->db->from('order_details as od');   
-        $this->db->where('o.order_id',$order_id);
-
+    
+    //check_existence of order_id in orders table
+    function check_existence()
+    {
+        $this->db->select('o.order_id');
+        $this->db->join('order_details as od','o.order_id = od.order_id');
+        $this->db->from('orders as o');
+        $this->db->where('status',1);//status changes to "not assigned" when place order is clicked
         return $this->db->get()->result_array();
-    }
+    }      
 
     function getId($data){
-        $item_id = $this->getItemId_forInsert($data['item_name']);
+        $item_id = $this->getItemId($data['item_name']);
 
         $this->db->select('id');
         $this->db->from('item_service');
@@ -124,7 +171,7 @@ class Customer_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    function getItemId_forInsert($item_name)
+    function getItemId($item_name)
     {
         $this->db->select('item_id');
         $this->db->from('items');
@@ -132,59 +179,56 @@ class Customer_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    // function getService()
-    // {
-    //     $query=$this->db->get('services');  
-    //     return $query->result();
-    // }
-
-    // public function updateItem_service($input)
-    // {
-    //     $id = $input['id'];
-
-    //     $item_name = $input['item_name'];
-    //     $item_id = $this->getUpdateItemId($item_name);
-
-    //     $service_name = $input['service_name'];
-    //     $service_id = $this->getUpdateServiceId($service_name);
-
-    //     $price = $input['price'];
-    //     $data = array('item_id' => $item_id,
-    //                 'service_id' => $service_id);
-
-    //     $single_data = call_user_func_array('array_merge',call_user_func_array('array_merge', $data));
-       
-    //     $this->db->where('id',$id);  
-    //     $query = $this->db->update("item_service",$single_data);
+    function remove_order_details($data)
+    {
+        $id = $this->getId($data);
+        //checking for existence
+        $order_id = $this->check_existence();
         
-    //     $this->db->set('price',$price);
-    //     $this->db->where('id',$id);  
-    //     $query2 = $this->db->update("item_service");
+        $this->db->select('*');
+        $this->db->from('order_details');
+        $this->db->where('order_id',$order_id[0]['order_id']);
+        $num_rows = $this->db->get()->num_rows();
         
-    // }
+        if($num_rows == 1)
+        {
+            $this->db->where('order_id',$order_id[0]['order_id']);
+            $this->db->delete('orders');
+           
+        }
+        else if($num_rows > 1)
+        {
+            $this->db->where('order_id',$order_id[0]['order_id'])->where('id',$id[0]['id']);
+            $this->db->delete('order_details');     
+        }
+        
+    }
 
-    // public function getUpdateItemId($item_name)
-    // {
-    //     $this->db->select('item_id');
-    //     $this->db->from('items');
-    //     $this->db->where('item_name',$item_name,NULL, FALSE);
-    //     return $this->db->get()->result_array();
-    // }
+    function update_status($order_id)
+    {
+    
+        $status = array('status' => 'not assigned');
+        
 
-    // public function getUpdateServiceId($service_name)
-    // {
-       
-    //     $this->db->select('service_id');
-    //     $this->db->from('services');
-    //     $this->db->where('service_name',$service_name);
-    //     return $this->db->get()->result_array();
-    // }
+        $this->db->set($status);
+        $this->db->where('order_id',$order_id);
+        $this->db->update('orders');
 
-    // public function deleteItem_service($id)
-    // {
-    //     $this->db->where('id', $id);
-    //     $this->db->delete('item_service'); 
-    // }
+        
+    }
 
+    public function fetchOrderDetails($order_id){
+
+        $this->db->select('it.item_name,s.service_name,is.price,od.quantity');
+        $this->db->join('items as it','is.item_id=it.item_id');
+        $this->db->join('services as s','s.service_id=is.service_id');
+        $this->db->join('order_details as od','is.id=od.id');
+        $this->db->join('orders as o','o.order_id=od.order_id');
+        $this->db->where('o.order_id',$order_id);
+        $this->db->from('item_service as is');
+        $query = $this->db->get();
+        return $query->result_array();
+
+    }
 }
 ?>

@@ -53,16 +53,19 @@
                                      
                                       <div class="navbar-header navbar-right pull-right">
                                             <ul class="nav pull-right">
-                                              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="logout" style="display:inline-block;">
+                                              <li class="pull-right"><a href="#">
                                               <i class="fas fa-sign-out-alt"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#"tool-tip-toggle="tooltip-demo" data-original-title="notifications" style="display:inline-block;">
+                                              <li class="pull-right"><a href="#"> 
+                                                <i class="fas fa-clipboard-list"></i>
+                                              </a></li>
+                                              <li class="pull-right"><a href="#">
                                                 <i class="fas fa-bell"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="cart" style="display:inline-block;">
+                                              <li class="pull-right"><a href="#">
                                                 <i class="fas fa-cart-arrow-down"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="Rating" style="display:inline-block;" class="dropdown-toggle" data-toggle="dropdown">
+                                              <li class="pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                                 <i class="far fa-thumbs-up"></i>
                                               </a> 
                                               <ul class="dropdown-menu">
@@ -144,10 +147,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-10"></div>   
-          <div class="col-sm-2"><button id="document1" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Place Order</button></div>
-               <div class="modal fade" id="myModal" role="dialog">
+          <div class="col-sm-2">
+            <button id="placeOrder" data-id = " " class="btn btn-success placeOrder" data-toggle="modal" data-target="#placeOrderModal">Place Order</button></div>
+               <div class="modal fade" id="placeOrderModal" role="dialog">
                              <div class="modal-dialog">
-                      
                                  <!-- Modal content-->
                                  <div class="modal-content">
                                     <div class="modal-header">
@@ -155,12 +158,26 @@
                                        <h4 class="modal-title">Your Order Successful</h4>
                                     </div>
                                     <div class="modal-body">
+                                    <div class="table-responsive">
+                                    <br/>
+                                    <table id="view_order_details" class="table table-bordered table-striped">
+                                      <thead>
+                                          <tr>
+                                              <th width="20%">Serial No</th>
+                                              <th width="35%">Service</th>
+                                              <th width="35%">Item</th>
+                                              <th width="35%">Quantity</th>
+                                              <th width="35%">Price</th>
+                                          </tr>    
+                                      </thead>  
+                                    </table>
+                                  </div>   
                                         
                                     </div>
-
                                     <div class="modal-footer">
-                                       <button type="button" class="btn btn-default displayitems" data-dismiss="modal">OK</button>
-                                      
+                                    <button type="button" class="btn btn-default Edit" data-dismiss="modal">Edit Order</button>
+
+                                    <button type="button" class="btn btn-default submit" data-dismiss="modal">Submit Order</button>
                                   </div>
                                  </div>
                               </div>
@@ -183,7 +200,6 @@ $(document).on('click', '.displayitems', function(event){
  event.preventDefault();
     //fill label text
     var service_id = $(this).data("id");
-
     var item_service = $('#order_details').DataTable();    
     item_service.destroy();
 
@@ -203,8 +219,9 @@ $(document).on('click', '.displayitems', function(event){
            }
        ]
     });
+});
 
-    $(document).on('input', '.text_qty', function(){
+$(document).on('input', '.text_qty', function(){
       let text_qty = $(this);
       let slno = text_qty.data('slno');
       let qty = text_qty.val().trim();
@@ -221,50 +238,100 @@ $(document).on('click', '.displayitems', function(event){
         text_qty.val(qty);
         $('input[name="txt-total-' + slno + '"]').val( qty * rate);
       }
+});
+
+$(document).on('change','.check_order',function() {
+      let id = $(this).data('id');
+      let service_id = $(this).data('service_id');
+      let slno =  $(this).data('slno');
+      let order_details = $('#order_details').DataTable();
+      let data = order_details.row( $(this).parents('tr') ).data();
+      let item_name = data[1];
+      
+      let customer_id = 2;
+      let text_box = $('input[name="quantity-' + id + '"]');
+      let quantity = text_box.val();
+      if(this.checked) {
+      $.ajax({
+          url:"<?php echo base_url().'customer_controller/place_order_details';?>",
+          type:"POST",
+          data : {id : id,
+                  customer_id : customer_id,
+                  service_id : service_id,
+                  item_name : item_name,
+                  quantity : quantity},
+          success:function(data)  
+          {  
+            data = JSON.parse(data);
+            // alert(data);
+            $('.placeOrder').attr('data-id',data);
+          }   
+      });  
+    }
+    else{
+      var qty = ".Quantity-"+id;
+      var price = ".Price-"+id;
+      // console.log(qty);
+      $(qty).html('<input type="text" name="quantity-' + id +'" maxlength=2 class="text_qty form-control" data-slno="' + slno +'" size="3">');
+      $(price).html('<input type="text" class="form-control" name="txt-total-'+slno+'" size="3" readonly>',);
+
+       $.ajax({
+          url:"<?php echo base_url().'customer_controller/remove_order_details';?>",
+          type:"POST",
+          data : {customer_id : customer_id,
+                  service_id : service_id,
+                  item_name : item_name
+                 },
+          success:function(data)  
+          {  
+              
+          }   
+      });  
+    }
+  });
+  $(document).on('click', '.placeOrder', function(event){
+    let order_id = $(this).data('id');
+    // $.ajax({
+    //       url:"<?php echo base_url().'customer_controller/update_status';?>",
+    //       type:"POST",
+    //       data : {order_id : order_id},
+    //       success:function(data)  
+    //       {  
+            
+    //       }   
+    // });  
+
+       var dataTable = $('#view_order_details').DataTable({
+       "processing":true, 
+       "serverSide":true,
+       "order":[],
+       "ajax":{
+           url:"<?php echo base_url().'Customer_controller/fetchOrderDetails';?>",
+           type:"POST",
+           data : {order_id : order_id}
+       },
+       "columnDefs":[
+           {
+              "targets":[0,1,2,3,4], 
+              "orderable":false,
+           }
+       ]
+    });
+
+    $(document).on('click', '.submit', function(event){
+          $.ajax({
+          url:"<?php echo base_url().'customer_controller/update_status';?>",
+          type:"POST",
+          data : {order_id : order_id},
+          success:function(data)  
+          {  
+            
+          }   
+    });  
+  });
   });
 
-
-    $(document).on('change','.check_order',function() {
-      let id = $(this).data('id');
-
-          let order_details = $('#order_details').DataTable();
-          let data = order_details.row( $(this).parents('tr') ).data();
-          let item_name = data[1];
-
-          let customer_id = 2;
-          let text_box = $('input[name="quantity-' + id + '"]');
-          let quantity = text_box.val();
-          if(this.checked) {
-          $.ajax({
-              url:"<?php echo base_url().'customer_controller/place_order_details';?>",
-              type:"POST",
-              data : {customer_id : customer_id,
-                      service_id : service_id,
-                      item_name : item_name,
-                      quantity : quantity},
-              success:function(data)  
-              {  
-                  
-              }   
-          });  
-        }
-        else{
-
-           
-        }
-    });
-});
-
-$(document).ready(function(){
-
-    $('[tool-tip-toggle="tooltip-demo"]').tooltip({
-
-        placement : 'bottom'
-
-    });
-
-});
-
+ 
   </script>
  
 
