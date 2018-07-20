@@ -53,19 +53,16 @@
                                      
                                       <div class="navbar-header navbar-right pull-right">
                                             <ul class="nav pull-right">
-                                              <li class="pull-right"><a href="#">
+                                              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="logout" style="display:inline-block;">
                                               <i class="fas fa-sign-out-alt"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#"> 
-                                                <i class="fas fa-clipboard-list"></i>
-                                              </a></li>
-                                              <li class="pull-right"><a href="#">
+                                              <li class="pull-right"><a href="#"tool-tip-toggle="tooltip-demo" data-original-title="notifications" style="display:inline-block;">
                                                 <i class="fas fa-bell"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#">
+                                              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="cart" style="display:inline-block;">
                                                 <i class="fas fa-cart-arrow-down"></i>
                                               </a></li>
-                                              <li class="pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="Rating" style="display:inline-block;" class="dropdown-toggle" data-toggle="dropdown">
                                                 <i class="far fa-thumbs-up"></i>
                                               </a> 
                                               <ul class="dropdown-menu">
@@ -258,7 +255,16 @@ $(document).on('click', '.displayitems', function(event){
     });
 });
 
- 
+$(document).ready(function(){
+
+    $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+
+        placement : 'bottom'
+
+    });
+
+});
+
   </script>
  
 
