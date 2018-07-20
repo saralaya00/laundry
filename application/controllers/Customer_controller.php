@@ -14,6 +14,7 @@
       $data["title"]="Orders";
       $this->load->model("Customer_model");
       $data["fetch_data"]=$this->Customer_model->getServices(); 
+      
       $this->load->view('customer_view', $data);
     }
 

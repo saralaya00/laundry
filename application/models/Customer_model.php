@@ -52,10 +52,13 @@ class Customer_model extends CI_Model
 
     function getServices()
     {
-        $this->db->select('*');
-        $this->db->from('services');
-        $query = $this->db->get();
-        return $query;
+        $this->db->distinct();
+        $this->db->select('s.service_id,s.service_name');
+        $this->db->join('item_service as is','is.service_id = s.service_id');
+        $this->db->from('services as s');
+        $this->db->where('is.flag >',0);
+        $result = $this->db->get()->result_array();
+        return $result;
     }
 
     // function getItem()

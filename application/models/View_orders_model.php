@@ -16,11 +16,11 @@ class View_orders_model extends CI_Model
             $this->db->select($this->select_column);  
             $this->db->from('orders');  
             $this->db->join('customer as c', 'c.customer_id = orders.customer_id','left');
-            if(isset($_POST["search"]["value"]))  
-            {  
-                  $this->db->like("full_name", $_POST["search"]["value"]);  
-                  $this->db->or_like("status", $_POST["search"]["value"]);  
-            }  
+            // if(isset($_POST["search"]["value"]))  
+            // {  
+            //       $this->db->like("full_name", $_POST["search"]["value"]);  
+            //       $this->db->or_like("status", $_POST["search"]["value"]);  
+            // }  
             if(isset($_POST["order"]))  
             {  
                   $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);  

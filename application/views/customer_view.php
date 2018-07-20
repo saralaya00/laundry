@@ -88,15 +88,17 @@
  <div class="container-fluid">
     <div class="row">   
         <div class="col-sm-3 box">
-          
           <?php
-            if($fetch_data->num_rows() > 0)
+          // print_r($fetch_data);?>
+          <?php
+            if(count($fetch_data) > 0)
               {
-                foreach($fetch_data->result() as $row)
+                foreach($fetch_data as $row)
                 {
+                
            ?>
                 <div>
-                  <button type="button" class="btn btn-success displayitems" data-id="<?php echo $row->service_id; ?>" style=" padding:10%; margin:12%; width:50%;" ><?php echo $row->service_name; ?></button><br/>
+                  <button type="button" class="btn btn-success displayitems" data-id="<?php echo $row['service_id'] ?>" style=" padding:10%; margin:12%; width:50%;" ><?php echo $row['service_name']; ?></button><br/>
                   </div>
                   <?php
                 }
