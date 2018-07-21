@@ -13,9 +13,16 @@
 
     public function index()
     {
-      $data["title"]="Orders";
-      $data["fetch_data"]=$this->Customer_model->getServices(); 
-      $this->load->view('customer_view', $data);
+      if($this->input->post('slug') != '' || $_SESSION['slug'] != '')
+      {                
+            $data["title"]="Orders";
+            $_SESSION['slug'] = $this->input->post('slug');
+
+            $data["fetch_data"]=$this->Customer_model->getServices(); 
+            $this->load->view('customer_view', $data);
+      }
+
+      else redirect(base_url());
     }
 
     public function getItemServiceDetails()

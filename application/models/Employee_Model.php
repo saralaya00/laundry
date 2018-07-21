@@ -11,8 +11,8 @@
         {
             //Insert into Users
             $userinfo = array(
-                'username' => $empdata['contact_no'],
-                'password' => '',
+                'username' => hash('sha256', $empdata['contact_no']),
+                'password' => hash('sha256','no-password'),
                 'role' => 'Employee'
             );
 
