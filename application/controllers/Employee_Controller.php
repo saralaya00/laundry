@@ -12,9 +12,15 @@
         public function index()
         {
             $data['title'] = "Employee Records";
-            $this->load->view('common/footbar.php');
-            $this->load->view('employee/view_employee.php', $data);
-            $this->load->view('common/end_wrapper.php');
+            
+            if($_SESSION['salt'] != '')
+            {                
+                $this->load->view('common/footbar.php');
+                $this->load->view('employee/view_employee.php', $data);
+                $this->load->view('common/end_wrapper.php');
+            }
+
+            else redirect(base_url());
         }
 
         public function get_employees()

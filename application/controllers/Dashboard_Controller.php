@@ -8,15 +8,23 @@
             $this->load->model('Employee_Model');
             $this->load->model('Service_model');
             $this->load->model('Item_model');
+
             $this -> form_validation -> set_error_delimiters('<span>', '</span>');
         }
 
         public function index()
         {
             $data['title'] = "Dashboard";
-            $this->load->view('common/footbar.php');
-            $this->load->view('dashboard/view_cards.php');
-            $this->load->view('common/end_wrapper.php');
+
+            if($this->input->post('salt') != '' || $_SESSION['salt'] != '')
+            {
+                $_SESSION['salt'] = $this->input->post('salt');
+                $this->load->view('common/footbar.php',$data);
+                $this->load->view('dashboard/view_cards.php');
+                $this->load->view('common/end_wrapper.php');
+            }
+
+            else redirect(base_url());
         }
 
         public function md_employee()

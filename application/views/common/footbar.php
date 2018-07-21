@@ -38,7 +38,6 @@
 
 <body class="fix-header fix-sidebar" data-baseurl="<?php echo base_url();?>">
     <!-- Preloader : if any-->
-
     <!-- (+) Main Wrapper : Header -->
     <div id="main-wrapper">
         <!-- (+) Header -->
@@ -50,7 +49,7 @@
                         <span class="fa fa-angle-down fa-lg"></span>
                     </button>
 
-                    <a href="<?php echo base_url();?>">
+                    <a href="<?php echo base_url('dashboard');?>">
                         <div class="row">
                             <div class="col-xs-3">
                                 <img src="assets/icons/cloth.png" alt="homepage" class="header-icon" />
@@ -71,7 +70,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">
+                            <a href="<?php echo base_url();?>">
                                 <span class="fa fa-sign-out fa-lg"> &nbsp;</span> Logout </a>
                         </li>
                     </ul>
