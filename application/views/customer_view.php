@@ -192,10 +192,8 @@
             </footer>
    </div>   
    </body>   
-</html>
-            
- 
-<script type="text/javascript" language="javascript">
+<script>
+
 $(document).on('click', '.displayitems', function(event){
  event.preventDefault();
     //fill label text
@@ -208,7 +206,7 @@ $(document).on('click', '.displayitems', function(event){
        "serverSide":true,
        "order":[],
        "ajax":{
-           url:"<?php echo base_url().'customer_controller/getItemServiceDetails';?>",
+           url:"<?php echo base_url().'Customer_Controller/getItemServiceDetails';?>",
            type:"POST",
            data : {service_id : service_id}
        },
@@ -251,88 +249,80 @@ $(document).on('change','.check_order',function() {
       let customer_id = 2;
       let text_box = $('input[name="quantity-' + id + '"]');
       let quantity = text_box.val();
-      if(this.checked) {
-      $.ajax({
-          url:"<?php echo base_url().'customer_controller/place_order_details';?>",
-          type:"POST",
-          data : {id : id,
-                  customer_id : customer_id,
-                  service_id : service_id,
-                  item_name : item_name,
-                  quantity : quantity},
-          success:function(data)  
-          {  
-            data = JSON.parse(data);
-            // alert(data);
-            $('.placeOrder').attr('data-id',data);
-          }   
-      });  
-    }
-    else{
-      var qty = ".Quantity-"+id;
-      var price = ".Price-"+id;
-      // console.log(qty);
-      $(qty).html('<input type="text" name="quantity-' + id +'" maxlength=2 class="text_qty form-control" data-slno="' + slno +'" size="3">');
-      $(price).html('<input type="text" class="form-control" name="txt-total-'+slno+'" size="3" readonly>',);
+      if(this.checked)
+      {
+        $.ajax({
+            url:"<?php echo base_url().'Customer_Controller/place_order_details';?>",
+            type:"POST",
+            data : {id : id,
+                    customer_id : customer_id,
+                    service_id : service_id,
+                    item_name : item_name,
+                    quantity : quantity},
+            success:function(data)  
+            {  
+              data = JSON.parse(data);
+              // alert(data);
+              $('.placeOrder').attr('data-id',data);
+            }   
+        });  
+      }
+      else{
+          var qty = ".Quantity-"+id;
+          var price = ".Price-"+id;
+          // console.log(qty);
+          $(qty).html('<input type="text" name="quantity-' + id +'" maxlength=2 class="text_qty form-control" data-slno="' + slno +'" size="3">');
+          $(price).html('<input type="text" class="form-control" name="txt-total-'+slno+'" size="3" readonly>',);
 
-       $.ajax({
-          url:"<?php echo base_url().'customer_controller/remove_order_details';?>",
-          type:"POST",
-          data : {customer_id : customer_id,
-                  service_id : service_id,
-                  item_name : item_name
-                 },
-          success:function(data)  
-          {  
-              
-          }   
-      });  
-    }
-  });
-  $(document).on('click', '.placeOrder', function(event){
-    let order_id = $(this).data('id');
-    // $.ajax({
-    //       url:"<?php echo base_url().'customer_controller/update_status';?>",
-    //       type:"POST",
-    //       data : {order_id : order_id},
-    //       success:function(data)  
-    //       {  
-            
-    //       }   
-    // });  
-
-       var dataTable = $('#view_order_details').DataTable({
-       "processing":true, 
-       "serverSide":true,
-       "order":[],
-       "ajax":{
-           url:"<?php echo base_url().'Customer_controller/fetchOrderDetails';?>",
-           type:"POST",
-           data : {order_id : order_id}
-       },
-       "columnDefs":[
-           {
-              "targets":[0,1,2,3,4], 
-              "orderable":false,
-           }
-       ]
-    });
-
-    $(document).on('click', '.submit', function(event){
           $.ajax({
-          url:"<?php echo base_url().'customer_controller/update_status';?>",
-          type:"POST",
-          data : {order_id : order_id},
-          success:function(data)  
-          {  
-            
-          }   
-    });  
-  });
-  });
+              url:"<?php echo base_url().'Customer_Controller/remove_order_details';?>",
+              type:"POST",
+              data : {customer_id : customer_id,
+                      service_id : service_id,
+                      item_name : item_name
+                    },
+              success:function(data)  
+              {  
+                  
+              }   
+          });  
+      }
+});
 
- 
-  </script>
+// $(document).on('click', '.placeOrder', function(event){
+//   let order_id = $(this).data('id');
+
+//   var dataTable = $('#view_order_details').DataTable({
+//     "processing":true, 
+//     "serverSide":true,
+//     "order":[],
+//     "ajax":{
+//         url:"<?php echo base_url().'Customer_Controller/fetchOrderDetails';?>",
+//         type:"POST",
+//         data : {order_id : order_id}
+//     },
+//     "columnDefs":[
+//         {
+//             "targets":[0,1,2,3,4], 
+//             "orderable":false,
+//         }
+//     ]
+//   });
+// });
+// $(document).on('click', '.submit', function(event){
+//     $.ajax({
+//       url:"<?php echo base_url().'Customer_Controller/update_status';?>",
+//       type:"POST",
+//       data : {order_id : order_id},
+//       success:function(data)  
+//       {  
+        
+//       }   
+//     });  
+// });
+
+ </script>
+ </html>
  
 
 

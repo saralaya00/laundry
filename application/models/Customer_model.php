@@ -204,18 +204,17 @@ class Customer_model extends CI_Model
         
     }
 
-    function update_status($order_id)
-    {
+    // function update_status($order_id)
+    // {
     
-        $status = array('status' => 'not assigned');
-        
+    //     $status = array('status' => 'not assigned');
 
-        $this->db->set($status);
-        $this->db->where('order_id',$order_id);
-        $this->db->update('orders');
+    //     $this->db->set($status);
+    //     $this->db->where('order_id',$order_id);
+    //     $this->db->update('orders');
 
         
-    }
+    // }
 
     public function fetchOrderDetails($order_id){
 

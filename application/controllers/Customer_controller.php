@@ -1,7 +1,7 @@
 <?php
- defined('BASEPATH')OR exit('No direct script access allowed');
+//  defined('BASEPATH')OR exit('No direct script access allowed');
 
- class Customer_controller extends CI_Controller{
+ class Customer_Controller extends CI_Controller{
 
     public function __construct()
     {
@@ -13,7 +13,7 @@
 
      function index(){
       $data["title"]="Orders";
-      $this->load->model("Customer_model");
+    //   $this->load->model("Customer_model");
       $data["fetch_data"]=$this->Customer_model->getServices(); 
       $this->load->view('customer_view', $data);
     }
@@ -111,16 +111,16 @@
        
     }
 
-    function update_status()
-    {
-        $order_id = $this->input->post('order_id');
-        $result = $this->Customer_model->update_status($order_id);
+    // function update_status()
+    // {
+    //     $order_id = $this->input->post('order_id');
+    //     $result = $this->Customer_model->update_status($order_id);
 
-        if($result)
-        {
-            echo json_encode("updated");
-        }
-    }
+    //     if($result)
+    //     {
+    //         echo json_encode("updated");
+    //     }
+    // }
 
     public function fetchOrderDetails(){
         $order_id = $this->input->post('order_id');
