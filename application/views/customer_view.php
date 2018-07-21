@@ -323,7 +323,7 @@
 
     });
    document.getElementById("myButton").onclick = function () {
-        location.href = <?php echo base_url(); ?>;
+        location.href = '<?php echo base_url(); ?>';
     };
 
   });
