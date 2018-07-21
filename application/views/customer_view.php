@@ -199,6 +199,8 @@
           let text_qty = $(this);
           let slno = text_qty.data('slno');
           let qty = text_qty.val().trim();
+          let id = text_qty.data('id');
+          let check_box = '#'+id;//id of check_box to disable
           let rate = $('label[name="lbl-rate-' + slno + '"]').html();
 
           if (!$.isNumeric(qty) || (qty < 1 || qty > 99) )
@@ -206,12 +208,15 @@
             text_qty.val(qty);
             text_qty.val('');
             $('input[name="txt-total-' + slno + '"]').val(0);
+            $(check_box).prop('disabled', true);//enable check bo
+
           }
 
           else 
           {
             text_qty.val(qty);
             $('input[name="txt-total-' + slno + '"]').val( qty * rate);
+            $(check_box).prop('disabled', false);//enable 
           }
     });
 
@@ -223,7 +228,7 @@
       let data = order_details.row( $(this).parents('tr') ).data();
       let item_name = data[1];
       
-      let customer_id = 2;
+      let customer_id = <?php echo set_value('customer_id'); ?>;
       let text_box = $('input[name="quantity-' + id + '"]');
       let quantity = text_box.val();
       if(this.checked)
