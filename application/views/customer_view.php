@@ -1,4 +1,4 @@
-<html>
+ <html>
   <head>
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="assets/css/mystyle.css">
@@ -50,20 +50,22 @@
           </div>
           <div class="navbar-header navbar-right pull-right">
             <ul class="nav pull-right">
-              <li class="pull-right"><a href="#"><i class="fas fa-sign-out-alt"></i></a></li>
-              <li class="pull-right"><a href="#"><i class="fas fa-clipboard-list"></i></a></li>
-              <li class="pull-right"><a href="#"><i class="fas fa-bell"></i></a></li>
-              <li class="pull-right"><a href="#"><i class="fas fa-cart-arrow-down"></i></a></li>
-              <li class="pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="far fa-thumbs-up"></i></a> 
+              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="logout" style="display:inline-block;" class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-sign-out-alt"></i></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
+                  <li style="text-align:center;">Are You Sure</li>
+                  <li>
+                    <div style=" display: flex; align-items: center; justify-content: center;">
+                      <button id="myButton" class="btn btn-success submit-button">yes</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button class="btn btn-danger">no</button>
+                    </div>
+                  </li>
                 </ul>
+              </li>
+              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="orders list" style="display:inline-block;"><i class="fas fa-clipboard-list"></i></a></li>
+              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="notification" style="display:inline-block;"><i class="fas fa-bell"></i></a></li>
+              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="cart" style="display:inline-block;"><i class="fas fa-cart-arrow-down"></i></a></li>
+              <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="review" style="display:inline-block;" ><i class="far fa-thumbs-up"></i></a> 
+               
               </li>
             </ul>
           </div> <!--/.navbar-right -->
@@ -314,6 +316,15 @@
     $(document).on('click', '.Edit', function(event){
       $('.placeOrder').modal('hide');
     });
+    
+    $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+
+        placement : 'left'
+
+    });
+   document.getElementById("myButton").onclick = function () {
+        location.href = "loca";
+    };
 
   });
   </script>
