@@ -14,11 +14,14 @@
 
         public function index()
         {
-            $data['title'] = "Dashboard";
-
-            if($this->input->post('salt') != '' || $_SESSION['salt'] != '')
+            if($this->input->post('slug') != '' || $_SESSION['slug'] != '')
             {
-                $_SESSION['salt'] = $this->input->post('salt');
+                $data['title'] = "Dashboard";
+
+                //Set the timing in config.php
+                if(!isset($_SESSION['slug'])) 
+                    $_SESSION['slug'] = $this->input->post('slug');
+
                 $this->load->view('common/footbar.php',$data);
                 $this->load->view('dashboard/view_cards.php');
                 $this->load->view('common/end_wrapper.php');

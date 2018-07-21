@@ -8,17 +8,21 @@ class ItemService_Controller extends CI_Controller {
     }
 
     function index()
-    {  
-        //title of page
-        $data["title"] = "Items and Services Configuration";  
+    {
+        if($_SESSION['slug'] != '')
+        {                
+            $data["title"] = "Items and Services Configuration";  
 
-        //retrieve service to fill dropdown
-        $_POST['services'] = $this->getServices();
+            //retrieve service to fill dropdown
+            $_POST['services'] = $this->getServices();
 
-        //load view_item_service page
-        $this->load->view('common/footbar.php');
-        $this->load->view('item_service/view_item_service.php',$data);
-        $this->load->view('common/end_wrapper.php');
+            //load view_item_service page
+            $this->load->view('common/footbar.php');
+            $this->load->view('item_service/view_item_service.php',$data);
+            $this->load->view('common/end_wrapper.php');
+        }
+
+       else redirect(base_url());
     }
 
     public function getServices()

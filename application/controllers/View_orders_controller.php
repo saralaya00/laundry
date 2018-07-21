@@ -7,11 +7,18 @@ class View_orders_controller extends CI_Controller {
             $this->load->model("view_orders_model");  
       }
       
-      function index(){  
-           $data["title"] = "Orders";  
-           $this->load->view('common/footbar.php');
-           $this->load->view('orders/view_orders.php',$data);
-           $this->load->view('common/end_wrapper.php');
+      function index()
+      {  
+            if($_SESSION['slug'] != '')
+            {                
+                  $data["title"] = "Orders";  
+
+                  $this->load->view('common/footbar.php');
+                  $this->load->view('orders/view_orders.php',$data);
+                  $this->load->view('common/end_wrapper.php');
+            }
+
+           else redirect(base_url());
       }  
 
       function fetch_orders()

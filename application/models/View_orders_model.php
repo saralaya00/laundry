@@ -14,8 +14,9 @@ class View_orders_model extends CI_Model
       function make_query()  
       {  
             $this->db->select($this->select_column);  
-            $this->db->from('orders');  
-            $this->db->join('customer as c', 'c.customer_id = orders.customer_id','left');
+            $this->db->from('orders as o');  
+            $this->db->join('customer as c', 'c.customer_id = o.customer_id','left');
+            $this->db->where('o.status !=',1);
             // if(isset($_POST["search"]["value"]))  
             // {  
             //       $this->db->like("full_name", $_POST["search"]["value"]);  
