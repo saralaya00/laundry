@@ -184,7 +184,12 @@ class View_orders_controller extends CI_Controller {
             foreach ($item_name as $key=>$value) {
                   $count++;
             }
-         
+            
+            // print_r($item_name);
+            // print_r($service_name);
+            // print_r($quantity);
+            // print_r($price);
+
             while($i != $count)
             {
                   $data_values[$i] = array(array_merge($item_name[$i], $service_name[$i], $quantity[$i],$price[$i])); 

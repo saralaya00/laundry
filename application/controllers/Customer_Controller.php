@@ -28,7 +28,7 @@
     public function getItemServiceDetails()
     {
         $service_id =  $this->input->post('service_id');
-
+        
         $CheckedDetails= $this->Customer_model->getCheckedDetails($service_id);  
 
         $unCheckedDetails= $this->Customer_model->getUnCheckedDetails($service_id);  
