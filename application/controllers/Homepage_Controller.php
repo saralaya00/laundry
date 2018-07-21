@@ -10,8 +10,10 @@
 
         public function index()
         {
-            $data['title'] = 'Homepage';
+            //Auto Logout
             unset($_SESSION['slug']);
+
+            $data['title'] = 'Homepage';
             $this->load->view('homepage/view_homepage.php');
         }
 
@@ -40,10 +42,9 @@
                     //if password == hash('sha256','no-password'),
                     // show change password.php
 
-                    //Default >> should be changed
+                    //Default page >> should be changed if used
                     $redir['link'] = base_url('dashboard');
                     $redir['slug'] = hash('sha256', $usernameSHA);
-
                     echo json_encode($redir);
                 }
     
@@ -51,7 +52,7 @@
                 {
                     $redir['link'] = base_url('customer');
                     $redir['slug'] = hash('sha256', $usernameSHA);
-
+                    $redir['customer_id'] = $login_details['customer_id'];
                     echo json_encode($redir);
                 }
             }

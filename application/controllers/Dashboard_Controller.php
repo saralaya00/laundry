@@ -17,7 +17,10 @@
             if($this->input->post('slug') != '' || $_SESSION['slug'] != '')
             {
                 $data['title'] = "Dashboard";
-                $_SESSION['slug'] = $this->input->post('slug');
+
+                //Set the timing in config.php
+                if(!isset($_SESSION['slug'])) 
+                    $_SESSION['slug'] = $this->input->post('slug');
 
                 $this->load->view('common/footbar.php',$data);
                 $this->load->view('dashboard/view_cards.php');

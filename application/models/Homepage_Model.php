@@ -17,13 +17,24 @@
             // print_r($result);
             if ($result['password'] == $passwordSHA)
             {
+                $login_details['username'] = $result['username'];
                 $login_details['is_verified'] = 1;
-                $login_details['role'] = $result['role']; 
+                $login_details['role'] = $result['role'];
+
+                if ($result['role'] == 'Customer')
+                {
+                    $this->db->from('customer');
+                    $this->db->where('user_id', $result['user_id']);
+                    $customer = $this->db->get()->result_array();
+                    $customer = $customer[0];
+
+                    $login_details['customer_id'] = $customer['customer_id']; 
+                }
             }
 
             else 
             {
-                $login_details['result'] = $result;
+                $login_details['username'] = $result['username'];
                 $login_details['is_verified'] = 0;
                 $login_details['role'] = 'none';
             }

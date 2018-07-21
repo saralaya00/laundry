@@ -85,7 +85,8 @@
                 $.post(baseURL + 'Homepage_Controller/verify_login', postData)
                 .done(function(data){
                     let redir = JSON.parse(data);
-                    $.redirect(redir.link.toString(), {'slug': redir.slug}, 'POST');
+                    // console.log(redir);
+                    $.redirect(redir.link.toString(), {'slug': redir.slug, 'customer_id': redir.customer_id}, 'POST');
                 });
             });
         </script>

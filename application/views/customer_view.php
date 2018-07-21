@@ -223,7 +223,7 @@
       let data = order_details.row( $(this).parents('tr') ).data();
       let item_name = data[1];
       
-      let customer_id = 2;
+      let customer_id = <?php echo set_value('customer_id'); ?>;
       let text_box = $('input[name="quantity-' + id + '"]');
       let quantity = text_box.val();
       if(this.checked)
