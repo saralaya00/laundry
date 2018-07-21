@@ -13,9 +13,16 @@
 
     public function index()
     {
-      $data["title"]="Orders";
-      $data["fetch_data"]=$this->Customer_model->getServices(); 
-      $this->load->view('customer_view', $data);
+      if($this->input->post('slug') != '' || $_SESSION['slug'] != '')
+      {                
+            $data["title"]="Orders";
+            $_SESSION['slug'] = $this->input->post('slug');
+
+            $data["fetch_data"]=$this->Customer_model->getServices(); 
+            $this->load->view('customer_view', $data);
+      }
+
+      else redirect(base_url());
     }
 
     public function getItemServiceDetails()
@@ -37,9 +44,9 @@
                 $data_items[$i] = array("slno" => $i+1, //id from item_service table
                                         "item_name" => $value['item_name'],
                                         "Rate" => '<label name="lbl-rate-'. ($i+1) . '">'.$value['price'].'  </label>',
-                                        "Quantity" => '<div class="quantity-'.$value['id'].'"><label name="lbl-qty-'. ($i+1) . '">'.$value['quantity'].'</label></div>',
+                                        "Quantity" => '<div class="quantity-'.$value['id'].'" data-id = "'.$value['id'].'"><label name="lbl-qty-'. ($i+1) . '">'.$value['quantity'].'</label></div>',
                                         "price" => '<div class="price-'.$value['id'].'">'.($value['price']* $value['quantity']).'</div>',
-                                        "select" => '<input type="checkbox" class="checkbox check_order" name="check_order" data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'" checked>'
+                                        "select" => '<input type="checkbox" class="checkbox check_order" name="check_order-"'.$value['id'].' data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'" id = "'.$value['id'].'" checked>'
                                     );
                 $i++;
             } 
@@ -51,9 +58,9 @@
                 $data_items[$i] = array("slno" => $i+1, //id from item_service table
                                         "item_name" => $value['item_name'],
                                         "Rate" => '<label name="lbl-rate-'. ($i+1) . '">'.$value['price'].'  </label>',
-                                        "Quantity" =>'<input type="text" name="quantity-'.$value['id'].'" maxlength=2 class="text_qty form-control" data-slno="' . ($i+1) .'" size="3">',
+                                        "Quantity" =>'<input type="text" name="quantity-'.$value['id'].'" maxlength=2 class="text_qty form-control" data-slno="' . ($i+1) .'" size="3" data-id = "'.$value['id'].'">',
                                         "price" => '<input type="text" class="form-control" name="txt-total-' . ($i+1) .'" size="3" readonly>',
-                                        "select" => '<input type="checkbox" class="checkbox check_order" name="check_order" data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'">'
+                                        "select" => '<input type="checkbox" class="checkbox check_order" name="check_order-"'.$value['id'].' data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'" id = "'.$value['id'].'" disabled>'
                                     );
                 $i++;
             }  
@@ -134,8 +141,8 @@
               $sub_array[] = $i;
               $sub_array[] = $value['item_name'];
               $sub_array[] = $value['service_name'];  
-              $sub_array[] = $value['price'];  
               $sub_array[] = $value['quantity'];
+              $sub_array[] = $value['price'];  
               $sub_array[] = (($value['quantity']) *($value['price']));
 
               $data[] = $sub_array;  

@@ -10,8 +10,10 @@
 
         public function index()
         {
+            //Auto Logout
+            unset($_SESSION['slug']);
+
             $data['title'] = 'Homepage';
-            unset($_SESSION['salt']);
             $this->load->view('homepage/view_homepage.php');
         }
 
@@ -28,22 +30,29 @@
                 if ($login_details['role'] == 'Admin')
                 {
                     $redir['link'] = base_url('dashboard');
-                    $redir['salt'] = hash('sha256', $usernameSHA);
+                    $redir['slug'] = hash('sha256', $usernameSHA);
 
                     echo json_encode($redir);
-                    // print_r($redir);
                 }
     
                 if ($login_details['role'] == 'Employee')
                 {
                     // optional
+
+                    //if password == hash('sha256','no-password'),
+                    // show change password.php
+
+                    //Default page >> should be changed if used
+                    $redir['link'] = base_url('dashboard');
+                    $redir['slug'] = hash('sha256', $usernameSHA);
+                    echo json_encode($redir);
                 }
     
                 if($login_details['role'] == 'Customer')
                 {
                     $redir['link'] = base_url('customer');
-                    $redir['salt'] = hash('sha256', $usernameSHA);
-
+                    $redir['slug'] = hash('sha256', $usernameSHA);
+                    $redir['customer_id'] = $login_details['customer_id'];
                     echo json_encode($redir);
                 }
             }
