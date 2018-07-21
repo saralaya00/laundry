@@ -204,20 +204,16 @@ class Customer_model extends CI_Model
         
     }
 
-    // function update_status($order_id)
-    // {
-    
-    //     $status = array('status' => 'not assigned');
+    function update_status($order_id)
+    {
+        $status = array('status' => 'not assigned');
+        $this->db->set($status);
+        $this->db->where('order_id',$order_id);
+        $this->db->update('orders');
+    }
 
-    //     $this->db->set($status);
-    //     $this->db->where('order_id',$order_id);
-    //     $this->db->update('orders');
-
-        
-    // }
-
-    public function fetchOrderDetails($order_id){
-
+    public function fetchOrderDetails($order_id)
+    {
         $this->db->select('it.item_name,s.service_name,is.price,od.quantity');
         $this->db->join('items as it','is.item_id=it.item_id');
         $this->db->join('services as s','s.service_id=is.service_id');
@@ -227,7 +223,6 @@ class Customer_model extends CI_Model
         $this->db->from('item_service as is');
         $query = $this->db->get();
         return $query->result_array();
-
     }
 }
 ?>

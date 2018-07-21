@@ -1,26 +1,24 @@
 <?php
-//  defined('BASEPATH')OR exit('No direct script access allowed');
+ defined('BASEPATH')OR exit('No direct script access allowed');
 
- class Customer_Controller extends CI_Controller{
-
+ class Customer_Controller extends CI_Controller
+ {
     public function __construct()
     {
         parent::__construct();
-       $this->load->model("Customer_model"); 
+        $this->load->model("Customer_model"); 
     //    $this->load->model("Customer_model"); 
     } 
 
 
-     function index(){
+    public function index()
+    {
       $data["title"]="Orders";
-    //   $this->load->model("Customer_model");
       $data["fetch_data"]=$this->Customer_model->getServices(); 
       $this->load->view('customer_view', $data);
     }
 
-   
-  
- public function getItemServiceDetails()
+    public function getItemServiceDetails()
     {
         $service_id =  $this->input->post('service_id');
 
@@ -111,24 +109,25 @@
        
     }
 
-    // function update_status()
-    // {
-    //     $order_id = $this->input->post('order_id');
-    //     $result = $this->Customer_model->update_status($order_id);
+    function update_status()
+    {
+        $order_id = $this->input->post('order_id');
+        $result = $this->Customer_model->update_status($order_id);
 
-    //     if($result)
-    //     {
-    //         echo json_encode("updated");
-    //     }
-    // }
+        if($result)
+        {
+            echo json_encode("updated");
+        }
+    }
 
-    public function fetchOrderDetails(){
+    public function fetchOrderDetails()
+    {
         $order_id = $this->input->post('order_id');
         $result = $this->Customer_model->fetchOrderDetails($order_id);
         
         $i = 0;
         $data = array();
-        foreach($result[] as $key => $value)  
+        foreach($result as $key => $value)  
         {  
             $i++;
               $sub_array = array();
@@ -142,16 +141,14 @@
               $data[] = $sub_array;  
         }  
             
-            $output = array(  
-                  "draw"              =>    intval($_POST["draw"]),  
-                  "recordsTotal"      =>    $i,  
-                  "recordsFiltered"   =>    $i,  
-                  "data"              =>    $data  
-            );  
+        $output = array(  
+                "draw"              =>    intval($_POST["draw"]),  
+                "recordsTotal"      =>    $i,  
+                "recordsFiltered"   =>    $i,  
+                "data"              =>    $data  
+        );  
 
-            echo json_encode($output); 
-    }
-   
-       
+        echo json_encode($output); 
+    }   
 }
 ?>
