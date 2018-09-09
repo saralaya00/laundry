@@ -17,7 +17,7 @@
         </div>
         
         <div class="form-group row">
-            <label class="col-md-3 col-form-label text-right"> Address &nbsp;&nbsp;</label>
+            <label class="col-md-3 col-form-label text-right"> Address &nbsp;<span class="text-danger">&nbsp; *</span></label>
             <div class="col-md-4">
                 <textarea class="form-control resize-vert" name="address" maxlength=100 placeholder="Enter Address"  rows="4"><?php echo trim(set_value('address')); ?></textarea>
             </div>

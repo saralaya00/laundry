@@ -17,7 +17,7 @@
                                         <br /><br />
                                         <h2>Laundry</h2>
                          
-                                        <h5>( Enter your details to continue )</h5>
+                                        <h5>(Enter your details to continue)</h5>
                                          <br />
                                     
                           
@@ -35,7 +35,7 @@
                                                    <br />
                                                  <div class="form-group input-group">
                                                         <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                                                        <input id="text_username" type="text" class="form-control" name="user_name" placeholder="Enter your Contact no" autofocus="autofocus" required />
+                                                        <input id="text_username" type="text" class="form-control" name="user_name" placeholder="Enter your Username" autofocus="autofocus" required />
                                                     </div>
                                                         <div class="form-group input-group">
                                                         <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>

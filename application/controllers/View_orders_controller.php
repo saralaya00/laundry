@@ -33,11 +33,20 @@ class View_orders_controller extends CI_Controller {
                   $sub_array = array();
                   $sub_array[] = $row->order_id;
                   $sub_array[] = $row->full_name;
-                  $sub_array[] = $row->order_date;  
-                  $sub_array[] = $row->delivery_date;  
+                  $sub_array[] = '<div class="text-center">' . $row->order_date . '</div>'; 
+                  
+                  if ($row->delivery_date == '0000-00-00')
+                  {
+                        $sub_array[] = '<div class="text-center">
+                              <span class=" fa fa-minus fa-lg"></span>
+                        </div>';
+                  }
+                  else $sub_array[] = '<div class="text-center">' . $row->delivery_date . '</div>';  
                   $sub_array[] = $row->status;
                   //button to view order
-                  $sub_array[] = '<button type="button" name="view" data-id="'.$row->order_id.'" class="btn btn-success btn-xs viewOrder" data-toggle="modal" data-target="#modal-template">View Order</button>';  
+                  $sub_array[] = '<button type="button" name="view" data-id="'.$row->order_id.'" class="btn btn-success btn-xs viewOrder" data-toggle="modal" data-target="#modal-template">
+                        View Order &nbsp;<span class=" fa fa-eye">
+                  </button>';  
                   
                   //cannot change employee or assign order if order has been delivered
                   if($row->status=="delivered")
@@ -49,7 +58,9 @@ class View_orders_controller extends CI_Controller {
                   {
                         $sub_array[] = 
                         '<div class="text-center">
-                              <button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-warning btn-xs assign" data-toggle="modal" data-target="#modal-template">Assign order</button>
+                              <button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-warning btn-xs assign" data-toggle="modal" data-target="#modal-template">
+                                    Assign order &nbsp;<span class=" fa fa-user-plus">
+                              </button>
                         </div>';  
                   }
                   //change employee to handle order
@@ -57,7 +68,9 @@ class View_orders_controller extends CI_Controller {
                   {
                         $sub_array[] = 
                         '<div class="text-center">
-                              <button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-primary btn-xs changeEmployee" data-toggle="modal" data-target="#modal-template">Change Employee</button>
+                              <button type="button" name="assign" data-id="'.$row->order_id.'" class="btn btn-primary btn-xs changeEmployee" data-toggle="modal" data-target="#modal-template">
+                                    Change Employee  &nbsp;<span class=" fa fa-pencil">
+                              </button>
                         </div>';  
                   }
                   $data[] = $sub_array;  

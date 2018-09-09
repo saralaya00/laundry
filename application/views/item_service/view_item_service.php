@@ -21,10 +21,10 @@
         <table id="item_price" class="table table-bordered table-striped" width="100%">  
             <thead>  
             <tr>  
-                <th width="5%">Serial Number</th>  
-                <th width="10%">Item Name</th>  
-                <th width="10%">Price</th>
-                <th width="5%">Actions</th>   
+                <th width="15%">Serial Number</th>  
+                <th width="40%">Item Name</th>  
+                <th width="30%">Price</th>
+                <th width="15%">Actions</th>   
             </tr>  
             </thead>  
         </table>
