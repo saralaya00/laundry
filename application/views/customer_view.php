@@ -52,7 +52,7 @@
             <ul class="nav pull-right">
               <li class="pull-right"><a href="#" tool-tip-toggle="tooltip-demo" data-original-title="logout" style="display:inline-block;" class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-sign-out-alt"></i></a>
                 <ul class="dropdown-menu">
-                  <li style="text-align:center;">Are You Sure</li>
+                  <li style="text-align:center;">Are You Sure ?</li>
                   <li>
                     <div style=" display: flex; align-items: center; justify-content: center;">
                       <button id="myButton" class="btn btn-success submit-button">yes</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -76,15 +76,19 @@
     <!-- end of header part-->
     <!--display services -->
     <div class="container-fluid">
+    
       <div class="row">   
         <div class="col-sm-3 box">
           <?php
+            echo '<h3 class="text-center">Services</h3>';
             if(count($fetch_data) > 0)
             {
               foreach($fetch_data as $row)
               {?>
                 <div>
-                  <button type="button" class="btn btn-success displayitems" data-id="<?php echo $row['service_id'] ?>" style=" padding:10%; margin:12%; width:50%;" ><?php echo $row['service_name']; ?></button><br/>
+                  <button type="button" class="btn btn-success displayitems" data-id="<?php echo $row['service_id'] ?>" style=" padding:10px; margin:2% 0%; width:100%;" >
+                    <label> <?php echo $row['service_name']; ?> </label>
+                  </button><br/>
                 </div>
               <?php
               }
@@ -97,7 +101,7 @@
         </div>
         <div class="col-sm-1"></div>      
         <div class="col-sm-8 box container-fluid">
-          <h3 align="center"><?php echo $title; ?></h3>
+          <h2 align="center"><?php echo 'Create a new Order' ?></h2>
           <br/>
             <div class="table-responsive">
               <br/>
@@ -109,7 +113,7 @@
                     <th width="35%">Rate</th>
                     <th width="35%">Quantity</th>
                     <th width="35%">Price</th>
-                    <th width="35%">select</th>
+                    <th width="35%">Selected</th>
                   </tr>    
                 </thead>  
               </table>
@@ -133,7 +137,7 @@
           </div>
             <footer class="footer">
               <div class="container">
-                <span class="text-muted">&copy; 2017 | pooja v tendulkar.| All rigths reserved.</span>
+                <span class="text-muted">&copy; 2018 | VRV Embassy.| All rigths reserved.</span>
               </div>
             </footer>
       </div>
@@ -153,11 +157,11 @@
             <table id="view_order_details" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th width="20%">Serial No</th>
+                  <th width="10%">Serial No</th>
                   <th width="35%">Service</th>
-                  <th width="35%">Item</th>
-                  <th width="35%">Quantity</th>
-                  <th width="35%">Price</th>
+                  <th width="25%">Item</th>
+                  <th width="20%">Quantity</th>
+                  <th width="10%">Price</th>
                 </tr>    
               </thead>  
             </table>
@@ -308,7 +312,7 @@
         data : {order_id : order_id},
         success:function(data)  
         {  
-          
+          location.reload();
         }   
       });  
     });

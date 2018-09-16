@@ -46,7 +46,7 @@
                                         "Rate" => '<label name="lbl-rate-'. ($i+1) . '">'.$value['price'].'  </label>',
                                         "Quantity" => '<div class="quantity-'.$value['id'].'" data-id = "'.$value['id'].'"><label name="lbl-qty-'. ($i+1) . '">'.$value['quantity'].'</label></div>',
                                         "price" => '<div class="price-'.$value['id'].'">'.($value['price']* $value['quantity']).'</div>',
-                                        "select" => '<input type="checkbox" class="checkbox check_order" name="check_order-"'.$value['id'].' data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'" id = "'.$value['id'].'" checked>'
+                                        "select" => '<div class="text-center"><input type="checkbox" class="checkbox check_order" name="check_order-"'.$value['id'].' data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'" id = "'.$value['id'].'" checked></div>'
                                     );
                 $i++;
             } 
@@ -60,7 +60,7 @@
                                         "Rate" => '<label name="lbl-rate-'. ($i+1) . '">'.$value['price'].'  </label>',
                                         "Quantity" =>'<input type="text" name="quantity-'.$value['id'].'" maxlength=2 class="text_qty form-control" data-slno="' . ($i+1) .'" size="3" data-id = "'.$value['id'].'">',
                                         "price" => '<input type="text" class="form-control" name="txt-total-' . ($i+1) .'" size="3" readonly>',
-                                        "select" => '<input type="checkbox" class="checkbox check_order" name="check_order-"'.$value['id'].' data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'" id = "'.$value['id'].'" disabled>'
+                                        "select" => '<div class="text-center"><input type="checkbox" class="checkbox check_order" name="check_order-"'.$value['id'].' data-slno="'.($i+1).'" data-service_id="'.$service_id.'" data-id = "'.$value['id'].'" id = "'.$value['id'].'" disabled></div>'
                                     );
                 $i++;
             }  
